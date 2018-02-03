@@ -1,0 +1,25 @@
+{
+  "name": "little-angular-book",
+  "version": "1.0.0",
+  "description": "Getting started with Angular 5+",
+  "main": "index.js",
+  "scripts": {
+    "init": "gitbook init",
+    "serve": "gitbook serve",
+    "build": "gitbook build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szkrd/little-angular-book.git"
+  },
+  "keywords": [],
+  "author": "Szabolcs Kurdi <szabolcs.kurdi@gmail.com> (https://github.com/szkrd)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szkrd/little-angular-book/issues"
+  },
+  "homepage": "https://github.com/szkrd/little-angular-book#readme",
+  "devDependencies": {
+    "gitbook-cli": "2.3.2"
+  }
+}
