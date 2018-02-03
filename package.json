@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/szkrd/little-angular-book#readme",
   "devDependencies": {
-    "gitbook-cli": "2.3.2"
+    "gitbook-cli": "2.3.2",
+    "gitbook-plugin-advanced-emoji": "0.2.2"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "root": "./docs",
+  "plugins": [
+    "advanced-emoji"
+  ]
+}
