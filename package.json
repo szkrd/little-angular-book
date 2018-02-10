@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "init": "gitbook init",
+    "start": "gitbook serve",
     "serve": "gitbook serve",
     "build": "gitbook build"
   },

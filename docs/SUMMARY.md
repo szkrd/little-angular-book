@@ -7,3 +7,7 @@
   - [Enums](./typescript/enums.md)
   - [Advanced types](./typescript/advanced-types.md)
   - [Decorators](./typescript/decorators.md)
+- [Components](./components/README.md)
+  - [Lifecycle events](./components/lifecycle-events.md)
+  - [I/O](./components/input-output.md)
+  - [Styles](./components/styles.md)

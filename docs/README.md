@@ -27,3 +27,4 @@ I (as the omnipotent narrator) will try to keep my snarky comments out of this b
 - :rocket: - non trivial or complicated (rocket science)
 - :question: - questionable statement
 - :exclamation: - notice or warning
+- :bomb: - bad idea
