@@ -1,3 +1,4 @@
+{% raw %}
 # Styles
 
 - Styles are scoped (by default in an emulated fashion, but one can enable real shadow DOM styles with `encapsulation: ViewEncapsulation.Native`)
@@ -28,3 +29,4 @@ h2 {
 ```
 
 :bomb: `ViewEncapsulation.None` will destroy a component's boundaries (and will force Angular to duplicate their style in every shadowed element).
+{% endraw %}

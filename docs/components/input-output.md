@@ -1,3 +1,4 @@
+{% raw %}
 # Input / Output
 
 in parent html:
@@ -48,3 +49,4 @@ Some of the popular approaches:
 - common store ([ngrx](https://github.com/ngrx/store))
 - eventbus ([eventemitters](https://nodejs.org/api/events.html))
 - custom DOM events (see: bubbles and composed) 
+{% endraw %}

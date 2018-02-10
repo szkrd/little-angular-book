@@ -1,3 +1,4 @@
+{% raw %}
 # Lifecycle events
 
 :bulb: The most important ones
@@ -16,3 +17,4 @@ All events:
   - `ngAfterViewInit()`: the view (along with children) has fully been initialized	
   - `ngAfterViewChecked()`	
 - `ngOnDestroy()`: clean up your subscribers and event listeners here	
+{% endraw %}
