@@ -1,7 +1,7 @@
 {% raw %}
 # Class & style helpers
 
-[Attr/prop], (event), [(two-way)], ngClass, ngStyle
+`[class]`, `[class.foo]`, `[style]`, `[style.width.%]`, `[ngClass]`, `[ngStyle]`
 
 ## With binding
 
