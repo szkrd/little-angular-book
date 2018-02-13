@@ -1,3 +1,4 @@
+{% raw %}
 # Generics
 
 - typically describes types of items inside a collection
@@ -59,3 +60,4 @@ function createVehicle<T extends Vehicle> (Klass: {new(): T;}, passengerCount: n
 const car = createVehicle(Car, 5);
 const airplane = createVehicle(Airplane, 396);
 ```
+{% endraw %}

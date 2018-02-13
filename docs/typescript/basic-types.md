@@ -1,3 +1,4 @@
+{% raw %}
 # Basic types
 
 ## simple types
@@ -51,3 +52,4 @@ let cat = 'Garfield'; // implicit string, let's say this variable is coming outs
 let catNameLen = (cat as string).length; // tsx safe syntax
 let catNameLen = <string>cat.length;
 ```
+{% endraw %}

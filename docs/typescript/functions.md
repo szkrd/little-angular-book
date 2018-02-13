@@ -1,3 +1,4 @@
+{% raw %}
 # Functions
 
 The simplest example: `let inc = (x: number, y: number = 1): number => x + y;`
@@ -65,3 +66,4 @@ function getUser (this: Users, name: string = 'jill') {
 
  - use call or apply: `getUser.call(users, 'jack');`
  - it would **not** work without the scoping: `getUser('jill');` :no_good:
+{% endraw %}

@@ -1,3 +1,4 @@
+{% raw %}
 # Decorators
 
 - Decorators are functions when placed in a decorator context will be called with special contextual parameters.
@@ -56,3 +57,4 @@ rosey.greet(); // prints "Hello Judy, my friend"
 
 :rocket: Since es6 class properties are not enumerable, manipulating their descriptors is not exactly trivial.
   The official examples themselves are relying heavily on the `reflect-metadata` package (future metadata API polyfill) for easier reflection.
+{% endraw %}

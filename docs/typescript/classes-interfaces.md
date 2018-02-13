@@ -1,3 +1,4 @@
+{% raw %}
 # Classes and interfaces
 
 :bulb: TypeScript, unlike Java, understands types as **shapes**.
@@ -182,3 +183,4 @@ interface Box {
 
 const box: Box = {height: 1, width: 1, scale: 3}
 ```
+{% endraw %}

@@ -1,3 +1,4 @@
+{% raw %}
 # Enums
 
 Enums are named constants and can really help with code readability.
@@ -45,3 +46,4 @@ const enum States { Select, Search, Result }
 let getState = () => States.Search; // will be replaced with the raw value
 assert.equal(getState.toString(), '() => 1'); // the stringified compiled javascript code
 ```
+{% endraw %}
