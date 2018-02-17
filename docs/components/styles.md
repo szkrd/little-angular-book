@@ -40,3 +40,5 @@ Some tips:
 - you can use a common scss if you keep it to the bare minimum
 - `@import "~common.scss";` may be used with absolute paths
 - use `stylePreprocessorOptions.includePaths` in `.angular-cli.json` and then you can omit the tilde and the extension, more [here](https://github.com/angular/angular-cli/wiki/stories-global-styles)
+
+:bomb: Such an import will duplicate the css everywhere it has been included (checked the prod build).
