@@ -30,3 +30,13 @@ h2 {
 
 :bomb: `ViewEncapsulation.None` will destroy a component's boundaries (and will force Angular to duplicate their style in every shadowed element).
 {% endraw %}
+
+## Global styles
+
+Shadow roots can't get global styles due to their encapsulated nature (`/deep/`, `::ng-deep`, `>>>` has been deprecated).
+
+Some tips:
+
+- you can use a common scss if you keep it to the bare minimum
+- `@import "~common.scss";` may be used with absolute paths
+- use `stylePreprocessorOptions.includePaths` in `.angular-cli.json` and then you can omit the tilde and the extension, more [here](https://github.com/angular/angular-cli/wiki/stories-global-styles)
