@@ -42,3 +42,5 @@ Some tips:
 - use `stylePreprocessorOptions.includePaths` in `.angular-cli.json` and then you can omit the tilde and the extension, more [here](https://github.com/angular/angular-cli/wiki/stories-global-styles)
 
 :bomb: Such an import will duplicate the css everywhere it has been included (checked the prod build).
+
+:bomb: Css will have mixin support with the [@apply](https://tabatkins.github.io/specs/css-apply-rule/) rule, but right now it's not yet supported anywhere.
