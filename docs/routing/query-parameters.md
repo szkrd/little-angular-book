@@ -37,4 +37,19 @@ this.router.navigate(['view/posts'], {
   queryParams: {q: this.searchText}
 });
 ```
+
+## Combining parameters and query parameters
+
+:bulb: Sometimes you want to listen for query param and param change (probably with more complex pages) together.  
+Use `combineLatest` (from _rxjs/observable/combineLatest_) to get them both:
+
+```typescript
+combineLatest(
+  this.activatedRoute.queryParamMap,
+  this.activatedRoute.paramMap
+).subscribe(this.onRouteAnyParamChange);
+```
+
+The bound `onRouteAnyParamChange` will accept an array param, the first item is the queryParam map, the second is the param map.
+
 {% endraw %}
