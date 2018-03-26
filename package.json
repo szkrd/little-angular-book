@@ -6,6 +6,7 @@
   "scripts": {
     "init": "gitbook init",
     "start": "gitbook serve",
+    "serve-alt": "gitbook --lrport 6999 --port 7000 serve",
     "serve": "gitbook serve",
     "build": "gitbook build"
   },
