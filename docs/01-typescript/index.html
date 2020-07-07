@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>little angular book</title>
+    <link rel="stylesheet" href="../normalize.css">
+    <link rel="stylesheet" href="../hljs-theme.css">
+    <link rel="stylesheet" href="../markdown.css">
+    <link rel="stylesheet" href="../main.css?v=2.0.0">
+    <!--<script src="script.js"></script>-->
+</head>
+<body>
+<div class="menu">
+    
+        <div class="menu-item depth-1 ">
+             
+            <a href="../index.html">Little angular book</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 selected">
+            ▸
+            <a href="../01-typescript/index.html">TypeScript</a>
+            
+                <div class="menu-section depth-3">
+                    ◦
+                    <a href="#1">
+                        What is TypeScript
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-3">
+                    ◦
+                    <a href="#2">
+                        Keeping your code clean: linting
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-3">
+                    ◦
+                    <a href="#3">
+                        Shims, transpilers, ES5-6-7
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-3">
+                    ◦
+                    <a href="#4">
+                        External dependencies, type definitions
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-3">
+                    ◦
+                    <a href="#5">
+                        Automatically detected types
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-3">
+                    ◦
+                    <a href="#6">
+                        Safeguards against nulls
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-3">
+                    ◦
+                    <a href="#7">
+                        Things ignored in this chapter
+                    </a>
+                </div>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../01-typescript/01-basic-types/index.html">Basic types</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../01-typescript/02-classes-interfaces/index.html">Classes and interfaces</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../01-typescript/03-functions/index.html">Functions</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../01-typescript/04-enums/index.html">Enums</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../01-typescript/05-advanced-types/index.html">Advanced types</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../01-typescript/06-decorators/index.html">Decorators</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../01-typescript/07-generics/index.html">Generics</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../02-components/index.html">Components</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../02-components/01-lifecycle-events/index.html">Lifecycle events</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../02-components/02-input-output/index.html">Input / Output</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../02-components/03-templates/index.html">Templates</a>
+            
+        </div>
+    
+        <div class="menu-item depth-4 ">
+            ▪
+            <a href="../02-components/03-templates/01-raw-html/index.html">Raw HTML</a>
+            
+        </div>
+    
+        <div class="menu-item depth-4 ">
+            ▪
+            <a href="../02-components/03-templates/02-data-flow/index.html">Data flow</a>
+            
+        </div>
+    
+        <div class="menu-item depth-4 ">
+            ▪
+            <a href="../02-components/03-templates/03-class-style/index.html">Class &amp; style helpers</a>
+            
+        </div>
+    
+        <div class="menu-item depth-4 ">
+            ▪
+            <a href="../02-components/03-templates/04-structural-directives/index.html">Structural directives</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../02-components/04-styles/index.html">Styles</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../03-routing/index.html">Routing</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../03-routing/01-parameters/index.html">Route parameters</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../03-routing/02-query-parameters/index.html">Query parameters</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../04-dependency-injection/index.html">Dependency injection</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../04-dependency-injection/01-circumventing-di/index.html">Circumventing the DI system</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../04-dependency-injection/02-sharing-services/index.html">Sharing services</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../04-dependency-injection/03-providers/index.html">Providers</a>
+            
+        </div>
+    
+        <div class="menu-item depth-4 ">
+            ▪
+            <a href="../04-dependency-injection/03-providers/01-class-provider/index.html">Class provider</a>
+            
+        </div>
+    
+        <div class="menu-item depth-4 ">
+            ▪
+            <a href="../04-dependency-injection/03-providers/02-factory-provider/index.html">Factory provider</a>
+            
+        </div>
+    
+        <div class="menu-item depth-4 ">
+            ▪
+            <a href="../04-dependency-injection/03-providers/03-value-provider/index.html">Value provider</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../04-dependency-injection/04-di-tricks/index.html">DI tricks</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../05-services/index.html">Services</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../06-problems/index.html">Problems</a>
+            
+        </div>
+    
+</div>
+<div class="markdown-body"><h1 id="typescript">TypeScript</h1>
+<p>Angular uses TypeScript. While you can omit all type definitions, trying to ignore TS (not including it in an angular project) and going all js would not be a good idea.</p>
+<p>💡 Angular devs wanted to create another language on top of javascript, because they needed to rely heavily on code annotations (decorators, hence the @ naming) which are not yet part of the js spec. Fortunately TS decided to add decorator support and Angular went with TypeScript.</p>
+<h2><a name="1">What is TypeScript</a></h2>
+<p>TypeScript (TS) is a strict <strong>syntactical superset</strong> of JavaScript, and adds <strong>optional static typing</strong> to the language.</p>
+<p>Syntactical superset means that the TS compiler will <strong>not</strong> transpile your code to ES5 or add polyfills for ES6/7 so if you are using object spread for example (<code>{...}</code>) and the target browser does not support object spread then you <strong>must</strong> transpile your code (probably with Babel or Bublé).</p>
+<p>TS feels like a bridge between java and javascript and it is rather close to the failed and forgotten <strong>ES4</strong> (or ActionScript / <strong>AS3</strong>) - the type system is optional and noone stops you from using functional concepts if you prefer those (though some people would argue that the class system and the philosophy around types is a deviation from the functional nature of the language).</p>
+<p>💡 Anders Hejlsberg, grand daddy of Turbo Pascal, Delphi and C#, is the lead architect of TypeScript.</p>
+<h2><a name="2">Keeping your code clean: linting</a></h2>
+<ul>
+<li>Coding style should be enforced by a linter. Use <strong>tslint</strong> for TS.</li>
+<li>eslint <em>may</em> work to a certain extent with babel parser or typescript eslint parser. ❓</li>
+<li><code>tslint:recommended</code> seems to be a sane default, but it feels different from the standard/semistandard world.</li>
+<li><code>&quot;extends&quot;: &quot;tslint-config-semistandard&quot;</code> works, but feels out of place and triggers warnings during script execution (unrelated to the code itself).</li>
+</ul>
+<h2><a name="3">Shims, transpilers, ES5-6-7</a></h2>
+<p>Don&#39;t forget to use target <code>es6</code> in tsconfig (es5 target will break with es6 language features, like <code>Set</code> for example) -
+<code>@types/es6-shim</code> and <code>es6-shim</code> will <a href="https://github.com/Microsoft/TypeScript/issues/6842">not help</a>.</p>
+<p>If you want <code>array.includes</code> for example, then add the es7 option to tsconfig (<code>lib: [&#39;es7&#39;]</code>)</p>
+<p>💡 ES7 has <code>array.includes</code> and the exponentiation operator (<code>**</code>, Math.pow).</p>
+<h2><a name="4">External dependencies, type definitions</a></h2>
+<p>If you are using 3rd party libraries then you will have to interface with them somehow (or at least let the TS compiler know about those interfaces). Use <a href="http://definitelytyped.org/">Definitely Typed</a> to find and then install (<code>npm install --save @types/foo</code>) type definitions.</p>
+<p>For example the <code>TS7026: JSX element implicitly has type &#39;any&#39; because no interface &#39;JSX.IntrinsicElements&#39; exists.</code> error means just that (and may be solved with <code>npm i -S @types/react @types/react-dom</code>). This may sound optional, but for tsc this is <strong>not</strong>.</p>
+<h2><a name="5">Automatically detected types</a></h2>
+<p>TS can implicitly assign types to a variable (for example in <code>const foo = &#39;bar&#39;</code> foo will be a string type).</p>
+<p>If you are not going to initialize your variable then the compiler will assume an <code>any</code> type. This may lead to bugs but in the early days it may be helpful, especially if you&#39;re new to typescript. This behaviour may be disabled with <code>noImplicitAny: true</code> in tsconfig.</p>
+<p>TS does some clever things in the background to infer types for you, so while <code>const foo = &#39;bar&#39;</code> is trivial, it knows that if you use something with <code>window.onmousedown</code> for example, then that should be a function with a MouseEvent input parameter (this is called contextual typing).</p>
+<h2><a name="6">Safeguards against nulls</a></h2>
+<p>Null and undefined &quot;values&quot; are considered dangerous and are prone to introducing bugs.</p>
+<p>With <code>let name = &#39;John&#39;</code> we know that &quot;name&quot; is a string and has the intrinsic properties of strings (has a length, has a toUpperCase method, can be concatenated with the + operator etc.) - but <code>name = null</code> destroys the intrinsic nature of this variable, so extra safeguards are needed in the software.</p>
+<p>TypeScript allows <code>strictNullChecks</code> to be enabled: with that parameter one must explicitly mark nullable types and the default behaviour is to forbid null/undefined &quot;types&quot;.</p>
+<h2><a name="7">Things ignored in this chapter</a></h2>
+<p>I tried to find a middle ground with examples and relevancy, for an in depth guide please follow the <a href="https://www.typescriptlang.org/docs/home.html">TS Handbook</a>.</p>
+<ol>
+<li>Symbols: ts has es6 Symbol support, refer to the ecmascript spec
+or <a href="https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/">this nice article</a>.</li>
+<li>Iterators and generators: ts has es6 iterable support, see spec
+or <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator">this mdn example</a>.</li>
+<li>Modules: es6 import export (which you probably already know about), tsc packaging, advanced topics like
+CommonJS, SystemJS, AMD, UMD/isomorphic, es6 native modules.</li>
+<li>Namespaces (used to be &quot;internal modules&quot;): it feels like a legacy concept.
+Just use es6 modules and try to skip the multi-file namespace with its triple-slash metadata.</li>
+<li>Module resolution: with the &quot;node&quot; resolution strategy things are somewhat clearer,
+plus the whole module/path resolving in the shadow of webpack is another advanced thing.</li>
+</ol>
+<ul>
+<li><a href="./01-basic-types/index.html">Basic types</a></li>
+<li><a href="./02-classes-interfaces/index.html">Classes and interfaces</a></li>
+<li><a href="./03-functions/index.html">Functions</a></li>
+<li><a href="./04-enums/index.html">Enums</a></li>
+<li><a href="./05-advanced-types/index.html">Advanced types</a></li>
+<li><a href="./06-decorators/index.html">Decorators</a></li>
+<li><a href="./07-generics/index.html">Generics</a></li>
+</ul>
+</div>
+
+</body>
+</html>

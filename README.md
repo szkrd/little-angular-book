@@ -2,6 +2,8 @@
 
 Helpful notes for taming the kraken called Angular.
 
+Available at: https://szkrd.github.io/little-angular-book/
+
 ## Book deprecation warning
 
 I wrote these notes for Angular 5 in 2018 Q1, they may or may not be totally
@@ -10,6 +12,7 @@ update this book. Or might not.
 
 ## Toolchain deprecation warning
 
-Created with `gitbook-cli` (GitBook 3.2.3): since GitBook has deprecated the old gitbook-cli
-way of publishing git books, please browse this project [locally](./docs/SUMMARY.md)
-(the original exported gitbook may [still work though](https://szkrd.gitbooks.io/little-angular-book/content/)).
+Originally created for GitBook, but since they moved towards a saas business model,
+this repo has been archived, unarchived, and now has a custom static builder.
+
+Do `npm install`, `npm run build`, `npm serve`. Joy, happiness.
