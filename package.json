@@ -1,14 +1,11 @@
 {
   "name": "little-angular-book",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Getting started with Angular 5+",
   "main": "index.js",
   "scripts": {
-    "init": "gitbook init",
-    "start": "gitbook serve",
-    "serve-alt": "gitbook --lrport 6999 --port 7000 serve",
-    "serve": "gitbook serve",
-    "build": "gitbook build"
+    "build": "node src/build.js",
+    "serve": "serve ./docs"
   },
   "repository": {
     "type": "git",
@@ -22,7 +19,12 @@
   },
   "homepage": "https://github.com/szkrd/little-angular-book#readme",
   "devDependencies": {
-    "gitbook-cli": "2.3.2",
-    "gitbook-plugin-advanced-emoji": "0.2.2"
+    "serve": "11.3.2"
+  },
+  "dependencies": {
+    "ejs": "3.1.3",
+    "emojilib": "2.4.0",
+    "highlight.js": "10.1.1",
+    "marked": "1.1.0"
   }
 }
