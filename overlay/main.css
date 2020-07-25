@@ -76,6 +76,7 @@ body pre.hljs {
 
 .menu .menu-item.selected > a {
   font-weight: bold;
+  text-decoration: underline;
 }
 
 .menu .menu-section {

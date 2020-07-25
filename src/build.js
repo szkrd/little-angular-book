@@ -1,3 +1,4 @@
+const shelljs = require('shelljs')
 const fs = require('fs')
 const { promisify } = require('util')
 const path = require('path')
@@ -6,6 +7,7 @@ const marked = promisify(require('marked'))
 const emoji = require('emojilib')
 const ejs = require('ejs')
 const packageJson = require('../package.json')
+const args = process.argv.splice(2)
 
 const fsCopyFile = promisify(fs.copyFile)
 const fsReadDir = promisify(fs.readdir)
@@ -66,8 +68,17 @@ async function walkDir (dir, fileList = []) {
 // ---------------------------------------------------------------------------------------------------------------------
 
 async function main () {
+  // change to script's parent dir (which should be the project's root)
+  shelljs.cd(path.join(path.dirname(process.argv[1]), '/..'))
+
   const { version } = packageJson
   const list = await walkDir('./book')
+
+  // delete the docs dir first
+  if (!args.includes('no-flush')) {
+    shelljs.rm('-rf', 'docs')
+    shelljs.mkdir('docs')
+  }
 
   // build common menu
   let menuItems = list
