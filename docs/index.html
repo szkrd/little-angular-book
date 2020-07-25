@@ -222,7 +222,19 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="./06-problems/index.html">Problems</a>
+            <a href="./06-testing/index.html">Testing</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="./06-testing/01-jasmine/index.html">Jasmine </a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="./07-problems/index.html">Problems</a>
             
         </div>
     
@@ -234,6 +246,8 @@
 <li><a href="02-components/index.html">Components</a></li>
 <li><a href="03-routing/index.html">Router</a></li>
 <li><a href="04-dependency-injection/index.html">Dependency injection</a></li>
+<li><a href="05-services/index.html">Services</a></li>
+<li><a href="06-testing/index.html">Testing</a></li>
 <li><a href="05-problems/index.html">Problems</a></li>
 </ul>
 <h2><a name="1">Requirements</a></h2>
@@ -260,5 +274,13 @@
 </ul>
 </div>
 
+<script type="text/javascript">
+  (() => {
+    const selectedMenuItem = document.querySelector('.menu-item.selected');
+    if (selectedMenuItem) {
+      selectedMenuItem.scrollIntoView(true);
+    }
+  })();
+</script>
 </body>
 </html>

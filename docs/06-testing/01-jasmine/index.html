@@ -126,23 +126,9 @@
             
         </div>
     
-        <div class="menu-item depth-3 selected">
+        <div class="menu-item depth-3 ">
             ▹
             <a href="../../03-routing/01-parameters/index.html">Route parameters</a>
-            
-                <div class="menu-section depth-4">
-                    ◦
-                    <a href="#1">
-                        The current route
-                    </a>
-                </div>
-            
-                <div class="menu-section depth-4">
-                    ◦
-                    <a href="#2">
-                        Router lifecycle
-                    </a>
-                </div>
             
         </div>
     
@@ -212,9 +198,23 @@
             
         </div>
     
-        <div class="menu-item depth-3 ">
+        <div class="menu-item depth-3 selected">
             ▹
             <a href="../../06-testing/01-jasmine/index.html">Jasmine </a>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#1">
+                        Expectation matchers
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#2">
+                        Spies
+                    </a>
+                </div>
             
         </div>
     
@@ -225,39 +225,111 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="route-parameters">Route parameters</h1>
+<div class="markdown-body"><h1 id="jasmine-white_flower">Jasmine 💮</h1>
+<p>A10 comes with <a href="https://jasmine.github.io/api/3.5/global">v3.5</a>;
+Jasmine is a fairly straightforward bdd framework, has a sane list of
+matchers and fairly basic spy capabilities:</p>
 <ul>
-<li><code>:id</code> → <code>{path: &#39;post/:id&#39;, component: PostPageComponent}</code></li>
-<li>don&#39;t forget to unsubscribe on component destroy!</li>
+<li><code>describe</code> (desc, specDefs)</li>
+<li><code>afterEach</code>, <code>afterAll</code> (fn <em>opt</em>, timeout <em>opt</em>)</li>
+<li><code>beforeEach</code>, <code>beforeAll</code> (fn <em>opt</em>, timeout <em>opt</em>)</li>
+<li><code>it</code> (desc, fn <em>opt</em>, timeout <em>opt</em>)</li>
+<li><code>expect</code> (actual), <code>expectAsync</code> (actual)</li>
+<li><strong>focusing</strong>: <code>fdescribe</code>, <code>fit</code></li>
+<li><strong>skipping</strong>: <code>xdescribe</code>, <code>xit</code></li>
 </ul>
-<p>Subscribing to parameter changes<br>with <code>ActivatedRoute</code> service from <code>@angular/router</code>:</p>
-<pre class="hljs"><code class="language-typescript">ngOnInit() {
-  <span class="hljs-built_in">this</span>.routeChangeSubscription = <span class="hljs-built_in">this</span>.activatedRoute
-    .paramMap
-    .subscribe(<span class="hljs-function"><span class="hljs-params">params</span> =&gt;</span> {
-      <span class="hljs-built_in">this</span>.id = <span class="hljs-built_in">Number</span>(params.get(<span class="hljs-string">&#x27;id&#x27;</span>));
-      <span class="hljs-built_in">this</span>.getPost();
-    });
-}</code></pre>
-<p>Opening links from the template<br>using the <code>routerLink</code> directive:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">&quot;[&#x27;/view/post&#x27;, item.id]&quot;</span>&gt;</span>
-  {{ item.title }}
-<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
-<p>Opening links from the component class,<br>using <code>{Router}</code> from <code>@angular/router</code>:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;/view/post&#x27;</span>, { id: item.id }]);</code></pre>
-<h2><a name="1">The current route</a></h2>
-<p>The current route is available via <code>ActivatedRoute</code>, which has observables to allow us to listen for changes.</p>
-<p>paramMap, queryParamMap, parent, data, url, etc.
-official list is <a href="https://angular.io/guide/router#activated-route">here</a>.</p>
-<h2><a name="2">Router lifecycle</a></h2>
-<p>Router emits all its events (list can be found <a href="https://angular.io/guide/router#router-events">here</a>):</p>
-<pre class="hljs"><code class="language-typescript">ngOnInit() {
-  <span class="hljs-built_in">this</span>.router.events
-    .subscribe(<span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
-      <span class="hljs-comment">// example: NavigationStart, RoutesRecognized, NavigationEnd</span>
-      <span class="hljs-built_in">console</span>.log(event);
-    });
-}</code></pre>
+<h2><a name="1">Expectation matchers</a></h2>
+<p>Negation modifier is <code>.not.</code></p>
+<ul>
+<li>equality<ul>
+<li><strong>toBe</strong>: <code>expect(thing).toBe(realThing);</code></li>
+<li><strong>toEqual</strong>: deep equality <code>expect(bigObject).toEqual({&quot;foo&quot;: [&#39;bar&#39;, &#39;baz&#39;]});</code></li>
+</ul>
+</li>
+<li>existence<ul>
+<li><strong>toBeDefined</strong>: <code>expect(result).toBeDefined();</code></li>
+<li><strong>toBeUndefined</strong>: <code>expect(result).toBeUndefined():</code></li>
+<li><strong>toBeTruthy</strong>: <code>expect(result).toBeTruthy();</code></li>
+<li><strong>toBeFalsy</strong>: <code>expect(result).toBeFalsy();</code></li>
+</ul>
+</li>
+<li>boolean<ul>
+<li><strong>toBeTrue</strong>: <code>expect(result).toBeTrue();</code></li>
+<li><strong>toBeFalse</strong>: <code>expect(result).toBeFalse();</code></li>
+</ul>
+</li>
+<li>numbers<ul>
+<li><strong>toBeNaN</strong>: <code>expect(thing).toBeNaN();</code></li>
+<li><strong>toBeCloseTo</strong>: <code>expect(number).toBeCloseTo(42.2, 3);</code></li>
+<li><strong>toBeGreaterThan</strong>: <code>expect(number).toBeGreaterThan(3);</code></li>
+<li><strong>toBeGreaterThanOrEqual</strong>: <code>expect(number).toBeGreaterThanOrEqual(25);</code></li>
+<li><strong>toBeLessThan</strong>: <code>expect(number).toBeLessThan(0);</code></li>
+<li><strong>toBeLessThanOrEqual</strong>: <code>expect(number).toBeLessThanOrEqual(123);</code></li>
+<li><strong>toBeNegativeInfinity</strong>: <code>expect(number).toBeNegativeInfinity();</code></li>
+<li><strong>toBePositiveInfinity</strong>: <code>expect(number).toBePositiveInfinity();</code></li>
+</ul>
+</li>
+<li>string<ul>
+<li><strong>toContain</strong>: <code>expect(string).toContain(substring);</code></li>
+<li><strong>toMatch</strong>: <code>expect(&quot;my string&quot;).toMatch(/string$/);</code></li>
+</ul>
+</li>
+<li>array<ul>
+<li><strong>toContain</strong>: <code>expect(array).toContain(anElement);</code></li>
+</ul>
+</li>
+<li>class/null<ul>
+<li><strong>toBeNull</strong>: <code>expect(result).toBeNull();</code></li>
+<li><strong>toBeInstanceOf</strong>: <code>expect(result).toBeInstanceOf(String);</code></li>
+</ul>
+</li>
+<li>html<ul>
+<li><strong>toHaveClass</strong>: <code>expect(htmlEl).toHaveClass(&#39;bar&#39;); //css</code></li>
+</ul>
+</li>
+<li>throw<ul>
+<li><strong>toThrow</strong>: <code>expect(() =&gt; { return &#39;x&#39;; }).toThrow();</code></li>
+<li><strong>toThrowError</strong>: <code>expect(() =&gt; { return &#39;x&#39;; }).toThrowError();</code></li>
+<li><strong>toThrowMatching</strong> <code>expect(() =&gt; { return &#39;x&#39;; }).toThrowMatching(predicateFn)</code></li>
+</ul>
+</li>
+<li>async/promise (expectAsync)<ul>
+<li><strong>toBeResolved</strong>: <code>expectAsync(aPromise).toBeResolved();</code></li>
+<li><strong>toBeResolvedTo</strong>: <code>expectAsync(aPromise).toBeResolvedTo({prop: &#39;value&#39;});</code></li>
+<li><strong>toBeRejected</strong>: <code>expectAsync(aPromise).toBeRejected();</code></li>
+<li><strong>toBeRejectedWith</strong>: <code>expectAsync(aPromise).toBeRejectedWith({prop: &#39;value&#39;});</code></li>
+<li><strong>toBeRejectedWithError</strong>: <code>expectAsync(aPromise).toBeRejectedWithError(MyError, /message/);</code></li>
+</ul>
+</li>
+</ul>
+<p>Future 3.6:</p>
+<ul>
+<li>toHaveSize (instead of array.length)</li>
+<li>toHaveBeenCalledOnceWith (spy)</li>
+<li>toBePending (async)</li>
+</ul>
+<h2><a name="2">Spies</a></h2>
+<p>Spy naming (<code>aName</code>) is optional, like most other parameters (lots of 🦆 typing).</p>
+<ul>
+<li>spying<ol>
+<li><strong>spyOn</strong>: spy on a method - <code>spyOn(obj, methodName)</code></li>
+<li><strong>spyOnProperty</strong>: spy on a prop (with defineProperty) - <code>spyOnProperty(obj, propName, &#39;get&#39;/&#39;set&#39;)</code> </li>
+<li><strong>spyOnAllFunctions</strong>: <code>spyOnAllFunctions(obj)</code></li>
+</ol>
+</li>
+<li>spy creation<ol>
+<li><strong>createSpy</strong>: <code>jasmine.createSpy(aName, fn)</code></li>
+<li><strong>createSpyObj</strong>: <code>jasmine.createSpyObj(aName, [ methods ], [ props ])</code></li>
+</ol>
+</li>
+<li>spy matchers<ul>
+<li><strong>toHaveBeenCalled</strong>: <code>expect(mySpy).toHaveBeenCalled();</code></li>
+<li><strong>toHaveBeenCalledBefore</strong>: <code>expect(mySpy).toHaveBeenCalledBefore(otherSpy);</code></li>
+<li><strong>toHaveBeenCalledTimes</strong>: <code>expect(mySpy).toHaveBeenCalledTimes(3);</code></li>
+<li><strong>toHaveBeenCalledWith</strong>: <code>expect(mySpy).toHaveBeenCalledWith(&#39;foo&#39;, &#39;bar&#39;, 2);</code></li>
+</ul>
+</li>
+</ul>
 </div>
 
 <script type="text/javascript">

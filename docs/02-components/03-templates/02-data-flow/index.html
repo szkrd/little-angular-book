@@ -215,7 +215,19 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../../../06-problems/index.html">Problems</a>
+            <a href="../../../06-testing/index.html">Testing</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../../06-testing/01-jasmine/index.html">Jasmine </a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../../../07-problems/index.html">Problems</a>
             
         </div>
     
@@ -246,5 +258,13 @@
 </ul>
 </div>
 
+<script type="text/javascript">
+  (() => {
+    const selectedMenuItem = document.querySelector('.menu-item.selected');
+    if (selectedMenuItem) {
+      selectedMenuItem.scrollIntoView(true);
+    }
+  })();
+</script>
 </body>
 </html>

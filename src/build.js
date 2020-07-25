@@ -95,7 +95,7 @@ async function main () {
         original,
         selected: false,
         depth: s.length,
-        title: title.replace(/^#\s+/, ''),
+        title: title.replace(/^#\s+/, '').replace(/:([a-z-_]*):/g, ''), // also remove text emojis
         sections,
         url: './' + s.join('/').replace(/README\.md$/, 'index.html').replace(/\.md$/, '.html')
       }

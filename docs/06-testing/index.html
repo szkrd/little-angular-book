@@ -120,16 +120,9 @@
             
         </div>
     
-        <div class="menu-item depth-2 selected">
+        <div class="menu-item depth-2 ">
             ▸
             <a href="../03-routing/index.html">Routing</a>
-            
-                <div class="menu-section depth-3">
-                    ◦
-                    <a href="#1">
-                        Target outlets
-                    </a>
-                </div>
             
         </div>
     
@@ -199,7 +192,7 @@
             
         </div>
     
-        <div class="menu-item depth-2 ">
+        <div class="menu-item depth-2 selected">
             ▸
             <a href="../06-testing/index.html">Testing</a>
             
@@ -218,44 +211,10 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="routing">Routing</h1>
-<ul>
-<li>use <code>&lt;base href=&quot;/&quot;&gt;</code> in html</li>
-<li>html5 history by default</li>
-<li>info on the current route is available through subscriptions</li>
-</ul>
-<p><em>app.module.ts</em></p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@NgModule</span>({
-  imports: [
-    routing <span class="hljs-comment">// from &quot;app.routes.ts&quot; below</span>
-  ],
-  <span class="hljs-comment">// ...</span></code></pre>
-<p><em>app.routes.ts</em></p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">const</span> routes: Routes = [
-  <span class="hljs-comment">// redirection</span>
-  {path: <span class="hljs-string">&#x27;&#x27;</span>, redirectTo: <span class="hljs-string">&#x27;view/posts&#x27;</span>, pathMatch: <span class="hljs-string">&#x27;full&#x27;</span>},
-  <span class="hljs-comment">// standalone page</span>
-  {path: <span class="hljs-string">&#x27;profile&#x27;</span>, component: ProfilePageComponent},
-  <span class="hljs-comment">// child view (the sidebar with the widgets is shared)</span>
-  {
-    path: <span class="hljs-string">&#x27;view&#x27;</span>,
-    component: ViewComponent,
-    children: [
-      {path: <span class="hljs-string">&#x27;posts&#x27;</span>, component: PostsPageComponent},
-      {path: <span class="hljs-string">&#x27;post/:id&#x27;</span>, component: PostPageComponent}
-    ]
-  },
-  <span class="hljs-comment">// fallback</span>
-  {path: <span class="hljs-string">&#x27;**&#x27;</span>, component: PageNotFoundComponent}
-];
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> routing = RouterModule.forRoot(routes);</code></pre>
-<h2><a name="1">Target outlets</a></h2>
-<ul>
-<li>Target slot is <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> in the html template.</li>
-<li>Multiple outlets may be used (must for a child component)</li>
-<li>named router outlet: <code>&lt;router-outlet name=&quot;sidebar&quot;&gt;&lt;/router-outlet&gt;</code></li>
-</ul>
+<div class="markdown-body"><h1 id="testing">Testing</h1>
+<p>A10 comes with <a href="https://jasmine.github.io/api/3.5/global">jasmine 3.5.11</a> bdd framework
+and <a href="https://karma-runner.github.io/5.0/index.html">karma 5</a> test runner; for high-level/e2e testing
+<a href="https://github.com/angular/protractor">protractor</a> is preferred.</p>
 </div>
 
 <script type="text/javascript">

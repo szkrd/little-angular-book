@@ -6,6 +6,8 @@ A journey to the magical land of Angular.
 - [Components](02-components/README.md)
 - [Router](03-routing/README.md)
 - [Dependency injection](04-dependency-injection/README.md)
+- [Services](05-services/README.md)
+- [Testing](06-testing/README.md)
 - [Problems](05-problems/README.md)
 
 ## Requirements 
