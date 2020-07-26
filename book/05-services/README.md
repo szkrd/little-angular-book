@@ -2,7 +2,7 @@
 
 Services are injectable classes that usually are instanciated by the DI system.
 
-See also: [sharing services](../dependency-injection/sharing-services.md).
+See also: [sharing services](../04-dependency-injection/02-sharing-services/README.md).
 
 ## Utility functions
 

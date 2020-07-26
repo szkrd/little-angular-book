@@ -13,6 +13,7 @@ const fsCopyFile = promisify(fs.copyFile)
 const fsReadDir = promisify(fs.readdir)
 const fsStat = promisify(fs.stat)
 const fsMkDir = promisify(fs.mkdir)
+const fsReadFile = promisify(fs.readFile)
 const fsWriteFile = promisify(fs.writeFile)
 
 // replace :emoji: markers with proper emoji (gitbook had a plugin for this)
@@ -122,7 +123,7 @@ async function main () {
     }))
 
     // prep the ejs renderer, fix paths
-    let ejsSource = fs.readFileSync('./overlay/index.ejs', 'utf-8')
+    let ejsSource = await fsReadFile('./overlay/index.ejs', 'utf-8')
     const ejsTemplate = ejs.compile(ejsSource, {
       fileName: 'index.ejs'
     })
@@ -133,14 +134,22 @@ async function main () {
       if (baseName === 'README.md') {
         target = target.replace(/README\.html$/, 'index.html')
       }
-      const contents = fs.readFileSync(source, 'utf-8')
+      const contents = await fsReadFile(source, 'utf-8')
+
       let md = await marked(contents)
       md = md.replace(/<pre>/g, '<pre class="hljs">') // such custom renderer, very lazy
       let headings = 1
       md = md.replace(/<h2[^>]*>/g, (sub) => `<h2><a name="${headings++}">`) // h2 start
       md = md.replace(/<\/h2>/g, '</a></h2>') // h2 start
-      md = md.replace(/README\.md">/g, 'index.html">')
-      md = md.replace(/\.md">/g, '.html">')
+      md = md.replace(/README\.md">/g, 'index.html">') // README to index.html
+      md = md.replace(/\.md">/g, '.html">') // all md to html
+      // fix relative roots in links
+      const relPath = targetPathOnly.split('/').slice(1).slice(0, depth - 1)
+      md = md.replace(/\shref="([^"]*)"/g, (all, matcher) => {
+        if (/^(http|https|ftp|\/|:\/\/)/.test(matcher)) return all // skip external or absolute
+        return ` href="${relativeRoot + relPath.join('/') + '/' + matcher}"`
+      })
+
       await fsWriteFile(target, ejsTemplate({
         md,
         v: version,

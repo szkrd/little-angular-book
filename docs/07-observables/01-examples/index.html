@@ -36,23 +36,9 @@
             
         </div>
     
-        <div class="menu-item depth-3 selected">
+        <div class="menu-item depth-3 ">
             ▹
             <a href="../../01-typescript/03-functions/index.html">Functions</a>
-            
-                <div class="menu-section depth-4">
-                    ◦
-                    <a href="#1">
-                        Alternate signatures
-                    </a>
-                </div>
-            
-                <div class="menu-section depth-4">
-                    ◦
-                    <a href="#2">
-                        Defining context (explicit this)
-                    </a>
-                </div>
             
         </div>
     
@@ -224,9 +210,23 @@
             
         </div>
     
-        <div class="menu-item depth-3 ">
+        <div class="menu-item depth-3 selected">
             ▹
             <a href="../../07-observables/01-examples/index.html">Examples</a>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#1">
+                        Download from api
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#2">
+                        Computed observable
+                    </a>
+                </div>
             
         </div>
     
@@ -237,57 +237,58 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="functions">Functions</h1>
-<p>The simplest example: <code>let inc = (x: number, y: number = 1): number =&gt; x + y;</code></p>
-<p>It&#39;s fairly simple to define array parameters:</p>
-<pre class="hljs"><code class="language-typescript">  <span class="hljs-keyword">let</span> baptize = (familyName: <span class="hljs-built_in">string</span>, ...names: <span class="hljs-built_in">string</span>[]): <span class="hljs-function"><span class="hljs-params">string</span> =&gt;</span> [familyName, ...names].join(<span class="hljs-string">&#x27; &#x27;</span>);
-  <span class="hljs-comment">//            ↑                                           ↑        ↑</span>
-  <span class="hljs-comment">//           input                                     output     implementation</span></code></pre>
-<h2><a name="1">Alternate signatures</a></h2>
-<p>Treat this as a <strong>lightweight</strong> overloading: you can&#39;t define multiple functions with the same name, but you can define multiple interfaces for one function.</p>
-<p>Then of course it&#39;s up to you to see if the input quacks or barks. In a &quot;real&quot; typed language this would not be needed, but typescript is just sugar on top of javascript (albeit sweet and helpful sugar).</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span> (<span class="hljs-params">element: HTMLElement</span>): <span class="hljs-title">number</span></span>; <span class="hljs-comment">// signature A</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span> (<span class="hljs-params">element: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">number</span></span>; <span class="hljs-comment">// signature B</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span> (<span class="hljs-params">element: <span class="hljs-built_in">any</span></span>): <span class="hljs-title">number</span> </span>{ <span class="hljs-comment">// this is not part of the &quot;valid&quot; overload list</span>
-  <span class="hljs-keyword">let</span> node: HTMLElement;
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> element === <span class="hljs-string">&#x27;string&#x27;</span>) { <span class="hljs-comment">// we still have to poke the duck</span>
-    node = <span class="hljs-built_in">document</span>.querySelector(element);
-  } <span class="hljs-keyword">else</span> {
-    node = element;
+<div class="markdown-body"><h1 id="examples">Examples</h1>
+<h2><a name="1">Download from api</a></h2>
+<p>Let&#39;s download a list of my repositories and print the ones starting with the letter <em>&quot;A&quot;</em>.</p>
+<p>Since the response is <em>one</em> array with lot&#39;s of objects, we use <code>map</code> in the pipe and not <code>filter</code>.</p>
+<p>In a &quot;real&quot; angular app we would use the angular&#39;s http service in our own service.</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> {Component, OnInit} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
+<span class="hljs-keyword">import</span> {ajax} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs/ajax&#x27;</span>;
+<span class="hljs-keyword">import</span> {map} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs/operators&#x27;</span>;
+<span class="hljs-keyword">import</span> {Observable, <span class="hljs-keyword">of</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs&#x27;</span>;
+
+<span class="hljs-keyword">interface</span> IRepo { name: <span class="hljs-built_in">string</span>; id: <span class="hljs-built_in">number</span>; }
+
+<span class="hljs-meta">@Component</span>({
+  selector: <span class="hljs-string">&#x27;app-github-repos&#x27;</span>,
+  template: <span class="hljs-string">`
+    &lt;ul&gt;
+      &lt;li *ngFor=&quot;let repo of repos$ | async&quot;&gt;{{ repo.name }}&lt;/li&gt;
+    &lt;/ul&gt;
+  `</span>
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> GithubReposComponent <span class="hljs-keyword">implements</span> OnInit {
+  repos$: Observable&lt;IRepo[]&gt;;
+
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-built_in">this</span>.repos$ = ajax.getJSON(<span class="hljs-string">&#x27;https://api.github.com/users/szkrd/repos&#x27;</span>)
+      .pipe(map(<span class="hljs-function">(<span class="hljs-params">repos: IRepo[]</span>) =&gt;</span> repos.filter(<span class="hljs-function"><span class="hljs-params">repo</span> =&gt;</span> /^a.*/.test(repo.name))));
   }
-  <span class="hljs-keyword">return</span> node.getBoundingClientRect().height;
+
+  ngOnInit(): <span class="hljs-built_in">void</span> {
+    <span class="hljs-built_in">this</span>.repos$.subscribe(); <span class="hljs-comment">// since an observable is cold, this will &quot;start&quot; it</span>
+  }
 }</code></pre>
-<p>to use the above function:</p>
-<ul>
-<li><code>getHeight(&#39;body&#39;);</code> → calls signature A</li>
-<li><code>getHeight(document.getElementsByTagName(&#39;body&#39;)[0]);</code> → calls signature B</li>
-<li><code>getHeight(42);</code> → this will not work on typescript&#39;s level 🚫 (but will work of course in the compiled js)</li>
-</ul>
-<p>❗ Notice how the function &quot;technically&quot; accepts any type - both signatures are just type helpers and will be stripped away. </p>
-<h2><a name="2">Defining context (explicit this)</a></h2>
-<p>One may enforce an expected calling context for a function:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> User {
-  age: <span class="hljs-built_in">number</span>;
-  department: <span class="hljs-built_in">string</span>;
-}
-
-<span class="hljs-keyword">interface</span> Users {
-  [name: <span class="hljs-built_in">string</span>]: User;
-}
-
-<span class="hljs-keyword">let</span> users: Users = {
-  john: { age: <span class="hljs-number">30</span>, department: <span class="hljs-string">&#x27;management&#x27;</span> },
-  jack: { age: <span class="hljs-number">26</span>, department: <span class="hljs-string">&#x27;backend development&#x27;</span> },
-  jill: { age: <span class="hljs-number">34</span>, department: <span class="hljs-string">&#x27;human resources&#x27;</span> }
-};
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUser</span> (<span class="hljs-params"><span class="hljs-built_in">this</span>: Users, name: <span class="hljs-built_in">string</span> = &#x27;jill&#x27;</span>) </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>[name];
+<h2><a name="2">Computed observable</a></h2>
+<p>Add two numbers (a$ and b$) using the two observables&#39; latest value:<br><code>combineLatest</code> will create an array <code>[a, b]</code> then we pipe &amp; map that to <code>arr[0] + arr[1]</code></p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@Component</span>({
+  selector: <span class="hljs-string">&#x27;app-add&#x27;</span>,
+  template: <span class="hljs-string">`
+    &lt;p&gt;
+      &lt;label&gt;A &lt;input type=&quot;number&quot; (change)=&quot;updateA($event)&quot; [value]=&quot;a$ | async&quot;&gt;&lt;/label&gt;
+      +
+      &lt;label&gt;B &lt;input type=&quot;number&quot; (change)=&quot;updateB($event)&quot; [value]=&quot;b$ | async&quot;&gt;&lt;/label&gt;
+      = {{sum$ | async}}
+    &lt;/p&gt;
+  `</span>
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AddComponent {
+  a$ = <span class="hljs-keyword">new</span> BehaviorSubject(<span class="hljs-number">-10</span>);
+  b$ = <span class="hljs-keyword">new</span> BehaviorSubject(<span class="hljs-number">10</span>);
+  sum$ = combineLatest(<span class="hljs-built_in">this</span>.a$, <span class="hljs-built_in">this</span>.b$).pipe(map(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x[<span class="hljs-number">0</span>] + x[<span class="hljs-number">1</span>]));
+  updateA($event) { <span class="hljs-built_in">this</span>.a$.next(<span class="hljs-built_in">parseInt</span>($event.target.value, <span class="hljs-number">10</span>)); }
+  updateB($event) { <span class="hljs-built_in">this</span>.b$.next(<span class="hljs-built_in">parseInt</span>($event.target.value, <span class="hljs-number">10</span>)); }
 }</code></pre>
-<ul>
-<li>use call or apply: <code>getUser.call(users, &#39;jack&#39;);</code></li>
-<li>it would <strong>not</strong> work without the scoping: <code>getUser(&#39;jill&#39;);</code> 🚫</li>
-</ul>
 </div>
 
 <script type="text/javascript">

@@ -206,7 +206,19 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../../07-problems/index.html">Problems</a>
+            <a href="../../07-observables/index.html">Observables</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../07-observables/01-examples/index.html">Examples</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../../08-problems/index.html">Problems</a>
             
         </div>
     
@@ -219,7 +231,7 @@ are<br><strong>ngOnChanges</strong> 🚪, <strong>ngOnInit</strong> ⏰ and <str
 <li>(constructor): instanciation; set initial variables, but possibly <strong>nothing else</strong> here! You have no incoming data / input prop values!</li>
 <li><code>ngOnChanges()</code>: incoming input    </li>
 <li><code>ngOnInit()</code>: component init, fetch data here if you must</li>
-<li><code>ngDoCheck()</code>: it runs on every detection, so <strong>avoid it</strong> like the plague, unless you really know what you&#39;re doing 👎</li>
+<li><code>ngDoCheck()</code>: it runs on every detection, so <strong>avoid it</strong> like the plague, unless you really know what you&#39;re doing 🚫</li>
 <li>for projected (transcluded) content and children related:    <ul>
 <li><code>ngAfterContentInit()</code>: transcluded content initialized</li>
 <li><code>ngAfterContentChecked()</code>    </li>
@@ -229,6 +241,12 @@ are<br><strong>ngOnChanges</strong> 🚪, <strong>ngOnInit</strong> ⏰ and <str
 </li>
 <li><code>ngOnDestroy()</code>: clean up your subscribers and event listeners here    </li>
 </ul>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@Component</span>({ selector: <span class="hljs-string">&#x27;app-sample&#x27;</span>, template: <span class="hljs-string">`...`</span> })
+<span class="hljs-keyword">class</span> Sample <span class="hljs-keyword">implements</span> OnInit, OnChanges, OnDestroy {
+  ngOnInit(): <span class="hljs-built_in">void</span> {}
+  ngOnChanges(changes: SimpleChanges): <span class="hljs-built_in">void</span> {}
+  ngOnDestroy(): <span class="hljs-built_in">void</span> {}
+}</code></pre>
 </div>
 
 <script type="text/javascript">

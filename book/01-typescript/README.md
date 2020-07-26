@@ -1,5 +1,13 @@
 # TypeScript
 
+1. [Basic types](01-basic-types/README.md)
+2. [Classes and interfaces](02-classes-interfaces/README.md)
+3. [Functions](03-functions/README.md)
+4. [Enums](04-enums/README.md)
+5. [Advanced types](05-advanced-types/README.md)
+6. [Decorators](06-decorators/README.md)
+7. [Generics](07-generics/README.md)
+
 Angular uses TypeScript. While you can omit all type definitions, trying to ignore TS (not including it in an angular project) and going all js would not be a good idea.
 
 :bulb: Angular devs wanted to create another language on top of javascript, because they needed to rely heavily on code annotations (decorators, hence the @ naming) which are not yet part of the js spec. Fortunately TS decided to add decorator support and Angular went with TypeScript.
