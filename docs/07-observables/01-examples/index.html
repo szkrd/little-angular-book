@@ -239,13 +239,13 @@
 </div>
 <div class="markdown-body"><h1 id="examples">Examples</h1>
 <h2><a name="1">Download from api</a></h2>
-<p>Let&#39;s download a list of my repositories and print the ones starting with the letter <em>&quot;A&quot;</em>.</p>
+<p>Let&#39;s download a list of my repositories and print the ones starting with the letter <em>&quot;A&quot;</em>. See how we have no ngOnInit, because the <code>async pipe</code> render &quot;triggers a subscription&quot;. </p>
 <p>Since the response is <em>one</em> array with lot&#39;s of objects, we use <code>map</code> in the pipe and not <code>filter</code>.</p>
 <p>In a &quot;real&quot; angular app we would use the angular&#39;s http service in our own service.</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> {Component, OnInit} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
 <span class="hljs-keyword">import</span> {ajax} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs/ajax&#x27;</span>;
 <span class="hljs-keyword">import</span> {map} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs/operators&#x27;</span>;
-<span class="hljs-keyword">import</span> {Observable, <span class="hljs-keyword">of</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs&#x27;</span>;
+<span class="hljs-keyword">import</span> {Observable} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs&#x27;</span>;
 
 <span class="hljs-keyword">interface</span> IRepo { name: <span class="hljs-built_in">string</span>; id: <span class="hljs-built_in">number</span>; }
 
@@ -257,16 +257,12 @@
     &lt;/ul&gt;
   `</span>
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> GithubReposComponent <span class="hljs-keyword">implements</span> OnInit {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> GithubReposComponent {
   repos$: Observable&lt;IRepo[]&gt;;
 
   <span class="hljs-keyword">constructor</span>(<span class="hljs-params"></span>) {
     <span class="hljs-built_in">this</span>.repos$ = ajax.getJSON(<span class="hljs-string">&#x27;https://api.github.com/users/szkrd/repos&#x27;</span>)
       .pipe(map(<span class="hljs-function">(<span class="hljs-params">repos: IRepo[]</span>) =&gt;</span> repos.filter(<span class="hljs-function"><span class="hljs-params">repo</span> =&gt;</span> /^a.*/.test(repo.name))));
-  }
-
-  ngOnInit(): <span class="hljs-built_in">void</span> {
-    <span class="hljs-built_in">this</span>.repos$.subscribe(); <span class="hljs-comment">// since an observable is cold, this will &quot;start&quot; it</span>
   }
 }</code></pre>
 <h2><a name="2">Computed observable</a></h2>

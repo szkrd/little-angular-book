@@ -2,17 +2,17 @@
 
 ## Download from api
 
-Let's download a list of my repositories and print the ones starting with the letter _"A"_.
+Let's download a list of my repositories and print the ones starting with the letter _"A"_. See how we have no ngOnInit, because the `async pipe` render "triggers a subscription". 
 
 Since the response is _one_ array with lot's of objects, we use `map` in the pipe and not `filter`.
 
 In a "real" angular app we would use the angular's http service in our own service.
 
 ```typescript
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ajax} from 'rxjs/ajax';
 import {map} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 
 interface IRepo { name: string; id: number; }
 
@@ -24,16 +24,12 @@ interface IRepo { name: string; id: number; }
     </ul>
   `
 })
-export class GithubReposComponent implements OnInit {
+export class GithubReposComponent {
   repos$: Observable<IRepo[]>;
 
   constructor() {
     this.repos$ = ajax.getJSON('https://api.github.com/users/szkrd/repos')
       .pipe(map((repos: IRepo[]) => repos.filter(repo => /^a.*/.test(repo.name))));
-  }
-
-  ngOnInit(): void {
-    this.repos$.subscribe(); // since an observable is cold, this will "start" it
   }
 }
 ```

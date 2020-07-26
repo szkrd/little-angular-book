@@ -74,11 +74,3 @@ I tried to find a middle ground with examples and relevancy, for an in depth gui
    Just use es6 modules and try to skip the multi-file namespace with its triple-slash metadata.
 5. Module resolution: with the "node" resolution strategy things are somewhat clearer,
    plus the whole module/path resolving in the shadow of webpack is another advanced thing.
-
-- [Basic types](./01-basic-types/README.md)
-- [Classes and interfaces](./02-classes-interfaces/README.md)
-- [Functions](./03-functions/README.md)
-- [Enums](./04-enums/README.md)
-- [Advanced types](./05-advanced-types/README.md)
-- [Decorators](./06-decorators/README.md)
-- [Generics](./07-generics/README.md)
