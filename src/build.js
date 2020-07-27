@@ -147,7 +147,8 @@ async function main () {
       const relPath = targetPathOnly.split('/').slice(1).slice(0, depth - 1)
       md = md.replace(/\shref="([^"]*)"/g, (all, matcher) => {
         if (/^(http|https|ftp|\/|:\/\/)/.test(matcher)) return all // skip external or absolute
-        return ` href="${relativeRoot + relPath.join('/') + '/' + matcher}"`
+        const pathMod = (relativeRoot + relPath.join('/') + '/' + matcher).replace(/^\//, '');
+        return ` href="${pathMod}"`
       })
 
       await fsWriteFile(target, ejsTemplate({
