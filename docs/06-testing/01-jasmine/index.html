@@ -323,7 +323,7 @@ matchers and fairly basic spy capabilities:</p>
 <h2><a name="2">Spies</a></h2>
 <p>Spy naming (<code>aName</code>) is optional, like most other parameters (lots of 🦆 typing).</p>
 <ul>
-<li>spying<ol>
+<li>spying on existing objects<ol>
 <li><strong>spyOn</strong>: spy on a method - <code>spyOn(obj, methodName)</code></li>
 <li><strong>spyOnProperty</strong>: spy on a prop (with defineProperty) - <code>spyOnProperty(obj, propName, &#39;get&#39;/&#39;set&#39;)</code> </li>
 <li><strong>spyOnAllFunctions</strong>: <code>spyOnAllFunctions(obj)</code></li>
@@ -339,6 +339,17 @@ matchers and fairly basic spy capabilities:</p>
 <li><strong>toHaveBeenCalledBefore</strong>: <code>expect(mySpy).toHaveBeenCalledBefore(otherSpy);</code></li>
 <li><strong>toHaveBeenCalledTimes</strong>: <code>expect(mySpy).toHaveBeenCalledTimes(3);</code></li>
 <li><strong>toHaveBeenCalledWith</strong>: <code>expect(mySpy).toHaveBeenCalledWith(&#39;foo&#39;, &#39;bar&#39;, 2);</code></li>
+</ul>
+</li>
+<li>return values<ul>
+<li>use <code>.and</code> to start a &quot;strategy&quot;:<ul>
+<li><strong>returnValue(s)</strong>: <code>.and.returnValue(42)</code>, <code>.and.returnValues</code></li>
+<li><strong>resolveTo</strong>, <strong>rejectWith</strong> (for promises): <code>.and.resolveTo(aPromise)</code></li>
+<li><strong>throwError</strong></li>
+<li><strong>callThrough</strong> (call the original function, by default it acts as a <em>stub</em> only)</li>
+</ul>
+</li>
+<li>only react to a fixed set of parameters:<br><code>.withArgs(1, 2, 3).and.</code></li>
 </ul>
 </li>
 </ul>
