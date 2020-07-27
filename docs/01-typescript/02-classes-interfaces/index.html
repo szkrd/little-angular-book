@@ -3,13 +3,16 @@
 <head>
     <meta charset="utf-8">
     <title>little angular book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../normalize.css">
     <link rel="stylesheet" href="../../hljs-theme.css">
     <link rel="stylesheet" href="../../markdown.css">
     <link rel="stylesheet" href="../../main.css?v=2.0.0">
-    <!--<script src="script.js"></script>-->
 </head>
 <body>
+<a id="menu-toggle" class="menu-toggle" href="#" title="toggle menu">
+    <span></span><span></span><span></span>
+</a>
 <div class="menu">
     
         <div class="menu-item depth-1 ">
@@ -391,14 +394,5 @@ newBook.read = <span class="hljs-literal">false</span>;</code></pre>
 
 <span class="hljs-keyword">const</span> box: Box = {height: <span class="hljs-number">1</span>, width: <span class="hljs-number">1</span>, scale: <span class="hljs-number">3</span>}</code></pre>
 </div>
-
-<script type="text/javascript">
-  (() => {
-    const selectedMenuItem = document.querySelector('.menu-item.selected');
-    if (selectedMenuItem) {
-      selectedMenuItem.scrollIntoView(true);
-    }
-  })();
-</script>
-</body>
+<script src="../../main.js"></script>
 </html>
