@@ -19,7 +19,7 @@ Use `useClass` above to replace the dependency with any other class (for example
 
 :bulb: You can use the same (already instanciated) class multiple times as an alias with `useExisting:` - this way you will not instanciate the same class multiple times.
 
-:thumbsdown: `[Foo, {provide: Bar, useClass: Foo}]` would instanciate Foo twice!
+:no_entry_sign: `[Foo, {provide: Bar, useClass: Foo}]` would instanciate Foo twice!
 
 ## Blog example
 

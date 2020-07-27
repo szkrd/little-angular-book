@@ -215,7 +215,31 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../../../06-problems/index.html">Problems</a>
+            <a href="../../../06-testing/index.html">Testing</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../../06-testing/01-jasmine/index.html">Jasmine </a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../../../07-observables/index.html">Observables</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../../07-observables/01-examples/index.html">Examples</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../../../08-problems/index.html">Problems</a>
             
         </div>
     
@@ -233,7 +257,7 @@
 <ul>
 <li>native events and custom events follow the same format</li>
 <li>usually child to parent</li>
-<li><code>&lt;h2 (click)=&quot;onClick&quot;&gt;</code> - must be a proper fn <strong>call</strong> 👎 (not just the name of the function)</li>
+<li><del><code>&lt;h2 (click)=&quot;onClick&quot;&gt;</code></del> - must be a proper fn <strong>call</strong> 🚫 (not just the name of the function)</li>
 <li><code>&lt;h2 (click)=&quot;onClick($event)&quot;&gt;</code> - MouseEvent argument</li>
 </ul>
 <p>💡 For stop propagation use the <code>$event</code>, but for a prevent default returning false is enough:</p>
@@ -243,8 +267,17 @@
 <ul>
 <li><code>[(size)]</code> === <code>[size]</code> + <code>(sizeChange)</code></li>
 <li>one can manually implement this in a component with <em>@Input size</em> and <em>@Output sizeChange</em> (EventEmitter<number>)</li>
+<li>for the example to work don&#39;t forget to add <strong>FormsModule</strong> in your <em>app.module.ts</em></li>
 </ul>
 </div>
 
+<script type="text/javascript">
+  (() => {
+    const selectedMenuItem = document.querySelector('.menu-item.selected');
+    if (selectedMenuItem) {
+      selectedMenuItem.scrollIntoView(true);
+    }
+  })();
+</script>
 </body>
 </html>

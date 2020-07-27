@@ -229,7 +229,31 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../../06-problems/index.html">Problems</a>
+            <a href="../../06-testing/index.html">Testing</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../06-testing/01-jasmine/index.html">Jasmine </a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../../07-observables/index.html">Observables</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../07-observables/01-examples/index.html">Examples</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../../08-problems/index.html">Problems</a>
             
         </div>
     
@@ -368,5 +392,13 @@ newBook.read = <span class="hljs-literal">false</span>;</code></pre>
 <span class="hljs-keyword">const</span> box: Box = {height: <span class="hljs-number">1</span>, width: <span class="hljs-number">1</span>, scale: <span class="hljs-number">3</span>}</code></pre>
 </div>
 
+<script type="text/javascript">
+  (() => {
+    const selectedMenuItem = document.querySelector('.menu-item.selected');
+    if (selectedMenuItem) {
+      selectedMenuItem.scrollIntoView(true);
+    }
+  })();
+</script>
 </body>
 </html>

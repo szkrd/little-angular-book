@@ -15,7 +15,7 @@
 
 - native events and custom events follow the same format
 - usually child to parent
-- `<h2 (click)="onClick">` - must be a proper fn **call** :thumbsdown: (not just the name of the function)
+- ~~`<h2 (click)="onClick">`~~ - must be a proper fn **call** :no_entry_sign: (not just the name of the function)
 - `<h2 (click)="onClick($event)">` - MouseEvent argument
 
 :bulb: For stop propagation use the `$event`, but for a prevent default returning false is enough:
@@ -30,4 +30,4 @@
 
 - `[(size)]` === `[size]` + `(sizeChange)`
 - one can manually implement this in a component with _@Input size_ and _@Output sizeChange_ (EventEmitter<number>)
-
+- for the example to work don't forget to add **FormsModule** in your _app.module.ts_

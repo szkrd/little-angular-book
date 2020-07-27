@@ -201,7 +201,31 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../../06-problems/index.html">Problems</a>
+            <a href="../../06-testing/index.html">Testing</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../06-testing/01-jasmine/index.html">Jasmine </a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../../07-observables/index.html">Observables</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../07-observables/01-examples/index.html">Examples</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../../08-problems/index.html">Problems</a>
             
         </div>
     
@@ -250,5 +274,13 @@ create(Cat, <span class="hljs-string">&#x27;Tabby&#x27;</span>);</code></pre>
 <span class="hljs-keyword">const</span> airplane = createVehicle(Airplane, <span class="hljs-number">396</span>);</code></pre>
 </div>
 
+<script type="text/javascript">
+  (() => {
+    const selectedMenuItem = document.querySelector('.menu-item.selected');
+    if (selectedMenuItem) {
+      selectedMenuItem.scrollIntoView(true);
+    }
+  })();
+</script>
 </body>
 </html>

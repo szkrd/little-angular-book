@@ -194,14 +194,44 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../06-problems/index.html">Problems</a>
+            <a href="../06-testing/index.html">Testing</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../06-testing/01-jasmine/index.html">Jasmine </a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../07-observables/index.html">Observables</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../07-observables/01-examples/index.html">Examples</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../08-problems/index.html">Problems</a>
             
         </div>
     
 </div>
 <div class="markdown-body"><h1 id="dependency-injection">Dependency injection</h1>
+<ol>
+<li><a href="../04-dependency-injection/01-circumventing-di/index.html">Circumventing the DI system</a></li>
+<li><a href="../04-dependency-injection/02-sharing-services/index.html">Sharing services</a></li>
+<li><a href="../04-dependency-injection/03-providers/index.html">Providers</a></li>
+<li><a href="../04-dependency-injection/04-di-tricks/index.html">DI tricks</a></li>
+</ol>
 <p>In Angular one passes dependencies to a class <strong>through its constructor</strong>: this clearly defines and tells us what the dependencies of a class are and makes testing really easy.</p>
-<p>Since thos dependencies may need their own parameters, may have already been instanciated or just need to be mocked, we need a DI system to help us with these tasks.</p>
+<p>Since those dependencies may need their own parameters, may have already been instanciated or just need to be mocked, we need a DI system to help us with these tasks.</p>
 <ul>
 <li>dependencies are <strong>unique per injector</strong> (so if you provide a dependency in a <em>@Component</em> and not in the topmost <em>@NgModule</em> then each and every component instance will have its own injected dependency)</li>
 <li>dependencies exist in a tree, just like the components<ul>
@@ -215,5 +245,13 @@
 <p>💡 During testing one can easily inject mock dependencies instead of real ones.</p>
 </div>
 
+<script type="text/javascript">
+  (() => {
+    const selectedMenuItem = document.querySelector('.menu-item.selected');
+    if (selectedMenuItem) {
+      selectedMenuItem.scrollIntoView(true);
+    }
+  })();
+</script>
 </body>
 </html>

@@ -66,7 +66,7 @@
             
         </div>
     
-        <div class="menu-item depth-2 selected">
+        <div class="menu-item depth-2 ">
             ▸
             <a href="../02-components/index.html">Components</a>
             
@@ -204,9 +204,23 @@
             
         </div>
     
-        <div class="menu-item depth-2 ">
+        <div class="menu-item depth-2 selected">
             ▸
             <a href="../07-observables/index.html">Observables</a>
+            
+                <div class="menu-section depth-3">
+                    ◦
+                    <a href="#1">
+                        Observables vs subjects
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-3">
+                    ◦
+                    <a href="#2">
+                        Creating observables using shorthands
+                    </a>
+                </div>
             
         </div>
     
@@ -223,17 +237,38 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="components">Components</h1>
-<ol>
-<li><a href="../02-components/01-lifecycle-events/index.html">Lifecycle events</a></li>
-<li><a href="../02-components/02-input-output/index.html">Input and output</a></li>
-<li><a href="../02-components/03-templates/index.html">Templates</a></li>
-<li><a href="../02-components/04-styles/index.html">Styles</a></li>
-</ol>
-<p>Components should have a clear way of communicating with the outside world (their parent).</p>
+<div class="markdown-body"><h1 id="observables">Observables</h1>
+<p>One can <strong>subscribe</strong> to observables (don&#39;t forget to unsubscribe in ngOnDestroy) and get their values one by one, all at once, combined, reduced, transformed etc.</p>
+<p>In angular templates use the async pipe to create ad hoc subscriptions: <code>{{name$ | async}}</code>.</p>
+<p>See <a href="../07-observables/01-examples/index.html">examples</a>.</p>
+<h2><a name="1">Observables vs subjects</a></h2>
+<p><strong>Observables:</strong></p>
 <ul>
-<li>smart (container) component: component with data model wired in (through store, service, inline ajax etc.), possibly stateful, usable in certain contexts only</li>
-<li>dumb (presentational) component: communicates through input and output channels, stateless, properly encapsulated, highly reusable</li>
+<li><strong>cold</strong>: executed on (every) subscribe</li>
+<li>we can&#39;t change its value &quot;from the outside&quot; (uni-directional, unicast)</li>
+<li>ex.: <code>from(aPromise)</code>, <code>from(rxAjax)</code>...</li>
+</ul>
+<p><strong>Subjects:</strong></p>
+<ul>
+<li><strong>hot</strong>: &quot;runs&quot; even if there are no subscribers</li>
+<li>same data is shared among subscribers</li>
+<li>new values can be &quot;added&quot; in time (bi-directional, multicast)</li>
+<li>use <code>BehaviorSubject</code> if you need access to the last emitted value</li>
+<li>use <code>ReplaySubject</code> if you need access to all the values (replayed) </li>
+</ul>
+<h2><a name="2">Creating observables using shorthands</a></h2>
+<ul>
+<li>of: <code>of(1, 2, 3)</code> = array-like list</li>
+<li>from: array-like, iterable (yields), collection (maps), promise, observable-like<ul>
+<li><code>from([1, 2, 3])</code></li>
+<li><code>from(&#39;abcdefg)</code> (a → b → c ... g)</li>
+<li><code>from(fetch(&#39;api/data&#39;))</code></li>
+</ul>
+</li>
+<li>interval: <code>interval(1000)</code></li>
+<li>event: <code>fromEvent(document, &#39;click&#39;)</code></li>
+<li>ajax: <code>ajax(&#39;/api/data&#39;)</code> (import ajax from rxjs/ajax first)</li>
+<li>others: create, empty, generate, range, throw, timer</li>
 </ul>
 </div>
 

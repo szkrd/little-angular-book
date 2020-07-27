@@ -28,5 +28,13 @@
 </div>
 <div class="markdown-body"><%- md %></div>
 
+<script type="text/javascript">
+  (() => {
+    const selectedMenuItem = document.querySelector('.menu-item.selected');
+    if (selectedMenuItem) {
+      selectedMenuItem.scrollIntoView(true);
+    }
+  })();
+</script>
 </body>
 </html>

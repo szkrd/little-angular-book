@@ -1,5 +1,8 @@
 # Routing
 
+1. [Parameters](01-parameters/README.md)
+2. [Query parameters](02-query-parameters/README.md)
+
 - use `<base href="/">` in html
 - html5 history by default
 - info on the current route is available through subscriptions

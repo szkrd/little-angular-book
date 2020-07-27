@@ -222,7 +222,31 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="./06-problems/index.html">Problems</a>
+            <a href="./06-testing/index.html">Testing</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="./06-testing/01-jasmine/index.html">Jasmine </a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="./07-observables/index.html">Observables</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="./07-observables/01-examples/index.html">Examples</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="./08-problems/index.html">Problems</a>
             
         </div>
     
@@ -230,11 +254,14 @@
 <div class="markdown-body"><h1 id="little-angular-book">Little angular book</h1>
 <p>A journey to the magical land of Angular.</p>
 <ul>
-<li><a href="01-typescript/index.html">Typescript</a></li>
-<li><a href="02-components/index.html">Components</a></li>
-<li><a href="03-routing/index.html">Router</a></li>
-<li><a href="04-dependency-injection/index.html">Dependency injection</a></li>
-<li><a href="05-problems/index.html">Problems</a></li>
+<li><a href="/01-typescript/index.html">Typescript</a></li>
+<li><a href="/02-components/index.html">Components</a></li>
+<li><a href="/03-routing/index.html">Router</a></li>
+<li><a href="/04-dependency-injection/index.html">Dependency injection</a></li>
+<li><a href="/05-services/index.html">Services</a></li>
+<li><a href="/06-testing/index.html">Testing</a></li>
+<li><a href="/07-observables/index.html">Observables</a></li>
+<li><a href="/08-problems/index.html">Problems</a></li>
 </ul>
 <h2><a name="1">Requirements</a></h2>
 <p>This book assumes that you are familiar with javascript (ES6), component based web applications, webpack (or gulp), linting, have seen react or vue and in general you know your way around HTML and CSS.</p>
@@ -251,7 +278,7 @@
 <p>I (as the omnipotent narrator) will try to keep my snarky comments out of this book and will try to keep things professional - but some of my opinions may be reflected here and there (including what I find complicated for example). Feel free to PR and update examples, grammar or style.</p>
 <h2><a name="4">Icons</a></h2>
 <ul>
-<li>👎 - not working</li>
+<li>🚫 - not working</li>
 <li>💡 - interesting fact</li>
 <li>🚀 - non trivial or complicated (rocket science)</li>
 <li>❓ - questionable statement</li>
@@ -260,5 +287,13 @@
 </ul>
 </div>
 
+<script type="text/javascript">
+  (() => {
+    const selectedMenuItem = document.querySelector('.menu-item.selected');
+    if (selectedMenuItem) {
+      selectedMenuItem.scrollIntoView(true);
+    }
+  })();
+</script>
 </body>
 </html>

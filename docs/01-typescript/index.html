@@ -243,12 +243,45 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../06-problems/index.html">Problems</a>
+            <a href="../06-testing/index.html">Testing</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../06-testing/01-jasmine/index.html">Jasmine </a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../07-observables/index.html">Observables</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../07-observables/01-examples/index.html">Examples</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../08-problems/index.html">Problems</a>
             
         </div>
     
 </div>
 <div class="markdown-body"><h1 id="typescript">TypeScript</h1>
+<ol>
+<li><a href="../01-typescript/01-basic-types/index.html">Basic types</a></li>
+<li><a href="../01-typescript/02-classes-interfaces/index.html">Classes and interfaces</a></li>
+<li><a href="../01-typescript/03-functions/index.html">Functions</a></li>
+<li><a href="../01-typescript/04-enums/index.html">Enums</a></li>
+<li><a href="../01-typescript/05-advanced-types/index.html">Advanced types</a></li>
+<li><a href="../01-typescript/06-decorators/index.html">Decorators</a></li>
+<li><a href="../01-typescript/07-generics/index.html">Generics</a></li>
+</ol>
 <p>Angular uses TypeScript. While you can omit all type definitions, trying to ignore TS (not including it in an angular project) and going all js would not be a good idea.</p>
 <p>💡 Angular devs wanted to create another language on top of javascript, because they needed to rely heavily on code annotations (decorators, hence the @ naming) which are not yet part of the js spec. Fortunately TS decided to add decorator support and Angular went with TypeScript.</p>
 <h2><a name="1">What is TypeScript</a></h2>
@@ -293,16 +326,15 @@ Just use es6 modules and try to skip the multi-file namespace with its triple-sl
 <li>Module resolution: with the &quot;node&quot; resolution strategy things are somewhat clearer,
 plus the whole module/path resolving in the shadow of webpack is another advanced thing.</li>
 </ol>
-<ul>
-<li><a href="./01-basic-types/index.html">Basic types</a></li>
-<li><a href="./02-classes-interfaces/index.html">Classes and interfaces</a></li>
-<li><a href="./03-functions/index.html">Functions</a></li>
-<li><a href="./04-enums/index.html">Enums</a></li>
-<li><a href="./05-advanced-types/index.html">Advanced types</a></li>
-<li><a href="./06-decorators/index.html">Decorators</a></li>
-<li><a href="./07-generics/index.html">Generics</a></li>
-</ul>
 </div>
 
+<script type="text/javascript">
+  (() => {
+    const selectedMenuItem = document.querySelector('.menu-item.selected');
+    if (selectedMenuItem) {
+      selectedMenuItem.scrollIntoView(true);
+    }
+  })();
+</script>
 </body>
 </html>

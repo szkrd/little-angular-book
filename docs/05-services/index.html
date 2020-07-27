@@ -201,14 +201,38 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../06-problems/index.html">Problems</a>
+            <a href="../06-testing/index.html">Testing</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../06-testing/01-jasmine/index.html">Jasmine </a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../07-observables/index.html">Observables</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../07-observables/01-examples/index.html">Examples</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../08-problems/index.html">Problems</a>
             
         </div>
     
 </div>
 <div class="markdown-body"><h1 id="services">Services</h1>
 <p>Services are injectable classes that usually are instanciated by the DI system.</p>
-<p>See also: <a href="../dependency-injection/sharing-services.html">sharing services</a>.</p>
+<p>See also: <a href="../05-services/../04-dependency-injection/02-sharing-services/index.html">sharing services</a>.</p>
 <h2><a name="1">Utility functions</a></h2>
 <p>I don&#39;t see a problem with injecting utility classes into services or components (while just importing them without the DI would make testing much harder).</p>
 <ul>
@@ -218,5 +242,13 @@
 </ul>
 </div>
 
+<script type="text/javascript">
+  (() => {
+    const selectedMenuItem = document.querySelector('.menu-item.selected');
+    if (selectedMenuItem) {
+      selectedMenuItem.scrollIntoView(true);
+    }
+  })();
+</script>
 </body>
 </html>

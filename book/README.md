@@ -6,7 +6,10 @@ A journey to the magical land of Angular.
 - [Components](02-components/README.md)
 - [Router](03-routing/README.md)
 - [Dependency injection](04-dependency-injection/README.md)
-- [Problems](05-problems/README.md)
+- [Services](05-services/README.md)
+- [Testing](06-testing/README.md)
+- [Observables](07-observables/README.md)
+- [Problems](08-problems/README.md)
 
 ## Requirements 
 
@@ -28,7 +31,7 @@ I (as the omnipotent narrator) will try to keep my snarky comments out of this b
 
 ## Icons
 
-- :thumbsdown: - not working
+- :no_entry_sign: - not working
 - :bulb: - interesting fact
 - :rocket: - non trivial or complicated (rocket science)
 - :question: - questionable statement

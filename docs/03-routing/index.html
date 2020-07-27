@@ -201,12 +201,40 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../06-problems/index.html">Problems</a>
+            <a href="../06-testing/index.html">Testing</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../06-testing/01-jasmine/index.html">Jasmine </a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../07-observables/index.html">Observables</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../07-observables/01-examples/index.html">Examples</a>
+            
+        </div>
+    
+        <div class="menu-item depth-2 ">
+            ▸
+            <a href="../08-problems/index.html">Problems</a>
             
         </div>
     
 </div>
 <div class="markdown-body"><h1 id="routing">Routing</h1>
+<ol>
+<li><a href="../03-routing/01-parameters/index.html">Parameters</a></li>
+<li><a href="../03-routing/02-query-parameters/index.html">Query parameters</a></li>
+</ol>
 <ul>
 <li>use <code>&lt;base href=&quot;/&quot;&gt;</code> in html</li>
 <li>html5 history by default</li>
@@ -246,5 +274,13 @@
 </ul>
 </div>
 
+<script type="text/javascript">
+  (() => {
+    const selectedMenuItem = document.querySelector('.menu-item.selected');
+    if (selectedMenuItem) {
+      selectedMenuItem.scrollIntoView(true);
+    }
+  })();
+</script>
 </body>
 </html>

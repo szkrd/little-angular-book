@@ -66,7 +66,7 @@
             
         </div>
     
-        <div class="menu-item depth-2 selected">
+        <div class="menu-item depth-2 ">
             ▸
             <a href="../02-components/index.html">Components</a>
             
@@ -192,7 +192,7 @@
             
         </div>
     
-        <div class="menu-item depth-2 ">
+        <div class="menu-item depth-2 selected">
             ▸
             <a href="../06-testing/index.html">Testing</a>
             
@@ -223,18 +223,11 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="components">Components</h1>
-<ol>
-<li><a href="../02-components/01-lifecycle-events/index.html">Lifecycle events</a></li>
-<li><a href="../02-components/02-input-output/index.html">Input and output</a></li>
-<li><a href="../02-components/03-templates/index.html">Templates</a></li>
-<li><a href="../02-components/04-styles/index.html">Styles</a></li>
-</ol>
-<p>Components should have a clear way of communicating with the outside world (their parent).</p>
-<ul>
-<li>smart (container) component: component with data model wired in (through store, service, inline ajax etc.), possibly stateful, usable in certain contexts only</li>
-<li>dumb (presentational) component: communicates through input and output channels, stateless, properly encapsulated, highly reusable</li>
-</ul>
+<div class="markdown-body"><h1 id="testing">Testing</h1>
+<p>A10 comes with <a href="https://jasmine.github.io/api/3.5/global">jasmine 3.5.11</a> bdd framework
+and <a href="https://karma-runner.github.io/5.0/index.html">karma 5</a> test runner; for high-level/e2e testing
+<a href="https://github.com/angular/protractor">protractor</a> is preferred.</p>
+<p><a href="../06-testing/01-jasmine/index.html">Jasmine cheatsheet</a>.</p>
 </div>
 
 <script type="text/javascript">

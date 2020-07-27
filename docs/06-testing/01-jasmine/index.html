@@ -36,23 +36,9 @@
             
         </div>
     
-        <div class="menu-item depth-3 selected">
+        <div class="menu-item depth-3 ">
             ▹
             <a href="../../01-typescript/03-functions/index.html">Functions</a>
-            
-                <div class="menu-section depth-4">
-                    ◦
-                    <a href="#1">
-                        Alternate signatures
-                    </a>
-                </div>
-            
-                <div class="menu-section depth-4">
-                    ◦
-                    <a href="#2">
-                        Defining context (explicit this)
-                    </a>
-                </div>
             
         </div>
     
@@ -212,9 +198,23 @@
             
         </div>
     
-        <div class="menu-item depth-3 ">
+        <div class="menu-item depth-3 selected">
             ▹
             <a href="../../06-testing/01-jasmine/index.html">Jasmine </a>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#1">
+                        Expectation matchers
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#2">
+                        Spies
+                    </a>
+                </div>
             
         </div>
     
@@ -237,56 +237,110 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="functions">Functions</h1>
-<p>The simplest example: <code>let inc = (x: number, y: number = 1): number =&gt; x + y;</code></p>
-<p>It&#39;s fairly simple to define array parameters:</p>
-<pre class="hljs"><code class="language-typescript">  <span class="hljs-keyword">let</span> baptize = (familyName: <span class="hljs-built_in">string</span>, ...names: <span class="hljs-built_in">string</span>[]): <span class="hljs-function"><span class="hljs-params">string</span> =&gt;</span> [familyName, ...names].join(<span class="hljs-string">&#x27; &#x27;</span>);
-  <span class="hljs-comment">//            ↑                                           ↑        ↑</span>
-  <span class="hljs-comment">//           input                                     output     implementation</span></code></pre>
-<h2><a name="1">Alternate signatures</a></h2>
-<p>Treat this as a <strong>lightweight</strong> overloading: you can&#39;t define multiple functions with the same name, but you can define multiple interfaces for one function.</p>
-<p>Then of course it&#39;s up to you to see if the input quacks or barks. In a &quot;real&quot; typed language this would not be needed, but typescript is just sugar on top of javascript (albeit sweet and helpful sugar).</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span> (<span class="hljs-params">element: HTMLElement</span>): <span class="hljs-title">number</span></span>; <span class="hljs-comment">// signature A</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span> (<span class="hljs-params">element: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">number</span></span>; <span class="hljs-comment">// signature B</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span> (<span class="hljs-params">element: <span class="hljs-built_in">any</span></span>): <span class="hljs-title">number</span> </span>{ <span class="hljs-comment">// this is not part of the &quot;valid&quot; overload list</span>
-  <span class="hljs-keyword">let</span> node: HTMLElement;
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> element === <span class="hljs-string">&#x27;string&#x27;</span>) { <span class="hljs-comment">// we still have to poke the duck</span>
-    node = <span class="hljs-built_in">document</span>.querySelector(element);
-  } <span class="hljs-keyword">else</span> {
-    node = element;
-  }
-  <span class="hljs-keyword">return</span> node.getBoundingClientRect().height;
-}</code></pre>
-<p>to use the above function:</p>
+<div class="markdown-body"><h1 id="jasmine-white_flower">Jasmine 💮</h1>
+<p>A10 comes with <a href="https://jasmine.github.io/api/3.5/global">v3.5</a>;
+Jasmine is a fairly straightforward bdd framework, has a sane list of
+matchers and fairly basic spy capabilities:</p>
 <ul>
-<li><code>getHeight(&#39;body&#39;);</code> → calls signature A</li>
-<li><code>getHeight(document.getElementsByTagName(&#39;body&#39;)[0]);</code> → calls signature B</li>
-<li><code>getHeight(42);</code> → this will not work on typescript&#39;s level 🚫 (but will work of course in the compiled js)</li>
+<li><code>describe</code> (desc, specDefs)</li>
+<li><code>afterEach</code>, <code>afterAll</code> (fn <em>opt</em>, timeout <em>opt</em>)</li>
+<li><code>beforeEach</code>, <code>beforeAll</code> (fn <em>opt</em>, timeout <em>opt</em>)</li>
+<li><code>it</code> (desc, fn <em>opt</em>, timeout <em>opt</em>)</li>
+<li><code>expect</code> (actual), <code>expectAsync</code> (actual)</li>
+<li><strong>focusing</strong>: <code>fdescribe</code>, <code>fit</code></li>
+<li><strong>skipping</strong>: <code>xdescribe</code>, <code>xit</code></li>
 </ul>
-<p>❗ Notice how the function &quot;technically&quot; accepts any type - both signatures are just type helpers and will be stripped away. </p>
-<h2><a name="2">Defining context (explicit this)</a></h2>
-<p>One may enforce an expected calling context for a function:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> User {
-  age: <span class="hljs-built_in">number</span>;
-  department: <span class="hljs-built_in">string</span>;
-}
-
-<span class="hljs-keyword">interface</span> Users {
-  [name: <span class="hljs-built_in">string</span>]: User;
-}
-
-<span class="hljs-keyword">let</span> users: Users = {
-  john: { age: <span class="hljs-number">30</span>, department: <span class="hljs-string">&#x27;management&#x27;</span> },
-  jack: { age: <span class="hljs-number">26</span>, department: <span class="hljs-string">&#x27;backend development&#x27;</span> },
-  jill: { age: <span class="hljs-number">34</span>, department: <span class="hljs-string">&#x27;human resources&#x27;</span> }
-};
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUser</span> (<span class="hljs-params"><span class="hljs-built_in">this</span>: Users, name: <span class="hljs-built_in">string</span> = &#x27;jill&#x27;</span>) </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>[name];
-}</code></pre>
+<h2><a name="1">Expectation matchers</a></h2>
+<p>Negation modifier is <code>.not.</code></p>
 <ul>
-<li>use call or apply: <code>getUser.call(users, &#39;jack&#39;);</code></li>
-<li>it would <strong>not</strong> work without the scoping: <code>getUser(&#39;jill&#39;);</code> 🚫</li>
+<li>equality<ul>
+<li><strong>toBe</strong>: <code>expect(thing).toBe(realThing);</code></li>
+<li><strong>toEqual</strong>: deep equality <code>expect(bigObject).toEqual({&quot;foo&quot;: [&#39;bar&#39;, &#39;baz&#39;]});</code></li>
+</ul>
+</li>
+<li>existence<ul>
+<li><strong>toBeDefined</strong>: <code>expect(result).toBeDefined();</code></li>
+<li><strong>toBeUndefined</strong>: <code>expect(result).toBeUndefined():</code></li>
+<li><strong>toBeTruthy</strong>: <code>expect(result).toBeTruthy();</code></li>
+<li><strong>toBeFalsy</strong>: <code>expect(result).toBeFalsy();</code></li>
+</ul>
+</li>
+<li>boolean<ul>
+<li><strong>toBeTrue</strong>: <code>expect(result).toBeTrue();</code></li>
+<li><strong>toBeFalse</strong>: <code>expect(result).toBeFalse();</code></li>
+</ul>
+</li>
+<li>numbers<ul>
+<li><strong>toBeNaN</strong>: <code>expect(thing).toBeNaN();</code></li>
+<li><strong>toBeCloseTo</strong>: <code>expect(number).toBeCloseTo(42.2, 3);</code></li>
+<li><strong>toBeGreaterThan</strong>: <code>expect(number).toBeGreaterThan(3);</code></li>
+<li><strong>toBeGreaterThanOrEqual</strong>: <code>expect(number).toBeGreaterThanOrEqual(25);</code></li>
+<li><strong>toBeLessThan</strong>: <code>expect(number).toBeLessThan(0);</code></li>
+<li><strong>toBeLessThanOrEqual</strong>: <code>expect(number).toBeLessThanOrEqual(123);</code></li>
+<li><strong>toBeNegativeInfinity</strong>: <code>expect(number).toBeNegativeInfinity();</code></li>
+<li><strong>toBePositiveInfinity</strong>: <code>expect(number).toBePositiveInfinity();</code></li>
+</ul>
+</li>
+<li>string<ul>
+<li><strong>toContain</strong>: <code>expect(string).toContain(substring);</code></li>
+<li><strong>toMatch</strong>: <code>expect(&quot;my string&quot;).toMatch(/string$/);</code></li>
+</ul>
+</li>
+<li>array<ul>
+<li><strong>toContain</strong>: <code>expect(array).toContain(anElement);</code></li>
+</ul>
+</li>
+<li>class/null<ul>
+<li><strong>toBeNull</strong>: <code>expect(result).toBeNull();</code></li>
+<li><strong>toBeInstanceOf</strong>: <code>expect(result).toBeInstanceOf(String);</code></li>
+</ul>
+</li>
+<li>html<ul>
+<li><strong>toHaveClass</strong>: <code>expect(htmlEl).toHaveClass(&#39;bar&#39;); //css</code></li>
+</ul>
+</li>
+<li>throw<ul>
+<li><strong>toThrow</strong>: <code>expect(() =&gt; { return &#39;x&#39;; }).toThrow();</code></li>
+<li><strong>toThrowError</strong>: <code>expect(() =&gt; { return &#39;x&#39;; }).toThrowError();</code></li>
+<li><strong>toThrowMatching</strong> <code>expect(() =&gt; { return &#39;x&#39;; }).toThrowMatching(predicateFn)</code></li>
+</ul>
+</li>
+<li>async/promise (expectAsync)<ul>
+<li><strong>toBeResolved</strong>: <code>expectAsync(aPromise).toBeResolved();</code></li>
+<li><strong>toBeResolvedTo</strong>: <code>expectAsync(aPromise).toBeResolvedTo({prop: &#39;value&#39;});</code></li>
+<li><strong>toBeRejected</strong>: <code>expectAsync(aPromise).toBeRejected();</code></li>
+<li><strong>toBeRejectedWith</strong>: <code>expectAsync(aPromise).toBeRejectedWith({prop: &#39;value&#39;});</code></li>
+<li><strong>toBeRejectedWithError</strong>: <code>expectAsync(aPromise).toBeRejectedWithError(MyError, /message/);</code></li>
+</ul>
+</li>
+</ul>
+<p>Future 3.6:</p>
+<ul>
+<li>toHaveSize (instead of array.length)</li>
+<li>toHaveBeenCalledOnceWith (spy)</li>
+<li>toBePending (async)</li>
+</ul>
+<h2><a name="2">Spies</a></h2>
+<p>Spy naming (<code>aName</code>) is optional, like most other parameters (lots of 🦆 typing).</p>
+<ul>
+<li>spying<ol>
+<li><strong>spyOn</strong>: spy on a method - <code>spyOn(obj, methodName)</code></li>
+<li><strong>spyOnProperty</strong>: spy on a prop (with defineProperty) - <code>spyOnProperty(obj, propName, &#39;get&#39;/&#39;set&#39;)</code> </li>
+<li><strong>spyOnAllFunctions</strong>: <code>spyOnAllFunctions(obj)</code></li>
+</ol>
+</li>
+<li>spy creation<ol>
+<li><strong>createSpy</strong>: <code>jasmine.createSpy(aName, fn)</code></li>
+<li><strong>createSpyObj</strong>: <code>jasmine.createSpyObj(aName, [ methods ], [ props ])</code></li>
+</ol>
+</li>
+<li>spy matchers<ul>
+<li><strong>toHaveBeenCalled</strong>: <code>expect(mySpy).toHaveBeenCalled();</code></li>
+<li><strong>toHaveBeenCalledBefore</strong>: <code>expect(mySpy).toHaveBeenCalledBefore(otherSpy);</code></li>
+<li><strong>toHaveBeenCalledTimes</strong>: <code>expect(mySpy).toHaveBeenCalledTimes(3);</code></li>
+<li><strong>toHaveBeenCalledWith</strong>: <code>expect(mySpy).toHaveBeenCalledWith(&#39;foo&#39;, &#39;bar&#39;, 2);</code></li>
+</ul>
+</li>
 </ul>
 </div>
 
