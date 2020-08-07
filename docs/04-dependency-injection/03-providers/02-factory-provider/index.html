@@ -235,8 +235,9 @@
   {
     provide: HTTP_INTERCEPTORS,
     useFactory: <span class="hljs-function">() =&gt;</span> {
-      <span class="hljs-keyword">const</span> httpCacheBackend = <span class="hljs-keyword">new</span> StorageCacheService(<span class="hljs-keyword">new</span> SessionStorageService());
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> HttpGetCacheInterceptor(httpCacheBackend);
+      <span class="hljs-keyword">const</span> sessionStorage = <span class="hljs-keyword">new</span> SessionStorageService(); <span class="hljs-comment">// depth -2</span>
+      <span class="hljs-keyword">const</span> httpCacheBackend = <span class="hljs-keyword">new</span> StorageCacheService(sessionStorage); <span class="hljs-comment">// depth -1</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> HttpGetCacheInterceptor(httpCacheBackend); <span class="hljs-comment">// depth 0</span>
     },
     multi: <span class="hljs-literal">true</span>
   }
@@ -251,5 +252,6 @@
   }
 ]</code></pre>
 </div>
-<script src="../../../main.js"></script>
+<script src="../../../main.js?v=2.0.0"></script>
+</body>
 </html>
