@@ -71,19 +71,21 @@ Spy naming (`aName`) is optional, like most other parameters (lots of :duck: typ
   1. **spyOn**: spy on a method - `spyOn(obj, methodName)`
   2. **spyOnProperty**: spy on a prop (with defineProperty) - `spyOnProperty(obj, propName, 'get'/'set')` 
   3. **spyOnAllFunctions**: `spyOnAllFunctions(obj)`
-- spy creation
-  1. **createSpy**: `jasmine.createSpy(aName, fn)`
-  2. **createSpyObj**: `jasmine.createSpyObj(aName, [ methods ], [ props ])`
-- spy matchers
+- spy creation from scratch
+  1. **jasmine.createSpy**: `jasmine.createSpy(aName, fn)`
+  2. **jasmine.createSpyObj**: `jasmine.createSpyObj(aName, [ methods ], [ props ])`
+- return values (use `.and` to start a "strategy"):
+  - `.and.stub` is the default, which does nothing
+  - **returnValue(s)**: `.and.returnValue(42)`, `.and.returnValues(first)`
+  - **resolveTo**, **rejectWith** (for promises): `.and.resolveTo(aPromise)`
+  - **throwError**
+  - **callFake** (create a fake function): `.and.callFake(x => x)`
+  - **callThrough** (call the original function, by default it acts as a _stub_ only)
+  - only react to a fixed set of parameters:  
+    `.withArgs(1, 2, 3).and.`
+- expectations (spy matchers)
   - **toHaveBeenCalled**: `expect(mySpy).toHaveBeenCalled();`
   - **toHaveBeenCalledBefore**: `expect(mySpy).toHaveBeenCalledBefore(otherSpy);`
   - **toHaveBeenCalledTimes**: `expect(mySpy).toHaveBeenCalledTimes(3);`
   - **toHaveBeenCalledWith**: `expect(mySpy).toHaveBeenCalledWith('foo', 'bar', 2);`
-- return values
-  - use `.and` to start a "strategy":
-    - **returnValue(s)**: `.and.returnValue(42)`, `.and.returnValues`
-    - **resolveTo**, **rejectWith** (for promises): `.and.resolveTo(aPromise)`
-    - **throwError**
-    - **callThrough** (call the original function, by default it acts as a _stub_ only)
-  - only react to a fixed set of parameters:  
-    `.withArgs(1, 2, 3).and.`
+  - reset the call counter: `mySpy.calls.reset()`

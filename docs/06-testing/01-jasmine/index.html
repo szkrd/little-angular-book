@@ -332,27 +332,27 @@ matchers and fairly basic spy capabilities:</p>
 <li><strong>spyOnAllFunctions</strong>: <code>spyOnAllFunctions(obj)</code></li>
 </ol>
 </li>
-<li>spy creation<ol>
-<li><strong>createSpy</strong>: <code>jasmine.createSpy(aName, fn)</code></li>
-<li><strong>createSpyObj</strong>: <code>jasmine.createSpyObj(aName, [ methods ], [ props ])</code></li>
+<li>spy creation from scratch<ol>
+<li><strong>jasmine.createSpy</strong>: <code>jasmine.createSpy(aName, fn)</code></li>
+<li><strong>jasmine.createSpyObj</strong>: <code>jasmine.createSpyObj(aName, [ methods ], [ props ])</code></li>
 </ol>
 </li>
-<li>spy matchers<ul>
+<li>return values (use <code>.and</code> to start a &quot;strategy&quot;):<ul>
+<li><code>.and.stub</code> is the default, which does nothing</li>
+<li><strong>returnValue(s)</strong>: <code>.and.returnValue(42)</code>, <code>.and.returnValues(first)</code></li>
+<li><strong>resolveTo</strong>, <strong>rejectWith</strong> (for promises): <code>.and.resolveTo(aPromise)</code></li>
+<li><strong>throwError</strong></li>
+<li><strong>callFake</strong> (create a fake function): <code>.and.callFake(x =&gt; x)</code></li>
+<li><strong>callThrough</strong> (call the original function, by default it acts as a <em>stub</em> only)</li>
+<li>only react to a fixed set of parameters:<br><code>.withArgs(1, 2, 3).and.</code></li>
+</ul>
+</li>
+<li>expectations (spy matchers)<ul>
 <li><strong>toHaveBeenCalled</strong>: <code>expect(mySpy).toHaveBeenCalled();</code></li>
 <li><strong>toHaveBeenCalledBefore</strong>: <code>expect(mySpy).toHaveBeenCalledBefore(otherSpy);</code></li>
 <li><strong>toHaveBeenCalledTimes</strong>: <code>expect(mySpy).toHaveBeenCalledTimes(3);</code></li>
 <li><strong>toHaveBeenCalledWith</strong>: <code>expect(mySpy).toHaveBeenCalledWith(&#39;foo&#39;, &#39;bar&#39;, 2);</code></li>
-</ul>
-</li>
-<li>return values<ul>
-<li>use <code>.and</code> to start a &quot;strategy&quot;:<ul>
-<li><strong>returnValue(s)</strong>: <code>.and.returnValue(42)</code>, <code>.and.returnValues</code></li>
-<li><strong>resolveTo</strong>, <strong>rejectWith</strong> (for promises): <code>.and.resolveTo(aPromise)</code></li>
-<li><strong>throwError</strong></li>
-<li><strong>callThrough</strong> (call the original function, by default it acts as a <em>stub</em> only)</li>
-</ul>
-</li>
-<li>only react to a fixed set of parameters:<br><code>.withArgs(1, 2, 3).and.</code></li>
+<li>reset the call counter: <code>mySpy.calls.reset()</code></li>
 </ul>
 </li>
 </ul>
