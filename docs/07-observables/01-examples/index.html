@@ -227,6 +227,20 @@
                 <div class="menu-section depth-4">
                     ◦
                     <a href="#2">
+                        Consecutive ajax calls
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#3">
+                        Parallel ajax calls
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#4">
                         Computed observable
                     </a>
                 </div>
@@ -268,7 +282,41 @@
       .pipe(map(<span class="hljs-function">(<span class="hljs-params">repos: IRepo[]</span>) =&gt;</span> repos.filter(<span class="hljs-function"><span class="hljs-params">repo</span> =&gt;</span> /^a.*/.test(repo.name))));
   }
 }</code></pre>
-<h2><a name="2">Computed observable</a></h2>
+<h2><a name="2">Consecutive ajax calls</a></h2>
+<p>Get JSON from url-1, <em>then</em> use a value from that response to download data from url-2.</p>
+<pre class="hljs"><code class="language-typescript">ajax.getJSON(url(<span class="hljs-string">&#x27;/movie/top_rated&#x27;</span>)).pipe(
+  tap(<span class="hljs-function">(<span class="hljs-params">data: <span class="hljs-built_in">any</span></span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Number of top rated items:&#x27;</span>, data.results.length)),
+  map(<span class="hljs-function">(<span class="hljs-params">data: <span class="hljs-built_in">any</span></span>) =&gt;</span> data.results[<span class="hljs-number">0</span>]),
+  tap(<span class="hljs-function">(<span class="hljs-params">data: <span class="hljs-built_in">any</span></span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Selected first movie:&#x27;</span>, data.id, data.title)),
+  <span class="hljs-comment">// &quot;switch to a new observable&quot;</span>
+  switchMap(<span class="hljs-function">(<span class="hljs-params">data: <span class="hljs-built_in">any</span></span>) =&gt;</span> ajax.getJSON(url(<span class="hljs-string">`/movie/<span class="hljs-subst">${data.id}</span>`</span>)))
+)</code></pre>
+<h2><a name="3">Parallel ajax calls</a></h2>
+<p>Here the observable returns responses as they arrive:</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">const</span> urls: <span class="hljs-built_in">string</span>[] = ids.map(<span class="hljs-function"><span class="hljs-params">id</span> =&gt;</span> url(<span class="hljs-string">`/movie/<span class="hljs-subst">${id}</span>`</span>));
+<span class="hljs-keyword">const</span> concurrentCalls = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">return</span> <span class="hljs-keyword">from</span>(urls).pipe(
+  mergeMap(ajax.getJSON, concurrentCalls)
+);</code></pre>
+<h3 id="parallel-ajax-calls-merged">Parallel ajax calls merged</h3>
+<p>Similar to <code>Promise.all</code>, download two jsons and then convert the array into a nicer object:</p>
+<pre class="hljs"><code class="language-typescript">zip(
+  ajax.getJSON(url(<span class="hljs-string">&#x27;/movie/top_rated&#x27;</span>)),
+  ajax.getJSON(url(<span class="hljs-string">&#x27;/discover/movie&#x27;</span>))
+).pipe(
+  map(<span class="hljs-function">(<span class="hljs-params">[topRated, discovered]: <span class="hljs-built_in">any</span>[]</span>) =&gt;</span> ({
+    topRated: topRated.results,
+    discovered: discovered.results
+  })),
+);</code></pre>
+<p>Just like Promise.all, this will fail if any of the calls fails.
+To continue even then, add an error handler:</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">const</span> onError = <span class="hljs-function">(<span class="hljs-params">err: <span class="hljs-built_in">any</span></span>) =&gt;</span> { <span class="hljs-built_in">console</span>.error(err); <span class="hljs-keyword">return</span> <span class="hljs-keyword">of</span>(err); };
+<span class="hljs-keyword">return</span> zip(
+  ajax.getJSON(url(<span class="hljs-string">&#x27;/movie/top_rated&#x27;</span>)).pipe(catchError(onError)),
+  ajax.getJSON(url(<span class="hljs-string">&#x27;/discover/movie&#x27;</span>)).pipe(catchError(onError)),
+)<span class="hljs-comment">//.pipe(...</span></code></pre>
+<h2><a name="4">Computed observable</a></h2>
 <p>Add two numbers (a$ and b$) using the two observables&#39; latest value:<br><code>combineLatest</code> will create an array <code>[a, b]</code> then we pipe &amp; map that to <code>arr[0] + arr[1]</code></p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@Component</span>({
   selector: <span class="hljs-string">&#x27;app-add&#x27;</span>,

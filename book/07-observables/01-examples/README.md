@@ -34,6 +34,59 @@ export class GithubReposComponent {
 }
 ```
 
+## Consecutive ajax calls
+
+Get JSON from url-1, _then_ use a value from that response to download data from url-2.
+
+```typescript
+ajax.getJSON(url('/movie/top_rated')).pipe(
+  tap((data: any) => console.log('Number of top rated items:', data.results.length)),
+  map((data: any) => data.results[0]),
+  tap((data: any) => console.log('Selected first movie:', data.id, data.title)),
+  // "switch to a new observable"
+  switchMap((data: any) => ajax.getJSON(url(`/movie/${data.id}`)))
+)
+```
+
+## Parallel ajax calls
+
+Here the observable returns responses as they arrive:
+
+```typescript
+const urls: string[] = ids.map(id => url(`/movie/${id}`));
+const concurrentCalls = 5;
+return from(urls).pipe(
+  mergeMap(ajax.getJSON, concurrentCalls)
+);
+```
+
+### Parallel ajax calls merged
+
+Similar to `Promise.all`, download two jsons and then convert the array into a nicer object:
+
+```typescript
+zip(
+  ajax.getJSON(url('/movie/top_rated')),
+  ajax.getJSON(url('/discover/movie'))
+).pipe(
+  map(([topRated, discovered]: any[]) => ({
+    topRated: topRated.results,
+    discovered: discovered.results
+  })),
+);
+```
+
+Just like Promise.all, this will fail if any of the calls fails.
+To continue even then, add an error handler:
+
+```typescript
+const onError = (err: any) => { console.error(err); return of(err); };
+return zip(
+  ajax.getJSON(url('/movie/top_rated')).pipe(catchError(onError)),
+  ajax.getJSON(url('/discover/movie')).pipe(catchError(onError)),
+)//.pipe(...
+```
+
 ## Computed observable
 
 Add two numbers (a$ and b$) using the two observables' latest value:  
