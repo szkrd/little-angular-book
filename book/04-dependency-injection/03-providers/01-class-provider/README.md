@@ -7,15 +7,16 @@ The simplest provider is the class provider:
 @NgModule({
   // ...
   providers: [
-    PostsService
+    PostsService // === { provide: PostsService, useClass: PostsService }
   ],
   // ...
 })
 ```
 
-This is a shortcut for `[{ provide: PostsService, useClass: PostsService }]`.
+As indicated in the comment, this is a shortcut for
+`[{ provide: PostsService, useClass: PostsService }]`.
 
-Use `useClass` above to replace the dependency with any other class (for example during testing).
+Use `useClass` to replace the dependency with any other class (for example during testing).
 
 :bulb: You can use the same (already instanciated) class multiple times as an alias with `useExisting:` - this way you will not instanciate the same class multiple times.
 

@@ -3,13 +3,16 @@
 <head>
     <meta charset="utf-8">
     <title>little angular book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../../normalize.css">
     <link rel="stylesheet" href="../../../hljs-theme.css">
     <link rel="stylesheet" href="../../../markdown.css">
     <link rel="stylesheet" href="../../../main.css?v=2.0.0">
-    <!--<script src="script.js"></script>-->
 </head>
 <body>
+<a id="menu-toggle" class="menu-toggle" href="#" title="toggle menu">
+    <span></span><span></span><span></span>
+</a>
 <div class="menu">
     
         <div class="menu-item depth-1 ">
@@ -232,8 +235,9 @@
   {
     provide: HTTP_INTERCEPTORS,
     useFactory: <span class="hljs-function">() =&gt;</span> {
-      <span class="hljs-keyword">const</span> httpCacheBackend = <span class="hljs-keyword">new</span> StorageCacheService(<span class="hljs-keyword">new</span> SessionStorageService());
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> HttpGetCacheInterceptor(httpCacheBackend);
+      <span class="hljs-keyword">const</span> sessionStorage = <span class="hljs-keyword">new</span> SessionStorageService(); <span class="hljs-comment">// depth -2</span>
+      <span class="hljs-keyword">const</span> httpCacheBackend = <span class="hljs-keyword">new</span> StorageCacheService(sessionStorage); <span class="hljs-comment">// depth -1</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> HttpGetCacheInterceptor(httpCacheBackend); <span class="hljs-comment">// depth 0</span>
     },
     multi: <span class="hljs-literal">true</span>
   }
@@ -248,14 +252,6 @@
   }
 ]</code></pre>
 </div>
-
-<script type="text/javascript">
-  (() => {
-    const selectedMenuItem = document.querySelector('.menu-item.selected');
-    if (selectedMenuItem) {
-      selectedMenuItem.scrollIntoView(true);
-    }
-  })();
-</script>
+<script src="../../../main.js?v=2.0.0"></script>
 </body>
 </html>

@@ -19,8 +19,8 @@ const fsWriteFile = promisify(fs.writeFile)
 // replace :emoji: markers with proper emoji (gitbook had a plugin for this)
 const customRenderer = (() => {
   const emojiKeywords = Object.keys(emoji.lib).reduce((acc, key) => {
-    const chr = acc[key] = emoji.lib[key].char;
-    (emoji.lib[key].keywords || []).forEach(kw => acc[kw] = chr)
+    const chr = (acc[key] = emoji.lib[key].char)
+    ;(emoji.lib[key].keywords || []).forEach((kw) => (acc[kw] = chr))
     return acc
   }, {})
   const origRenderer = marked.Renderer
@@ -33,29 +33,29 @@ const customRenderer = (() => {
       return origRenderer.prototype[method].apply(this, arguments)
     }
   }
-  ['codespan', 'del', 'em', 'heading', 'listitem', 'paragraph', 'strong', 'text'].forEach(addHook)
+  ;['codespan', 'del', 'em', 'heading', 'listitem', 'paragraph', 'strong', 'text'].forEach(addHook)
   return customRenderer
 })()
 marked.setOptions({
   highlight: function (code, lang) {
     lang = lang || 'text'
     return lang === 'text' ? code : hljs.highlight(lang, code).value
-  }
+  },
 })
 marked.use({ renderer: customRenderer })
 
-function escapeRex (s = '') {
+function escapeRex(s = '') {
   return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
 }
 
-function moveItemToArrayBeginning (s, arr) {
+function moveItemToArrayBeginning(s, arr) {
   if (arr && arr.length > 1 && arr.includes(s)) {
-    arr = [s].concat(arr.filter(x => x !== s))
+    arr = [s].concat(arr.filter((x) => x !== s))
   }
   return arr
 }
 
-async function walkDir (dir, fileList = []) {
+async function walkDir(dir, fileList = []) {
   let files = await fsReadDir(dir)
   files = moveItemToArrayBeginning('README.md', files.sort())
   for (const file of files) {
@@ -68,7 +68,7 @@ async function walkDir (dir, fileList = []) {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-async function main () {
+async function main() {
   // change to script's parent dir (which should be the project's root)
   shelljs.cd(path.join(path.dirname(process.argv[1]), '/..'))
 
@@ -83,12 +83,12 @@ async function main () {
 
   // build common menu
   let menuItems = list
-    .filter(s => s.endsWith('.md'))
-    .map(s => {
+    .filter((s) => s.endsWith('.md'))
+    .map((s) => {
       const original = s
-      const lines = (fs.readFileSync(s, 'utf-8')).split('\n')
-      let title = lines.find(line => line.startsWith('# ')).replace(/^# /, '') || s[s.length - 2] || 'TOC'
-      const sections = (lines.filter(line => line.startsWith('## ')) || []).map(l => l.replace(/^## /, ''))
+      const lines = fs.readFileSync(s, 'utf-8').split('\n')
+      let title = lines.find((line) => line.startsWith('# ')).replace(/^# /, '') || s[s.length - 2] || 'TOC'
+      const sections = (lines.filter((line) => line.startsWith('## ')) || []).map((l) => l.replace(/^## /, ''))
       title = title.replace(/^# /, '')
       s = s.split(path.sep).slice(1)
       console.info(`Processing ${s} (d:${s.length})`)
@@ -98,7 +98,12 @@ async function main () {
         depth: s.length,
         title: title.replace(/^#\s+/, '').replace(/:([a-z-_]*):/g, ''), // also remove text emojis
         sections,
-        url: './' + s.join('/').replace(/README\.md$/, 'index.html').replace(/\.md$/, '.html')
+        url:
+          './' +
+          s
+            .join('/')
+            .replace(/README\.md$/, 'index.html')
+            .replace(/\.md$/, '.html'),
       }
     })
 
@@ -116,16 +121,16 @@ async function main () {
     await fsMkDir(targetPathOnly, { recursive: true })
 
     // mark selected item in menu, fix relative paths
-    const localMenuItems = menuItems.map(item => ({
+    const localMenuItems = menuItems.map((item) => ({
       ...item,
       selected: item.original === source,
-      url: (relativeRoot + item.url).replace('/./', '/')
+      url: (relativeRoot + item.url).replace('/./', '/'),
     }))
 
     // prep the ejs renderer, fix paths
     let ejsSource = await fsReadFile('./overlay/index.ejs', 'utf-8')
     const ejsTemplate = ejs.compile(ejsSource, {
-      fileName: 'index.ejs'
+      fileName: 'index.ejs',
     })
 
     // convert md files to html
@@ -144,18 +149,25 @@ async function main () {
       md = md.replace(/README\.md">/g, 'index.html">') // README to index.html
       md = md.replace(/\.md">/g, '.html">') // all md to html
       // fix relative roots in links
-      const relPath = targetPathOnly.split('/').slice(1).slice(0, depth - 1)
+      const relPath = targetPathOnly
+        .split('/')
+        .slice(1)
+        .slice(0, depth - 1)
       md = md.replace(/\shref="([^"]*)"/g, (all, matcher) => {
         if (/^(http|https|ftp|\/|:\/\/)/.test(matcher)) return all // skip external or absolute
-        return ` href="${relativeRoot + relPath.join('/') + '/' + matcher}"`
+        const pathMod = (relativeRoot + relPath.join('/') + '/' + matcher).replace(/^\//, '')
+        return ` href="${pathMod}"`
       })
 
-      await fsWriteFile(target, ejsTemplate({
-        md,
-        v: version,
-        root: relativeRoot,
-        menuItems: localMenuItems
-      }))
+      await fsWriteFile(
+        target,
+        ejsTemplate({
+          md,
+          v: version,
+          root: relativeRoot,
+          menuItems: localMenuItems,
+        })
+      )
     }
 
     // copy binaries
@@ -169,10 +181,11 @@ async function main () {
   // copy overlay files
   const hljsTheme = 'darcula' // 'github-gist'
   await Promise.all([
+    fsCopyFile('./overlay/main.js', './docs/main.js'),
     fsCopyFile('./overlay/normalize.css', './docs/normalize.css'),
     fsCopyFile('./overlay/main.css', './docs/main.css'),
     fsCopyFile('./overlay/markdown.css', './docs/markdown.css'),
-    fsCopyFile(`./node_modules/highlight.js/styles/${hljsTheme}.css`, './docs/hljs-theme.css')
+    fsCopyFile(`./node_modules/highlight.js/styles/${hljsTheme}.css`, './docs/hljs-theme.css'),
   ])
 }
 

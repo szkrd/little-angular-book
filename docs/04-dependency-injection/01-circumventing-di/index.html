@@ -3,13 +3,16 @@
 <head>
     <meta charset="utf-8">
     <title>little angular book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../normalize.css">
     <link rel="stylesheet" href="../../hljs-theme.css">
     <link rel="stylesheet" href="../../markdown.css">
     <link rel="stylesheet" href="../../main.css?v=2.0.0">
-    <!--<script src="script.js"></script>-->
 </head>
 <body>
+<a id="menu-toggle" class="menu-toggle" href="#" title="toggle menu">
+    <span></span><span></span><span></span>
+</a>
 <div class="menu">
     
         <div class="menu-item depth-1 ">
@@ -234,14 +237,6 @@
 <p>These approaches work in a nodejs environment, but not in <a href="https://karma-runner.github.io/">Karma</a> which runs tests inside the browser (not to mention the need for transpiling, at the minimum from ts to js).</p>
 <p>Angular&#39;s DI is platform agnostic and allows tests to be run the same way both in the browser or on the server in a virtual jsdom environment.</p>
 </div>
-
-<script type="text/javascript">
-  (() => {
-    const selectedMenuItem = document.querySelector('.menu-item.selected');
-    if (selectedMenuItem) {
-      selectedMenuItem.scrollIntoView(true);
-    }
-  })();
-</script>
+<script src="../../main.js?v=2.0.0"></script>
 </body>
 </html>

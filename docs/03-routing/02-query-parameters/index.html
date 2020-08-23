@@ -3,13 +3,16 @@
 <head>
     <meta charset="utf-8">
     <title>little angular book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../normalize.css">
     <link rel="stylesheet" href="../../hljs-theme.css">
     <link rel="stylesheet" href="../../markdown.css">
     <link rel="stylesheet" href="../../main.css?v=2.0.0">
-    <!--<script src="script.js"></script>-->
 </head>
 <body>
+<a id="menu-toggle" class="menu-toggle" href="#" title="toggle menu">
+    <span></span><span></span><span></span>
+</a>
 <div class="menu">
     
         <div class="menu-item depth-1 ">
@@ -262,14 +265,6 @@
 ).subscribe(<span class="hljs-built_in">this</span>.onRouteAnyParamChange);</code></pre>
 <p>The bound <code>onRouteAnyParamChange</code> will accept an array param, the first item is the queryParam map, the second is the param map.</p>
 </div>
-
-<script type="text/javascript">
-  (() => {
-    const selectedMenuItem = document.querySelector('.menu-item.selected');
-    if (selectedMenuItem) {
-      selectedMenuItem.scrollIntoView(true);
-    }
-  })();
-</script>
+<script src="../../main.js?v=2.0.0"></script>
 </body>
 </html>

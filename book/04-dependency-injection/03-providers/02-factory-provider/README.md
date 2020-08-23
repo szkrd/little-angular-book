@@ -12,8 +12,9 @@ providers: [
   {
     provide: HTTP_INTERCEPTORS,
     useFactory: () => {
-      const httpCacheBackend = new StorageCacheService(new SessionStorageService());
-      return new HttpGetCacheInterceptor(httpCacheBackend);
+      const sessionStorage = new SessionStorageService(); // depth -2
+      const httpCacheBackend = new StorageCacheService(sessionStorage); // depth -1
+      return new HttpGetCacheInterceptor(httpCacheBackend); // depth 0
     },
     multi: true
   }
