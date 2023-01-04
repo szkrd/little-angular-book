@@ -150,7 +150,7 @@ async function main() {
       md = md.replace(/\.md">/g, '.html">') // all md to html
       // fix relative roots in links
       const relPath = targetPathOnly
-        .split('/')
+        .split(/[/\\]/) // slash vs backslash in path
         .slice(1)
         .slice(0, depth - 1)
       md = md.replace(/\shref="([^"]*)"/g, (all, matcher) => {
