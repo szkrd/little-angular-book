@@ -6,5 +6,19 @@
   "editor.insertSpaces": true,
   "search.exclude": {
     "sandbox": true
+  },
+  "files.exclude": {
+    "docs": true
+  },
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#8b008b",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#be00be",
+    "statusBarItem.remoteBackground": "#8b008b",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#8b008b",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#8b008b99",
+    "titleBar.inactiveForeground": "#e7e7e799"
   }
 }

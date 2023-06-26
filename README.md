@@ -19,5 +19,9 @@ Do `npm install`, `npm run build`, `npm serve`. Joy, happiness.
 
 ## Development
 
-1. this is a custom builder, please check the [package.json](./package.json) for run scripts
-2. angular versions may be found in _./sandbox_, please use WebStorm in there
+- this is a custom builder, please check the [package.json](./package.json) for run scripts
+- angular versions may be found in _./sandbox_, please use WebStorm in there
+- `serve` has been replaced with `express` (with express.static) because of file locking issues
+  (serve locked the files in docs file the watcher tried to rewrite them)
+- _sandbox_ is search ignored in vscode
+- _docs_ (the output) is file ignored in vscode
