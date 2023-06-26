@@ -16,3 +16,8 @@ Originally created for GitBook, but since they moved towards a saas business mod
 this repo has been archived, unarchived, and now has a custom static builder.
 
 Do `npm install`, `npm run build`, `npm serve`. Joy, happiness.
+
+## Development
+
+1. this is a custom builder, please check the [package.json](./package.json) for run scripts
+2. angular versions may be found in _./sandbox_, please use WebStorm in there
