@@ -15,7 +15,7 @@ npm serve
 
 Add eslint with `ng lint` (this will recommend the schematic `ng add @angular-eslint/schematics`).
 
-It may complain about the ts version, which may or may not be a problem:
+It may complain about the ts version, which may or may not be a problem:  
 _"WARNING: You are currently running a version of TypeScript which is not officially supported by @typesc
 ript-eslint/typescript-estree."_  
 so add a `var x = 1;` to a file, run the linter and see if it catches the problem; it should.
