@@ -3,8 +3,9 @@ const fs = require('fs')
 const { promisify } = require('util')
 const path = require('path')
 const hljs = require('highlight.js')
-const marked = promisify(require('marked'))
-const emoji = require('emojilib')
+const { marked } = require('marked')
+const emojiKeywordSet = require('emojilib')
+const emojiMetaData = require('unicode-emoji-json')
 const ejs = require('ejs')
 const packageJson = require('../package.json')
 const args = process.argv.splice(2)
@@ -16,11 +17,26 @@ const fsMkDir = promisify(fs.mkdir)
 const fsReadFile = promisify(fs.readFile)
 const fsWriteFile = promisify(fs.writeFile)
 
+// emojilib 3.x deprecated the emoji.lib interface, let's restore that as a quick fix
+// plus restore some of the original keywords that has been changed lately
+// see: https://github.com/muan/emojilib/blob/main/dist/emoji-en-US.json
+const emojiLib = {}
+Object.keys(emojiKeywordSet).forEach((char) => {
+  const keywords = emojiKeywordSet[char].map((kw) => kw.replaceAll(' ', '_'))
+  keywords.forEach((kw) => {
+    emojiLib[kw] = { keywords, char }
+    // left: proper | right: shorthand I want to use
+    if (kw === 'light_bulb') emojiLib['bulb'] = emojiLib[kw]
+    if (kw === 'no_entry') emojiLib['no_entry_sign'] = emojiLib[kw]
+  })
+})
+emojiLib.warn = { char: '⚠️', keywords: ['warn', 'warning_sign'] }
+
 // replace :emoji: markers with proper emoji (gitbook had a plugin for this)
 const customRenderer = (() => {
-  const emojiKeywords = Object.keys(emoji.lib).reduce((acc, key) => {
-    const chr = (acc[key] = emoji.lib[key].char)
-    ;(emoji.lib[key].keywords || []).forEach((kw) => (acc[kw] = chr))
+  const emojiKeywords = Object.keys(emojiLib).reduce((acc, key) => {
+    const chr = (acc[key] = emojiLib[key].char)
+    ;(emojiLib[key].keywords || []).forEach((kw) => (acc[kw] = chr))
     return acc
   }, {})
   const origRenderer = marked.Renderer
@@ -28,7 +44,7 @@ const customRenderer = (() => {
   const addHook = (method) => {
     customRenderer[method] = function (text) {
       if (text.includes(':') && text.match(/:/g).length > 1) {
-        text = text.replace(/:([a-z-_]*):/g, (s, m) => (emoji.lib[m] || {}).char || emojiKeywords[m] || s)
+        text = text.replace(/:([a-z-_]*):/g, (s, m) => (emojiLib[m] || {}).char || emojiKeywords[m] || s)
       }
       return origRenderer.prototype[method].apply(this, arguments)
     }

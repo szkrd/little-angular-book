@@ -251,7 +251,8 @@
 <p>It&#39;s fairly simple to define array parameters:</p>
 <pre class="hljs"><code class="language-typescript">  <span class="hljs-keyword">let</span> baptize = (familyName: <span class="hljs-built_in">string</span>, ...names: <span class="hljs-built_in">string</span>[]): <span class="hljs-function"><span class="hljs-params">string</span> =&gt;</span> [familyName, ...names].join(<span class="hljs-string">&#x27; &#x27;</span>);
   <span class="hljs-comment">//            ↑                                           ↑        ↑</span>
-  <span class="hljs-comment">//           input                                     output     implementation</span></code></pre>
+  <span class="hljs-comment">//           input                                     output     implementation</span>
+</code></pre>
 <h2><a name="1">Alternate signatures</a></h2>
 <p>Treat this as a <strong>lightweight</strong> overloading: you can&#39;t define multiple functions with the same name, but you can define multiple interfaces for one function.</p>
 <p>Then of course it&#39;s up to you to see if the input quacks or barks. In a &quot;real&quot; typed language this would not be needed, but typescript is just sugar on top of javascript (albeit sweet and helpful sugar).</p>
@@ -265,14 +266,15 @@
     node = element;
   }
   <span class="hljs-keyword">return</span> node.getBoundingClientRect().height;
-}</code></pre>
+}
+</code></pre>
 <p>to use the above function:</p>
 <ul>
 <li><code>getHeight(&#39;body&#39;);</code> → calls signature A</li>
 <li><code>getHeight(document.getElementsByTagName(&#39;body&#39;)[0]);</code> → calls signature B</li>
-<li><code>getHeight(42);</code> → this will not work on typescript&#39;s level 🚫 (but will work of course in the compiled js)</li>
+<li><code>getHeight(42);</code> → this will not work on typescript&#39;s level ⛔ (but will work of course in the compiled js)</li>
 </ul>
-<p>❗ Notice how the function &quot;technically&quot; accepts any type - both signatures are just type helpers and will be stripped away. </p>
+<p>‼️ Notice how the function &quot;technically&quot; accepts any type - both signatures are just type helpers and will be stripped away. </p>
 <h2><a name="2">Defining context (explicit this)</a></h2>
 <p>One may enforce an expected calling context for a function:</p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> User {
@@ -292,10 +294,11 @@
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUser</span> (<span class="hljs-params"><span class="hljs-built_in">this</span>: Users, name: <span class="hljs-built_in">string</span> = &#x27;jill&#x27;</span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>[name];
-}</code></pre>
+}
+</code></pre>
 <ul>
 <li>use call or apply: <code>getUser.call(users, &#39;jack&#39;);</code></li>
-<li>it would <strong>not</strong> work without the scoping: <code>getUser(&#39;jill&#39;);</code> 🚫</li>
+<li>it would <strong>not</strong> work without the scoping: <code>getUser(&#39;jill&#39;);</code> ⛔</li>
 </ul>
 </div>
 <script src="../../main.js?v=2.0.0"></script>

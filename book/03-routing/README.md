@@ -3,39 +3,42 @@
 1. [Parameters](01-parameters/README.md)
 2. [Query parameters](02-query-parameters/README.md)
 
-- use `<base href="/">` in html
+- Angular uses `<base href="/">` in _index.html_
 - html5 history by default
 - info on the current route is available through subscriptions
 
 _app.module.ts_
+
 ```typescript
 @NgModule({
-  imports: [
-    routing // from "app.routes.ts" below
-  ],
+  // ...
+  imports: [BrowserModule, AppRoutingModule],
   // ...
 ```
-_app.routes.ts_
+
+_app-routing.module.ts_
+
 ```typescript
 const routes: Routes = [
   // redirection
-  {path: '', redirectTo: 'view/posts', pathMatch: 'full'},
+  { path: '', redirectTo: 'view/posts', pathMatch: 'full' },
   // standalone page
-  {path: 'profile', component: ProfilePageComponent},
+  { path: 'profile', component: ProfilePageComponent },
   // child view (the sidebar with the widgets is shared)
   {
     path: 'view',
     component: ViewComponent,
     children: [
-      {path: 'posts', component: PostsPageComponent},
-      {path: 'post/:id', component: PostPageComponent}
-    ]
+      { path: 'posts', component: PostsPageComponent },
+      { path: 'post/:id', component: PostPageComponent },
+    ],
   },
   // fallback
-  {path: '**', component: PageNotFoundComponent}
-];
+  { path: '**', component: PageNotFoundComponent },
+]
 
-export const routing = RouterModule.forRoot(routes);
+@NgModule({ imports: [RouterModule.forRoot(routes)], exports: [RouterModule] })
+export class AppRoutingModule {}
 ```
 
 ## Target outlets

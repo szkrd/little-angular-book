@@ -246,7 +246,8 @@
   (<span class="hljs-attr">query-change</span>)=<span class="hljs-string">&quot;onSearchFormChange($event)&quot;</span>
 &gt;</span>
   Search for posts:
-<span class="hljs-tag">&lt;/<span class="hljs-name">app-search-form</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">app-search-form</span>&gt;</span>
+</code></pre>
 <p>in child (a generic search-form) ts:</p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-comment">// coming in via the [query] attribute</span>
 <span class="hljs-meta">@Input</span>(<span class="hljs-string">&#x27;query&#x27;</span>) defaultQuery = <span class="hljs-string">&#x27;&#x27;</span>;
@@ -262,8 +263,9 @@ ngOnChanges (changes) {
   <span class="hljs-keyword">if</span> (changes.defaultQuery) {
     <span class="hljs-built_in">this</span>.query.setValue(<span class="hljs-built_in">this</span>.defaultQuery);
   }
-}</code></pre>
-<p>❗ One can use getters and setters to emulate computed observable behaviour (eg. modify internal variable B when input A changes), but performance-wise it&#39;s NOT recommended.</p>
+}
+</code></pre>
+<p>‼️ One can use getters and setters to emulate computed observable behaviour (eg. modify internal variable B when input A changes), but performance-wise it&#39;s NOT recommended.</p>
 <p>💣 Circumventing an I/O interface:</p>
 <ol>
 <li>Accessing a child&#39;s internals via referencing (<code> &lt;app-timer #timer&gt;&lt;/app-timer&gt;</code>) <strong>from the parent template</strong> is possible.</li>
@@ -276,7 +278,7 @@ ngOnChanges (changes) {
 <li>via services (subject, behaviour subjects)</li>
 <li>common store (<a href="https://github.com/ngrx/store">ngrx</a>)</li>
 <li>eventbus (<a href="https://nodejs.org/api/events.html">eventemitters</a>)</li>
-<li>custom DOM events (see: bubbles and composed) </li>
+<li>custom DOM events (see: bubbles and composed)</li>
 </ul>
 </div>
 <script src="../../main.js?v=2.0.0"></script>

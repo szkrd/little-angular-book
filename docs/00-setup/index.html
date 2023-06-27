@@ -49,6 +49,13 @@
                 <div class="menu-section depth-3">
                     ◦
                     <a href="#4">
+                        Normalize css
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-3">
+                    ◦
+                    <a href="#5">
                         Create a component
                     </a>
                 </div>
@@ -266,7 +273,8 @@
 <pre class="hljs"><code class="language-bash"><span class="hljs-built_in">cd</span> sandbox
 npm init @angular angular-XX
 <span class="hljs-built_in">cd</span> angular-XX
-npm serve</code></pre>
+npm serve
+</code></pre>
 <h2><a name="2">Lint</a></h2>
 <p>Add eslint with <code>ng lint</code> (this will recommend the schematic <code>ng add @angular-eslint/schematics</code>).</p>
 <p>It may complain about the ts version, which may or may not be a problem:<br><em>&quot;WARNING: You are currently running a version of TypeScript which is not officially supported by @typesc
@@ -275,25 +283,32 @@ ript-eslint/typescript-estree.&quot;</em><br>so add a <code>var x = 1;</code> to
 <p><img src="./1687787944-webstorm.png" alt="eslint in webstorm"></p>
 <h2><a name="3">Prettier</a></h2>
 <p>Install with <code>npm i -D prettier</code> and create config with <code>echo {}&gt; .prettierrc.json</code>.</p>
-<p>.prettierrc.json ❓</p>
+<p>.prettierrc.json 🙋</p>
 <pre class="hljs"><code class="language-json">{
   <span class="hljs-attr">&quot;printWidth&quot;</span>: <span class="hljs-number">100</span>,
   <span class="hljs-attr">&quot;singleQuote&quot;</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">&quot;quoteProps&quot;</span>: <span class="hljs-string">&quot;preserve&quot;</span>
-}</code></pre>
-<p>.prettierignore ❓</p>
+}
+</code></pre>
+<p>.prettierignore 🙋</p>
 <pre class="hljs"><code class="language-text">build
 coverage
 e2e
-package-lock.json</code></pre>
+package-lock.json
+</code></pre>
 <p>Don&#39;t forget to enable prettier in WebStorm:</p>
 <p><img src="1687789401-webstorm.png" alt="prettier in webstorm"></p>
-<h2><a name="4">Create a component</a></h2>
+<h2><a name="4">Normalize css</a></h2>
+<p>Install Sindre&#39;s modern normalize: <code>npm i -S modern-normalize</code>,<br>then import it in the global <em>styles.scss</em> (under src): <code>@import &quot;modern-normalize&quot;;</code>.</p>
+<p>💣 Modifying (manually) such an external (s)css file will not trigger a proper rebuild.</p>
+<p>foo<br>bar</p>
+<h2><a name="5">Create a component</a></h2>
 <p>Create file (from predefined templates, aka. schematics): <code>ng generate</code> / <code>ng g</code>
 but this must be run in <strong>src/app</strong>, otherwise it will return the following error:<br><em>&quot;Could not find an NgModule. Use the &#39;--skip-import&#39; option to skip importing in NgModule.&quot;</em></p>
 <p>Create a new component (<strong>g</strong>enerate <strong>c</strong>omponent):</p>
 <pre class="hljs"><code class="language-bash"><span class="hljs-built_in">cd</span> src/app
-ng g c pages/AnotherPage</code></pre>
+ng g c pages/AnotherPage
+</code></pre>
 <p><img src="./1687785263-webstorm.png" alt="using the webstorm context menu"></p>
 </div>
 <script src="../main.js?v=2.0.0"></script>

@@ -247,7 +247,8 @@
     },
     multi: <span class="hljs-literal">true</span>
   }
-]</code></pre>
+]
+</code></pre>
 <p>(The <code>multi</code> property is only useful for interceptors.)</p>
 <p>A factory may have its (injectable) dependencies too - while the above is a bit convoluted, here&#39;s a simpler example:</p>
 <pre class="hljs"><code class="language-typescript">[
@@ -256,7 +257,8 @@
     useFactory: <span class="hljs-function">(<span class="hljs-params">logger: Logger</span>) =&gt;</span> <span class="hljs-keyword">new</span> PollService(logger),
     deps: [Logger]
   }
-]</code></pre>
+]
+</code></pre>
 </div>
 <script src="../../../main.js?v=2.0.0"></script>
 </body>

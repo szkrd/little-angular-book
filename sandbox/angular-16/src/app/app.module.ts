@@ -3,18 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FoobarComponent } from './foobar/foobar.component';
 import { DemoPageComponent } from './pages/demo-page/demo-page.component';
 import { AnotherPageComponent } from './pages/another-page/another-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FoobarComponent,
     DemoPageComponent,
     AnotherPageComponent,
     ProfilePageComponent,
+    ButtonComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

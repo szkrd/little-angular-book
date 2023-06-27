@@ -130,7 +130,14 @@
                 <div class="menu-section depth-4">
                     ◦
                     <a href="#1">
-                        Global styles
+                        Global style
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#2">
+                        Sharing style among encapsulated components
                     </a>
                 </div>
             
@@ -242,7 +249,9 @@
 <div class="markdown-body"><h1 id="styles">Styles</h1>
 <ul>
 <li>Styles are scoped (by default in an emulated fashion, but one can enable real shadow DOM styles with <code>encapsulation: ViewEncapsulation.Native</code>)</li>
-<li>If you are using an <strong>element</strong> selector in <code>@Component</code> then your element will be in the DOM! Use the <code>:host</code> selector to style it.<ul>
+<li>Emulated scope example: <code>&lt;div class=&quot;content&quot;&gt;&lt;/div&gt;</code> + <code>.content { color: red; }</code> = <code>.content[_ngcontent-ng-c1906523200] { ... }</code></li>
+<li>If you are using an <strong>element</strong> selector in <code>@Component</code> then your element will be in the DOM! Use the <code>:host</code> selector to style it.
+For example <code>app-button</code> will create an <code>&lt;app-button /&gt;</code> custom HTML element.<ul>
 <li><code>:host</code>: the current root element</li>
 <li><code>:host(.active)</code>: the current root element with a class</li>
 <li><code>:host-context(.theme-monokai)</code>: has a parent up the chain with the given class</li>
@@ -270,16 +279,31 @@
 }
 </code></pre>
 <p>💣 <code>ViewEncapsulation.None</code> will destroy a component&#39;s boundaries (and will force Angular to duplicate their style in every shadowed element).</p>
-<h2><a name="1">Global styles</a></h2>
-<p>Shadow roots can&#39;t get global styles due to their encapsulated nature (<code>/deep/</code>, <code>::ng-deep</code>, <code>&gt;&gt;&gt;</code> has been deprecated).</p>
-<p>Some tips:</p>
+<h2><a name="1">Global style</a></h2>
+<p>Trying to style the <code>body</code> element from a component will not work, because the element is outside the component.</p>
+<p>Angular already allows the use of a global style file in <em>angular.cli</em> with <code>&quot;styles&quot;: [ &quot;src/styles.scss&quot; ]</code>,<br>you can add global styles (or do global imports) here.</p>
+<h2><a name="2">Sharing style among encapsulated components</a></h2>
 <ul>
-<li>you can use a common scss if you keep it to the bare minimum</li>
-<li><code>@import &quot;~common.scss&quot;;</code> may be used with absolute paths</li>
-<li>use <code>stylePreprocessorOptions.includePaths</code> in <code>.angular-cli.json</code> and then you can omit the tilde and the extension, more <a href="https://github.com/angular/angular-cli/wiki/stories-global-styles">here</a></li>
+<li>Shadow root for a component is enabled with <code>encapsulation: ViewEncapsulation.ShadowDom</code></li>
+<li>Shadow roots proper can&#39;t get shared styles due to their encapsulated nature<br>(<code>/deep/</code>, <code>::ng-deep</code>, <code>&gt;&gt;&gt;</code> has been marked as deprecated and may go away sometime).</li>
 </ul>
-<p>💣 Such an import will duplicate the css everywhere it has been included (checked the prod build).</p>
-<p>💣 Css will have mixin support with the <a href="https://tabatkins.github.io/specs/css-apply-rule/">@apply</a> rule, but right now it&#39;s not yet supported anywhere.</p>
+<h3 id="css">Css</h3>
+<p>You can use a common <strong>css</strong> if you keep it to the bare minimum:<br><code>@import &quot;/src/styles/common.css&quot;;</code> or <code>@import &quot;../../../styles/common.css&quot;;</code></p>
+<p>‼️ Such an import will duplicate the css everywhere it has been included (checked the prod build).</p>
+<p>💡 Plain css was planned to have mixin support with the <a href="https://tabatkins.github.io/specs/css-apply-rule/">@apply</a> rule, but that effort has been abandoned.</p>
+<h3 id="scss">Scss</h3>
+<p>For <strong>scss</strong> you can use mixins (and serve the transpiled css gzipped on your server):<br><code>@import &quot;/src/styles/mixins&quot;;</code> or <code>@import &quot;../../../styles/mixins&quot;;</code></p>
+<p>Then use the mixin in the encapsulated component&#39;s scss:</p>
+<pre class="hljs"><code class="language-scss">:host {
+  @include button-shadow();
+}
+</code></pre>
+<p>Be sure to name the file as a proper <a href="https://stackoverflow.com/a/34890015">partial</a>
+with an underscore (<strong>_mixins.scss</strong>), so that it will not be included multiple times.</p>
+<p>💡 You can shorten the import to the filename (like <code>@import &quot;mixins&quot;;</code>) if you add
+the directory as an include path in <em>angular.json</em>:<br><code>&quot;stylePreprocessorOptions&quot;: { &quot;includePaths&quot;: [&quot;src/styles&quot;] },</code></p>
+<p>💣 Unfortunately you can&#39;t add the partial&#39;s import to common <em>src/styles.scss</em> and expect it to work elsewhere
+(the recompiler sometimes forgets to break, nevertheless it&#39;s not working).</p>
 </div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>

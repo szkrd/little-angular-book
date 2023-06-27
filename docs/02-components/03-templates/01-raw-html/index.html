@@ -233,8 +233,9 @@
     
 </div>
 <div class="markdown-body"><h1 id="raw-html">Raw HTML</h1>
-<pre class="hljs"><code>&lt;div [innerHTML]=&quot;message&quot;&gt;&lt;/div&gt;</code></pre>
-<p>❗ This will still go through a sanitizer, so inline styles, scripts and urls are going to be stripped out (the sanitizer pipe solution below is by <a href="https://stackoverflow.com/a/37076868">Günter Zöchbauer</a>).</p>
+<pre class="hljs"><code>&lt;div [innerHTML]=&quot;message&quot;&gt;&lt;/div&gt;
+</code></pre>
+<p>‼️ This will still go through a sanitizer, so inline styles, scripts and urls are going to be stripped out (the sanitizer pipe solution below is by <a href="https://stackoverflow.com/a/37076868">Günter Zöchbauer</a>).</p>
 <p>Possible sanitizers: style, html, script, url, resource url.</p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> { Pipe, PipeTransform } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
 <span class="hljs-keyword">import</span> { DomSanitizer } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/platform-browser&#x27;</span>;
@@ -246,7 +247,8 @@
   transform(val) {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sanitizer.bypassSecurityTrustHtml(val);
   }
-}</code></pre>
+}
+</code></pre>
 <ul>
 <li><code>text = &#39;&lt;em style=&quot;color:red&quot;&gt;unsafe text&lt;/em&gt;&#39;</code></li>
 <li>usage: <code>&lt;div [innerHTML]=&quot;text | safeHtml&quot;&gt;&lt;/div&gt;</code></li>

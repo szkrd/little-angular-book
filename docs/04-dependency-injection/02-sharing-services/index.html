@@ -244,20 +244,23 @@
     PostsService
   ],
   <span class="hljs-comment">// ...</span>
-})</code></pre>
+})
+</code></pre>
 <p>PostsService (which is an injectable class) will be instanciated by the App module.</p>
 <p>💡 Writing <code>@Injectable</code> is not needed for classes without dependencies or already decorated classes, but it really helps readability.</p>
 <p><em>services/posts.service.ts</em></p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@Injectable</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> PostsService {
   <span class="hljs-comment">// ...</span>
-}</code></pre>
+}
+</code></pre>
 <p>The PostsPage component can access this dependency:</p>
 <p><em>components/posts-page.component.ts</em></p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> PostsPageComponent <span class="hljs-keyword">implements</span> OnInit {
   <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> postsService: PostsService</span>) {}
   <span class="hljs-comment">// ...</span>
-}</code></pre>
+}
+</code></pre>
 <p>Under the hood <code>this.postsService = new PostsService()</code> &quot;happens&quot; in the constructor.</p>
 <p>💡 With a shared service and rxjs subjects it&#39;s trivial to setup an eventemitter or pubsub messaging.</p>
 </div>

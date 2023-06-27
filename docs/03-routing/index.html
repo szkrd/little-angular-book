@@ -245,36 +245,38 @@
 <li><a href="../03-routing/02-query-parameters/index.html">Query parameters</a></li>
 </ol>
 <ul>
-<li>use <code>&lt;base href=&quot;/&quot;&gt;</code> in html</li>
+<li>Angular uses <code>&lt;base href=&quot;/&quot;&gt;</code> in <em>index.html</em></li>
 <li>html5 history by default</li>
 <li>info on the current route is available through subscriptions</li>
 </ul>
 <p><em>app.module.ts</em></p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@NgModule</span>({
-  imports: [
-    routing <span class="hljs-comment">// from &quot;app.routes.ts&quot; below</span>
-  ],
-  <span class="hljs-comment">// ...</span></code></pre>
-<p><em>app.routes.ts</em></p>
+  <span class="hljs-comment">// ...</span>
+  imports: [BrowserModule, AppRoutingModule],
+  <span class="hljs-comment">// ...</span>
+</code></pre>
+<p><em>app-routing.module.ts</em></p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">const</span> routes: Routes = [
   <span class="hljs-comment">// redirection</span>
-  {path: <span class="hljs-string">&#x27;&#x27;</span>, redirectTo: <span class="hljs-string">&#x27;view/posts&#x27;</span>, pathMatch: <span class="hljs-string">&#x27;full&#x27;</span>},
+  { path: <span class="hljs-string">&#x27;&#x27;</span>, redirectTo: <span class="hljs-string">&#x27;view/posts&#x27;</span>, pathMatch: <span class="hljs-string">&#x27;full&#x27;</span> },
   <span class="hljs-comment">// standalone page</span>
-  {path: <span class="hljs-string">&#x27;profile&#x27;</span>, component: ProfilePageComponent},
+  { path: <span class="hljs-string">&#x27;profile&#x27;</span>, component: ProfilePageComponent },
   <span class="hljs-comment">// child view (the sidebar with the widgets is shared)</span>
   {
     path: <span class="hljs-string">&#x27;view&#x27;</span>,
     component: ViewComponent,
     children: [
-      {path: <span class="hljs-string">&#x27;posts&#x27;</span>, component: PostsPageComponent},
-      {path: <span class="hljs-string">&#x27;post/:id&#x27;</span>, component: PostPageComponent}
-    ]
+      { path: <span class="hljs-string">&#x27;posts&#x27;</span>, component: PostsPageComponent },
+      { path: <span class="hljs-string">&#x27;post/:id&#x27;</span>, component: PostPageComponent },
+    ],
   },
   <span class="hljs-comment">// fallback</span>
-  {path: <span class="hljs-string">&#x27;**&#x27;</span>, component: PageNotFoundComponent}
-];
+  { path: <span class="hljs-string">&#x27;**&#x27;</span>, component: PageNotFoundComponent },
+]
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> routing = RouterModule.forRoot(routes);</code></pre>
+<span class="hljs-meta">@NgModule</span>({ imports: [RouterModule.forRoot(routes)], <span class="hljs-built_in">exports</span>: [RouterModule] })
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppRoutingModule {}
+</code></pre>
 <h2><a name="1">Target outlets</a></h2>
 <ul>
 <li>Target slot is <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> in the html template.</li>

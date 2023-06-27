@@ -259,13 +259,16 @@
       <span class="hljs-built_in">this</span>.id = <span class="hljs-built_in">Number</span>(params.get(<span class="hljs-string">&#x27;id&#x27;</span>));
       <span class="hljs-built_in">this</span>.getPost();
     });
-}</code></pre>
+}
+</code></pre>
 <p>Opening links from the template<br>using the <code>routerLink</code> directive:</p>
 <pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">&quot;[&#x27;/view/post&#x27;, item.id]&quot;</span>&gt;</span>
   {{ item.title }}
-<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre>
 <p>Opening links from the component class,<br>using <code>{Router}</code> from <code>@angular/router</code>:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;/view/post&#x27;</span>, { id: item.id }]);</code></pre>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;/view/post&#x27;</span>, { id: item.id }]);
+</code></pre>
 <h2><a name="1">The current route</a></h2>
 <p>The current route is available via <code>ActivatedRoute</code>, which has observables to allow us to listen for changes.</p>
 <p>paramMap, queryParamMap, parent, data, url, etc.
@@ -278,7 +281,8 @@ official list is <a href="https://angular.io/guide/router#activated-route">here<
       <span class="hljs-comment">// example: NavigationStart, RoutesRecognized, NavigationEnd</span>
       <span class="hljs-built_in">console</span>.log(event);
     });
-}</code></pre>
+}
+</code></pre>
 </div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>

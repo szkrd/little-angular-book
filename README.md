@@ -23,5 +23,6 @@ Do `npm install`, `npm run build`, `npm serve`. Joy, happiness.
 - angular versions may be found in _./sandbox_, please use WebStorm in there
 - `serve` has been replaced with `express` (with express.static) because of file locking issues
   (serve locked the files in docs file the watcher tried to rewrite them)
+- **marked** 5.0.0 is not compatible with the project, using that will require additional work
 - _sandbox_ is search ignored in vscode
 - _docs_ (the output) is file ignored in vscode

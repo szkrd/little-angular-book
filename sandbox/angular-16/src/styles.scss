@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import "modern-normalize";
+
+html, body {
+  height: 100%;
+}
+
+// our button component has proper encapsulation, so this will not affect that
+//button {
+//  box-shadow: 2px 2px 5px #080;
+//  border: 1px solid #080
+//}

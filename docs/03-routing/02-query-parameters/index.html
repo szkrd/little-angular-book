@@ -254,21 +254,25 @@
       <span class="hljs-built_in">this</span>.page = <span class="hljs-built_in">Number</span>(params.get(<span class="hljs-string">&#x27;page&#x27;</span>)) || <span class="hljs-number">1</span>;
       <span class="hljs-built_in">this</span>.searchForPosts();
     });
-}</code></pre>
+}
+</code></pre>
 <p>Opening links from the template<br>using the <code>routerLink</code> directive:</p>
 <pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">&quot;[&#x27;/posts&#x27;]&quot;</span> [<span class="hljs-attr">queryParams</span>]=<span class="hljs-string">&quot;{q: searchText}&quot;</span>&gt;</span>
   {{searchText}}
-<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre>
 <p>Opening links from the component class,<br>using <code>{Router}</code> from <code>@angular/router</code>:</p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;view/posts&#x27;</span>], {
   queryParams: {q: <span class="hljs-built_in">this</span>.searchText}
-});</code></pre>
+});
+</code></pre>
 <h2><a name="1">Combining parameters and query parameters</a></h2>
 <p>💡 Sometimes you want to listen for query param and param change (probably with more complex pages) together.<br>Use <code>combineLatest</code> (from <em>rxjs/observable/combineLatest</em>) to get them both:</p>
 <pre class="hljs"><code class="language-typescript">combineLatest(
   <span class="hljs-built_in">this</span>.activatedRoute.queryParamMap,
   <span class="hljs-built_in">this</span>.activatedRoute.paramMap
-).subscribe(<span class="hljs-built_in">this</span>.onRouteAnyParamChange);</code></pre>
+).subscribe(<span class="hljs-built_in">this</span>.onRouteAnyParamChange);
+</code></pre>
 <p>The bound <code>onRouteAnyParamChange</code> will accept an array param, the first item is the queryParam map, the second is the param map.</p>
 </div>
 <script src="../../main.js?v=2.0.0"></script>

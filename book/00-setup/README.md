@@ -51,6 +51,16 @@ Don't forget to enable prettier in WebStorm:
 
 ![prettier in webstorm](1687789401-webstorm.png)
 
+## Normalize css
+
+Install Sindre's modern normalize: `npm i -S modern-normalize`,  
+then import it in the global _styles.scss_ (under src): `@import "modern-normalize";`.
+
+:bomb: Modifying (manually) such an external (s)css file will not trigger a proper rebuild.
+
+foo  
+bar
+
 ## Create a component
 
 Create file (from predefined templates, aka. schematics): `ng generate` / `ng g`
