@@ -72,5 +72,5 @@ with an underscore (**\_mixins.scss**), so that it will not be included multiple
 the directory as an include path in _angular.json_:  
 `"stylePreprocessorOptions": { "includePaths": ["src/styles"] },`
 
-:bomb: Unfortunately you can't add the partial's import to common _src/styles.scss_ and expect it to work elsewhere
+:no_entry_sign: Unfortunately you can't add the partial's import to common \_src/styles.scss\* and expect it to work elsewhere
 (the recompiler sometimes forgets to break, nevertheless it's not working).

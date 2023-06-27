@@ -6,6 +6,9 @@
 - Angular uses `<base href="/">` in _index.html_
 - html5 history by default
 - info on the current route is available through subscriptions
+- static link to a route with the `routerLink` directive:
+  `<a routerLink="/profile" routerLinkActive="active">profile</a>`  
+  (to set the active route's className, use the `routerLinkActive` directive)
 
 _app.module.ts_
 

@@ -28,6 +28,7 @@ Object.keys(emojiKeywordSet).forEach((char) => {
     // left: proper | right: shorthand I want to use
     if (kw === 'light_bulb') emojiLib['bulb'] = emojiLib[kw]
     if (kw === 'no_entry') emojiLib['no_entry_sign'] = emojiLib[kw]
+    if (kw === 'question_mark') emojiLib['question'] = emojiLib[kw]
   })
 })
 emojiLib.warn = { char: '⚠️', keywords: ['warn', 'warning_sign'] }

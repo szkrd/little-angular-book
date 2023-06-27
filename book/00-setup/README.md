@@ -17,8 +17,9 @@ Add eslint with `ng lint` (this will recommend the schematic `ng add @angular-es
 
 It may complain about the ts version, which may or may not be a problem:  
 _"WARNING: You are currently running a version of TypeScript which is not officially supported by @typesc
-ript-eslint/typescript-estree."_  
-so add a `var x = 1;` to a file, run the linter and see if it catches the problem; it should.
+ript-eslint/typescript-estree."_
+
+Add a `var x = 1;` to a file, run the linter and see if it catches the problem; it should.
 
 Don't forget to enable eslint in WebStorm:
 
@@ -57,9 +58,6 @@ Install Sindre's modern normalize: `npm i -S modern-normalize`,
 then import it in the global _styles.scss_ (under src): `@import "modern-normalize";`.
 
 :bomb: Modifying (manually) such an external (s)css file will not trigger a proper rebuild.
-
-foo  
-bar
 
 ## Create a component
 

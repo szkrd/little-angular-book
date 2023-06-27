@@ -90,6 +90,7 @@ body pre.hljs {
   padding: 3px 3px 3px 25px;
   text-indent: -10px;
   color: var(--color-g);
+  filter: saturate(0.3);
 }
 
 .menu-section:first-of-type {
@@ -109,15 +110,15 @@ body pre.hljs {
 }
 
 .menu .menu-item.depth-4 {
-  margin-left: 30px;
+  margin-left: 35px;
 }
 
 .menu .menu-item.depth-5 {
-  margin-left: 40px;
+  margin-left: 45px;
 }
 
 .menu .menu-item.depth-6 {
-  margin-left: 50px;
+  margin-left: 55px;
 }
 
 .menu .menu-item.depth-2,
@@ -133,17 +134,17 @@ body pre.hljs {
 
 .menu .menu-item.depth-4,
 .menu .menu-item.depth-4 a {
-  filter: brightness(70%);
+  filter: brightness(60%);
 }
 
 .menu .menu-item.depth-5,
 .menu .menu-item.depth-5 a {
-  filter: brightness(60%);
+  filter: brightness(50%);
 }
 
 .menu .menu-item.depth-6,
 .menu .menu-item.depth-6 a {
-  filter: brightness(50%);
+  filter: brightness(40%);
 }
 
 /* === CONTENT === */
@@ -184,10 +185,6 @@ body pre.hljs {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 2;
   }
-
-  body .menu-toggle {
-    opacity: 0.4;
-  }
 }
 
 /* === SIDEBAR MENU TOGGLE === */
@@ -204,54 +201,4 @@ body.sidebar-hidden .menu {
 body.sidebar-hidden .markdown-body {
   width: 100%;
   margin-left: 0;
-}
-
-.menu-toggle {
-  display: block;
-  background-color: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  border-radius: 2px;
-  position: fixed;
-  z-index: 3;
-  width: 16px;
-  height: 16px;
-  top: 2px;
-  left: 2px;
-  opacity: 0.2;
-  box-shadow: 0 0 5px inset rgba(0, 0, 0, 0.5);
-  transform-origin: top left;
-  transition: all 1s;
-}
-
-.menu-toggle:active {
-  box-shadow: 0 0 5px inset rgba(255, 255, 255, 0.3);
-  background-color: var(--color-c);
-  border-color: #fff;
-  opacity: 1;
-}
-
-.menu-toggle:active span {
-  background-color: #fff;
-  box-shadow: none;
-}
-
-.menu-toggle span {
-  display: block;
-  position: absolute;
-  left: 2px;
-  right: 2px;
-  height: 2px;
-  box-shadow: 0 0 1px 5px inset rgba(0, 0, 0, 0.5);
-}
-
-.menu-toggle span:nth-of-type(1) {
-  top: 2px;
-}
-
-.menu-toggle span:nth-of-type(2) {
-  top: 6px;
-}
-
-.menu-toggle span:nth-of-type(3) {
-  bottom: 2px;
 }

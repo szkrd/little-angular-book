@@ -1,252 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>little angular book</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../../normalize.css">
-    <link rel="stylesheet" href="../../hljs-theme.css">
-    <link rel="stylesheet" href="../../markdown.css">
-    <link rel="stylesheet" href="../../main.css?v=2.0.0">
-</head>
-<body>
-<a id="menu-toggle" class="menu-toggle" href="#" title="toggle menu">
-    <span></span><span></span><span></span>
-</a>
-<div class="menu">
-    
-        <div class="menu-item depth-1 ">
-             
-            <a href="../../index.html">Little angular book</a>
-            
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../normalize.css" />
+    <link rel="stylesheet" href="../../hljs-theme.css" />
+    <link rel="stylesheet" href="../../markdown.css" />
+    <link rel="stylesheet" href="../../main.css?v=2.0.0" />
+  </head>
+  <body>
+    <div class="menu">
+      
+      <div class="menu-item depth-1 ">
+         
+        <a href="../../index.html">Little angular book</a>
+        
+      </div>
+      
+      <div class="menu-item depth-2 ">
+        ▸
+        <a href="../../00-setup/index.html">Setup</a>
+        
+      </div>
+      
+      <div class="menu-item depth-2 ">
+        ▸
+        <a href="../../01-typescript/index.html">TypeScript</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../01-typescript/01-basic-types/index.html">Basic types</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../01-typescript/02-classes-interfaces/index.html">Classes and interfaces</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../01-typescript/03-functions/index.html">Functions</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../01-typescript/04-enums/index.html">Enums</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../01-typescript/05-advanced-types/index.html">Advanced types</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../01-typescript/06-decorators/index.html">Decorators</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../01-typescript/07-generics/index.html">Generics</a>
+        
+      </div>
+      
+      <div class="menu-item depth-2 ">
+        ▸
+        <a href="../../02-components/index.html">Components</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../02-components/01-lifecycle-events/index.html">Lifecycle events</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../02-components/02-input-output/index.html">Input / Output</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../02-components/03-templates/index.html">Templates</a>
+        
+      </div>
+      
+      <div class="menu-item depth-4 ">
+        ▪
+        <a href="../../02-components/03-templates/01-raw-html/index.html">Raw HTML</a>
+        
+      </div>
+      
+      <div class="menu-item depth-4 ">
+        ▪
+        <a href="../../02-components/03-templates/02-data-flow/index.html">Data flow</a>
+        
+      </div>
+      
+      <div class="menu-item depth-4 ">
+        ▪
+        <a href="../../02-components/03-templates/03-class-style/index.html">Class &amp; style helpers</a>
+        
+      </div>
+      
+      <div class="menu-item depth-4 ">
+        ▪
+        <a href="../../02-components/03-templates/04-structural-directives/index.html">Structural directives</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 selected">
+        ▹
+        <a href="../../02-components/04-styles/index.html">Styles</a>
+        
+        <div class="menu-section depth-4">
+          ◦
+          <a href="#1">
+            Global style
+          </a>
         </div>
-    
-        <div class="menu-item depth-2 ">
-            ▸
-            <a href="../../00-setup/index.html">Setup</a>
-            
+        
+        <div class="menu-section depth-4">
+          ◦
+          <a href="#2">
+            Sharing style among encapsulated components
+          </a>
         </div>
-    
-        <div class="menu-item depth-2 ">
-            ▸
-            <a href="../../01-typescript/index.html">TypeScript</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../01-typescript/01-basic-types/index.html">Basic types</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../01-typescript/02-classes-interfaces/index.html">Classes and interfaces</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../01-typescript/03-functions/index.html">Functions</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../01-typescript/04-enums/index.html">Enums</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../01-typescript/05-advanced-types/index.html">Advanced types</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../01-typescript/06-decorators/index.html">Decorators</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../01-typescript/07-generics/index.html">Generics</a>
-            
-        </div>
-    
-        <div class="menu-item depth-2 ">
-            ▸
-            <a href="../../02-components/index.html">Components</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../02-components/01-lifecycle-events/index.html">Lifecycle events</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../02-components/02-input-output/index.html">Input / Output</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../02-components/03-templates/index.html">Templates</a>
-            
-        </div>
-    
-        <div class="menu-item depth-4 ">
-            ▪
-            <a href="../../02-components/03-templates/01-raw-html/index.html">Raw HTML</a>
-            
-        </div>
-    
-        <div class="menu-item depth-4 ">
-            ▪
-            <a href="../../02-components/03-templates/02-data-flow/index.html">Data flow</a>
-            
-        </div>
-    
-        <div class="menu-item depth-4 ">
-            ▪
-            <a href="../../02-components/03-templates/03-class-style/index.html">Class &amp; style helpers</a>
-            
-        </div>
-    
-        <div class="menu-item depth-4 ">
-            ▪
-            <a href="../../02-components/03-templates/04-structural-directives/index.html">Structural directives</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 selected">
-            ▹
-            <a href="../../02-components/04-styles/index.html">Styles</a>
-            
-                <div class="menu-section depth-4">
-                    ◦
-                    <a href="#1">
-                        Global style
-                    </a>
-                </div>
-            
-                <div class="menu-section depth-4">
-                    ◦
-                    <a href="#2">
-                        Sharing style among encapsulated components
-                    </a>
-                </div>
-            
-        </div>
-    
-        <div class="menu-item depth-2 ">
-            ▸
-            <a href="../../03-routing/index.html">Routing</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../03-routing/01-parameters/index.html">Route parameters</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../03-routing/02-query-parameters/index.html">Query parameters</a>
-            
-        </div>
-    
-        <div class="menu-item depth-2 ">
-            ▸
-            <a href="../../04-dependency-injection/index.html">Dependency injection</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../04-dependency-injection/01-circumventing-di/index.html">Circumventing the DI system</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../04-dependency-injection/02-sharing-services/index.html">Sharing services</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../04-dependency-injection/03-providers/index.html">Providers</a>
-            
-        </div>
-    
-        <div class="menu-item depth-4 ">
-            ▪
-            <a href="../../04-dependency-injection/03-providers/01-class-provider/index.html">Class provider</a>
-            
-        </div>
-    
-        <div class="menu-item depth-4 ">
-            ▪
-            <a href="../../04-dependency-injection/03-providers/02-factory-provider/index.html">Factory provider</a>
-            
-        </div>
-    
-        <div class="menu-item depth-4 ">
-            ▪
-            <a href="../../04-dependency-injection/03-providers/03-value-provider/index.html">Value provider</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../04-dependency-injection/04-di-tricks/index.html">DI tricks</a>
-            
-        </div>
-    
-        <div class="menu-item depth-2 ">
-            ▸
-            <a href="../../05-services/index.html">Services</a>
-            
-        </div>
-    
-        <div class="menu-item depth-2 ">
-            ▸
-            <a href="../../06-testing/index.html">Testing</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../06-testing/01-jasmine/index.html">Jasmine </a>
-            
-        </div>
-    
-        <div class="menu-item depth-2 ">
-            ▸
-            <a href="../../07-observables/index.html">Observables</a>
-            
-        </div>
-    
-        <div class="menu-item depth-3 ">
-            ▹
-            <a href="../../07-observables/01-examples/index.html">Examples</a>
-            
-        </div>
-    
-        <div class="menu-item depth-2 ">
-            ▸
-            <a href="../../08-problems/index.html">Problems</a>
-            
-        </div>
-    
-</div>
-<div class="markdown-body"><h1 id="styles">Styles</h1>
+        
+      </div>
+      
+      <div class="menu-item depth-2 ">
+        ▸
+        <a href="../../03-routing/index.html">Routing</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../03-routing/01-parameters/index.html">Route parameters</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../03-routing/02-query-parameters/index.html">Query parameters</a>
+        
+      </div>
+      
+      <div class="menu-item depth-2 ">
+        ▸
+        <a href="../../04-dependency-injection/index.html">Dependency injection</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../04-dependency-injection/01-circumventing-di/index.html">Circumventing the DI system</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../04-dependency-injection/02-sharing-services/index.html">Sharing services</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../04-dependency-injection/03-providers/index.html">Providers</a>
+        
+      </div>
+      
+      <div class="menu-item depth-4 ">
+        ▪
+        <a href="../../04-dependency-injection/03-providers/01-class-provider/index.html">Class provider</a>
+        
+      </div>
+      
+      <div class="menu-item depth-4 ">
+        ▪
+        <a href="../../04-dependency-injection/03-providers/02-factory-provider/index.html">Factory provider</a>
+        
+      </div>
+      
+      <div class="menu-item depth-4 ">
+        ▪
+        <a href="../../04-dependency-injection/03-providers/03-value-provider/index.html">Value provider</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../04-dependency-injection/04-di-tricks/index.html">DI tricks</a>
+        
+      </div>
+      
+      <div class="menu-item depth-2 ">
+        ▸
+        <a href="../../05-services/index.html">Services</a>
+        
+      </div>
+      
+      <div class="menu-item depth-2 ">
+        ▸
+        <a href="../../06-testing/index.html">Testing</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../06-testing/01-jasmine/index.html">Jasmine </a>
+        
+      </div>
+      
+      <div class="menu-item depth-2 ">
+        ▸
+        <a href="../../07-observables/index.html">Observables</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../07-observables/01-examples/index.html">Examples</a>
+        
+      </div>
+      
+      <div class="menu-item depth-2 ">
+        ▸
+        <a href="../../08-problems/index.html">Problems</a>
+        
+      </div>
+      
+    </div>
+    <div class="markdown-body"><h1 id="styles">Styles</h1>
 <ul>
 <li>Styles are scoped (by default in an emulated fashion, but one can enable real shadow DOM styles with <code>encapsulation: ViewEncapsulation.Native</code>)</li>
 <li>Emulated scope example: <code>&lt;div class=&quot;content&quot;&gt;&lt;/div&gt;</code> + <code>.content { color: red; }</code> = <code>.content[_ngcontent-ng-c1906523200] { ... }</code></li>
@@ -302,9 +299,9 @@ For example <code>app-button</code> will create an <code>&lt;app-button /&gt;</c
 with an underscore (<strong>_mixins.scss</strong>), so that it will not be included multiple times.</p>
 <p>💡 You can shorten the import to the filename (like <code>@import &quot;mixins&quot;;</code>) if you add
 the directory as an include path in <em>angular.json</em>:<br><code>&quot;stylePreprocessorOptions&quot;: { &quot;includePaths&quot;: [&quot;src/styles&quot;] },</code></p>
-<p>💣 Unfortunately you can&#39;t add the partial&#39;s import to common <em>src/styles.scss</em> and expect it to work elsewhere
+<p>⛔ Unfortunately you can&#39;t add the partial&#39;s import to common _src/styles.scss* and expect it to work elsewhere
 (the recompiler sometimes forgets to break, nevertheless it&#39;s not working).</p>
 </div>
-<script src="../../main.js?v=2.0.0"></script>
-</body>
+    <script src="../../main.js?v=2.0.0"></script>
+  </body>
 </html>
