@@ -68,6 +68,12 @@
       
       <div class="menu-item depth-3 ">
         ▹
+        <a href="../../../01-typescript/06-utility-types/index.html">Utility types</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
         <a href="../../../01-typescript/07-generics/index.html">Generics</a>
         
       </div>
@@ -237,9 +243,9 @@
 <pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> { Pipe, PipeTransform } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
 <span class="hljs-keyword">import</span> { DomSanitizer } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/platform-browser&#x27;</span>;
 
-<span class="hljs-meta">@Pipe</span>({name: <span class="hljs-string">&#x27;safeHtml&#x27;</span>})
+<span class="hljs-meta">@Pipe</span>({ name: <span class="hljs-string">&#x27;safeHtml&#x27;</span> })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> SafeHtml <span class="hljs-keyword">implements</span> PipeTransform {
-  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> sanitizer:DomSanitizer</span>){}
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> sanitizer: DomSanitizer</span>) {}
 
   transform(val) {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sanitizer.bypassSecurityTrustHtml(val);

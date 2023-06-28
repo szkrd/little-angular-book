@@ -68,6 +68,12 @@
       
       <div class="menu-item depth-3 ">
         ▹
+        <a href="../../01-typescript/06-utility-types/index.html">Utility types</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
         <a href="../../01-typescript/07-generics/index.html">Generics</a>
         
       </div>
@@ -260,15 +266,12 @@
 </code></pre>
 <p>Opening links from the component class,<br>using <code>{Router}</code> from <code>@angular/router</code>:</p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;view/posts&#x27;</span>], {
-  queryParams: {q: <span class="hljs-built_in">this</span>.searchText}
+  queryParams: { q: <span class="hljs-built_in">this</span>.searchText },
 });
 </code></pre>
 <h2><a name="1">Combining parameters and query parameters</a></h2>
 <p>💡 Sometimes you want to listen for query param and param change (probably with more complex pages) together.<br>Use <code>combineLatest</code> (from <em>rxjs/observable/combineLatest</em>) to get them both:</p>
-<pre class="hljs"><code class="language-typescript">combineLatest(
-  <span class="hljs-built_in">this</span>.activatedRoute.queryParamMap,
-  <span class="hljs-built_in">this</span>.activatedRoute.paramMap
-).subscribe(<span class="hljs-built_in">this</span>.onRouteAnyParamChange);
+<pre class="hljs"><code class="language-typescript">combineLatest(<span class="hljs-built_in">this</span>.activatedRoute.queryParamMap, <span class="hljs-built_in">this</span>.activatedRoute.paramMap).subscribe(<span class="hljs-built_in">this</span>.onRouteAnyParamChange);
 </code></pre>
 <p>The bound <code>onRouteAnyParamChange</code> will accept an array param, the first item is the queryParam map, the second is the param map.</p>
 </div>

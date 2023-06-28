@@ -68,6 +68,12 @@
       
       <div class="menu-item depth-3 ">
         ▹
+        <a href="../../01-typescript/06-utility-types/index.html">Utility types</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
         <a href="../../01-typescript/07-generics/index.html">Generics</a>
         
       </div>
@@ -238,10 +244,7 @@
     </div>
     <div class="markdown-body"><h1 id="input--output">Input / Output</h1>
 <p>in parent html:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">app-search-form</span>
-  [<span class="hljs-attr">query</span>]=<span class="hljs-string">&quot;queryString&quot;</span>
-  (<span class="hljs-attr">query-change</span>)=<span class="hljs-string">&quot;onSearchFormChange($event)&quot;</span>
-&gt;</span>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">app-search-form</span> [<span class="hljs-attr">query</span>]=<span class="hljs-string">&quot;queryString&quot;</span> (<span class="hljs-attr">query-change</span>)=<span class="hljs-string">&quot;onSearchFormChange($event)&quot;</span>&gt;</span>
   Search for posts:
 <span class="hljs-tag">&lt;/<span class="hljs-name">app-search-form</span>&gt;</span>
 </code></pre>
@@ -265,7 +268,7 @@ ngOnChanges (changes) {
 <p>‼️ One can use getters and setters to emulate computed observable behaviour (eg. modify internal variable B when input A changes), but performance-wise it&#39;s NOT recommended.</p>
 <p>💣 Circumventing an I/O interface:</p>
 <ol>
-<li>Accessing a child&#39;s internals via referencing (<code> &lt;app-timer #timer&gt;&lt;/app-timer&gt;</code>) <strong>from the parent template</strong> is possible.</li>
+<li>Accessing a child&#39;s internals via referencing (<code>&lt;app-timer #timer&gt;&lt;/app-timer&gt;</code>) <strong>from the parent template</strong> is possible.</li>
 <li>Or <strong>from the parent class</strong> itself with <code>@ViewChild</code>.</li>
 </ol>
 <p>This technique <em>may</em> be useful during component testing (creating a temporary wrapper component that can manipulate the subject&#39;s internals).</p>

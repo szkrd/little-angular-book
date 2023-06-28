@@ -49,7 +49,7 @@
         <div class="menu-section depth-4">
           ◦
           <a href="#1">
-            Alternate signatures
+            Alternate signatures (overloading)
           </a>
         </div>
         
@@ -77,6 +77,12 @@
       <div class="menu-item depth-3 ">
         ▹
         <a href="../../01-typescript/06-decorators/index.html">Decorators</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../01-typescript/06-utility-types/index.html">Utility types</a>
         
       </div>
       
@@ -246,32 +252,38 @@
     <div class="markdown-body"><h1 id="functions">Functions</h1>
 <p>The simplest example: <code>let inc = (x: number, y: number = 1): number =&gt; x + y;</code></p>
 <p>It&#39;s fairly simple to define array parameters:</p>
-<pre class="hljs"><code class="language-typescript">  <span class="hljs-keyword">let</span> baptize = (familyName: <span class="hljs-built_in">string</span>, ...names: <span class="hljs-built_in">string</span>[]): <span class="hljs-function"><span class="hljs-params">string</span> =&gt;</span> [familyName, ...names].join(<span class="hljs-string">&#x27; &#x27;</span>);
-  <span class="hljs-comment">//            ↑                                           ↑        ↑</span>
-  <span class="hljs-comment">//           input                                     output     implementation</span>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">let</span> baptize = (familyName: <span class="hljs-built_in">string</span>, ...names: <span class="hljs-built_in">string</span>[]): <span class="hljs-function"><span class="hljs-params">string</span> =&gt;</span> [familyName, ...names].join(<span class="hljs-string">&#x27; &#x27;</span>);
+<span class="hljs-comment">//            ↑                                           ↑        ↑</span>
+<span class="hljs-comment">//           input                                     output     implementation</span>
 </code></pre>
-<h2><a name="1">Alternate signatures</a></h2>
+<h2><a name="1">Alternate signatures (overloading)</a></h2>
 <p>Treat this as a <strong>lightweight</strong> overloading: you can&#39;t define multiple functions with the same name, but you can define multiple interfaces for one function.</p>
 <p>Then of course it&#39;s up to you to see if the input quacks or barks. In a &quot;real&quot; typed language this would not be needed, but typescript is just sugar on top of javascript (albeit sweet and helpful sugar).</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span> (<span class="hljs-params">element: HTMLElement</span>): <span class="hljs-title">number</span></span>; <span class="hljs-comment">// signature A</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span> (<span class="hljs-params">element: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">number</span></span>; <span class="hljs-comment">// signature B</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span> (<span class="hljs-params">element: <span class="hljs-built_in">any</span></span>): <span class="hljs-title">number</span> </span>{ <span class="hljs-comment">// this is not part of the &quot;valid&quot; overload list</span>
-  <span class="hljs-keyword">let</span> node: HTMLElement;
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> element === <span class="hljs-string">&#x27;string&#x27;</span>) { <span class="hljs-comment">// we still have to poke the duck</span>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-comment">// overload signatures</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span>(<span class="hljs-params">element: HTMLElement</span>): <span class="hljs-title">number</span></span>; <span class="hljs-comment">// signature A</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span>(<span class="hljs-params">element: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">number</span></span>; <span class="hljs-comment">// signature B</span>
+
+<span class="hljs-comment">// implementation signature</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHeight</span>(<span class="hljs-params">element: <span class="hljs-built_in">any</span></span>): <span class="hljs-title">number</span> </span>{
+  <span class="hljs-comment">// this is not part of the &quot;valid&quot; overload list</span>
+  <span class="hljs-keyword">let</span> node: HTMLElement | <span class="hljs-literal">null</span>;
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> element === <span class="hljs-string">&#x27;string&#x27;</span>) {
+    <span class="hljs-comment">// we still have to poke the duck</span>
     node = <span class="hljs-built_in">document</span>.querySelector(element);
   } <span class="hljs-keyword">else</span> {
     node = element;
   }
-  <span class="hljs-keyword">return</span> node.getBoundingClientRect().height;
+  <span class="hljs-keyword">return</span> node ? node.getBoundingClientRect().height : <span class="hljs-number">-1</span>;
 }
 </code></pre>
 <p>to use the above function:</p>
 <ul>
 <li><code>getHeight(&#39;body&#39;);</code> → calls signature A</li>
 <li><code>getHeight(document.getElementsByTagName(&#39;body&#39;)[0]);</code> → calls signature B</li>
-<li><code>getHeight(42);</code> → this will not work on typescript&#39;s level ⛔ (but will work of course in the compiled js)</li>
+<li><code>getHeight(42);</code> → this will <strong>not</strong> work on typescript&#39;s level ⛔ (but will work of course in the compiled js)</li>
 </ul>
-<p>‼️ Notice how the function &quot;technically&quot; accepts any type - both signatures are just type helpers and will be stripped away. </p>
+<p>💡 For relatively simple functions it&#39;s easier to define multiple parameter types: <code>getHeight (element: string | HTMLElement)</code>.</p>
+<p>‼️ Notice how the function &quot;technically&quot; accepts any type - both signatures are just type helpers and will be stripped away.</p>
 <h2><a name="2">Defining context (explicit this)</a></h2>
 <p>One may enforce an expected calling context for a function:</p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> User {
@@ -286,10 +298,10 @@
 <span class="hljs-keyword">let</span> users: Users = {
   john: { age: <span class="hljs-number">30</span>, department: <span class="hljs-string">&#x27;management&#x27;</span> },
   jack: { age: <span class="hljs-number">26</span>, department: <span class="hljs-string">&#x27;backend development&#x27;</span> },
-  jill: { age: <span class="hljs-number">34</span>, department: <span class="hljs-string">&#x27;human resources&#x27;</span> }
+  jill: { age: <span class="hljs-number">34</span>, department: <span class="hljs-string">&#x27;human resources&#x27;</span> },
 };
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUser</span> (<span class="hljs-params"><span class="hljs-built_in">this</span>: Users, name: <span class="hljs-built_in">string</span> = &#x27;jill&#x27;</span>) </span>{
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUser</span>(<span class="hljs-params"><span class="hljs-built_in">this</span>: Users, name: <span class="hljs-built_in">string</span> = &#x27;jill&#x27;</span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>[name];
 }
 </code></pre>

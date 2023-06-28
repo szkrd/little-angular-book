@@ -16,6 +16,6 @@ styles = { 'font-size': this.selected ? '1.2em' : '1em' };
 ```
 
 In the html:
+
 - `[ngClass]="classes"`
 - `[ngStyle]="styles"`
-

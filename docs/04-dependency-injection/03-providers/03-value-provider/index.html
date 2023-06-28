@@ -68,6 +68,12 @@
       
       <div class="menu-item depth-3 ">
         ▹
+        <a href="../../../01-typescript/06-utility-types/index.html">Utility types</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
         <a href="../../../01-typescript/07-generics/index.html">Generics</a>
         
       </div>
@@ -232,15 +238,15 @@
     <div class="markdown-body"><h1 id="value-provider">Value provider</h1>
 <p>Here&#39;s the previous example, but with a value, not a wrapper class.</p>
 <p>Since this is not a class, we&#39;re not instanciating anything this time.</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> {MarkedOptions, parse} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;marked&#x27;</span>;
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> { MarkedOptions, parse } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;marked&#x27;</span>;
 
 <span class="hljs-keyword">type</span> MarkedParser = <span class="hljs-function">(<span class="hljs-params">src: <span class="hljs-built_in">string</span>, options?: MarkedOptions</span>) =&gt;</span> <span class="hljs-built_in">string</span>;
 
 <span class="hljs-meta">@Directive</span>({
   selector: <span class="hljs-string">&#x27;[appMarkdown]&#x27;</span>,
   providers: [
-    { provide: <span class="hljs-string">&#x27;toMarkdown&#x27;</span>, useValue: parse } <span class="hljs-comment">// &lt;-- !!</span>
-  ]
+    { provide: <span class="hljs-string">&#x27;toMarkdown&#x27;</span>, useValue: parse }, <span class="hljs-comment">// &lt;-- !!</span>
+  ],
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MarkdownDirective <span class="hljs-keyword">implements</span> OnChanges, OnInit {
   toMarkdown: MarkedParser;
@@ -252,7 +258,7 @@
   </span>) {
     <span class="hljs-built_in">this</span>.toMarkdown = toMarkdown;
   }
-  
+
   <span class="hljs-comment">// ...</span>
 }
 </code></pre>

@@ -1,4 +1,3 @@
-
 # Class provider
 
 The simplest provider is the class provider:
@@ -29,7 +28,7 @@ I'm using [marked](https://github.com/chjj/marked) to parse text into markdown, 
 Wrapping it in a class (interfaces are just typescript sugar, so defining a class is more straightforward):
 
 ```typescript
-import {MarkedOptions, parse} from 'marked';
+import { MarkedOptions, parse } from 'marked';
 
 export class Marked {
   parse: (src: string, options?: MarkedOptions) => string = parse;
@@ -46,4 +45,3 @@ export class MarkdownDirective implements OnChanges, OnInit {
   // ...
 }
 ```
-

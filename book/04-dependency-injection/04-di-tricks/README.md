@@ -12,4 +12,3 @@ export class DogComponent {
   constructor(@Optional() public alex: CanineComponent) {}
 }
 ```
-

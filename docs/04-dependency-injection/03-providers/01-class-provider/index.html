@@ -68,6 +68,12 @@
       
       <div class="menu-item depth-3 ">
         ▹
+        <a href="../../../01-typescript/06-utility-types/index.html">Utility types</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
         <a href="../../../01-typescript/07-generics/index.html">Generics</a>
         
       </div>
@@ -254,7 +260,7 @@
 <h2><a name="1">Blog example</a></h2>
 <p>I&#39;m using <a href="https://github.com/chjj/marked">marked</a> to parse text into markdown, so I can either create a wrapper class around the external library, or provide it as a value.</p>
 <p>Wrapping it in a class (interfaces are just typescript sugar, so defining a class is more straightforward):</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> {MarkedOptions, parse} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;marked&#x27;</span>;
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> { MarkedOptions, parse } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;marked&#x27;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Marked {
   parse: <span class="hljs-function">(<span class="hljs-params">src: <span class="hljs-built_in">string</span>, options?: MarkedOptions</span>) =&gt;</span> <span class="hljs-built_in">string</span> = parse;

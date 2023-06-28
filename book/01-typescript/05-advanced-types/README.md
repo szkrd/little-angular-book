@@ -1,13 +1,13 @@
 # Advanced types
 
-- intersection (&) and union (|)
+- intersection (`&`) and union (`|`)
 - runtime type guards (is)
-- TS understands typeof in code (for string, number, boolean, symbol)
-- TS understands instanceof in code
-- nullables (null and undefined assignable to anything; vs: strictNullChecks)
+- TS understands `typeof` in code (for string, number, boolean, symbol)
+- TS understands `instanceof` in code
+- nullables (null and undefined assignable to anything; vs: _strictNullChecks_)
 - type aliases (vs interfaces)
 - this may be used as a return type (useful for chaining)
-- index type query operator (T, keyof T)- for partial, pluck etc.
+- index type query operator (T, `keyof` T)- for partial, pluck etc.
 
 ## Custom types (type aliases)
 
@@ -31,7 +31,9 @@ let rolled: DiceRoll = 9; // TS will mark this as an invalid assignment
 - `id: string | number` = "either or" (useful for function signatures)
 
 ```typescript
-function extend<T, U> (a: T, b: U): T & U { return Object.assign({}, a, b); }
+function extend<T, U>(a: T, b: U): T & U {
+  return Object.assign({}, a, b);
+}
 let foo = { foo: 1, qux: 2 };
 let bar = { bar: 1 };
 let baz = extend(foo, bar);
@@ -44,7 +46,7 @@ let multiply = (source: string | number, times: number = 1): any => {
   if (typeof source === 'number') {
     return source * times;
   }
-  return (new Array(times)).fill(source).join('');
+  return new Array(times).fill(source).join('');
 };
 
 let x: string = multiply('ho', 3);
@@ -56,7 +58,7 @@ assert.equal(x + y, 'hohoho25');
 ## Nullables with strictNullChecks
 
 - `strictNullChecks` enabled will disallow assigning null and undefined, unless explicitly allowed
-- One can disable null guard with the ! postfix (only with strictNullChecks enabled)
+- One can disable null guard with the `!` postfix (only with strictNullChecks enabled)
 
 ```typescript
 let foo = 'bar';
@@ -76,17 +78,22 @@ interface X {
 :rocket: Writing better typechecks with the "is" keyword:
 
 ```typescript
-interface Fish { swim: boolean; name: string; }
-interface Bird { fly: boolean; name: string; }
+interface Fish {
+  swim: boolean;
+  name: string;
+}
+interface Bird {
+  fly: boolean;
+  name: string;
+}
 
 let myBird: Bird = { name: 'Tweetie', fly: true };
 let myFish: Fish = { name: 'Wanda', swim: true };
-let pets = [ myBird, myFish ];
+let pets = [myBird, myFish];
 
 //                                  item is Type
 //                                       ↓
-function isFish (pet: Fish | Bird): pet is Fish {
+function isFish(pet: Fish | Bird): pet is Fish {
   return (pet as Fish).swim !== undefined;
 }
 ```
-

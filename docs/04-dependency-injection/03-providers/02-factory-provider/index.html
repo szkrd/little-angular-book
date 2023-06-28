@@ -68,6 +68,12 @@
       
       <div class="menu-item depth-3 ">
         ▹
+        <a href="../../../01-typescript/06-utility-types/index.html">Utility types</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
         <a href="../../../01-typescript/07-generics/index.html">Generics</a>
         
       </div>
@@ -242,9 +248,9 @@
       <span class="hljs-keyword">const</span> httpCacheBackend = <span class="hljs-keyword">new</span> StorageCacheService(sessionStorage); <span class="hljs-comment">// depth -1</span>
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> HttpGetCacheInterceptor(httpCacheBackend); <span class="hljs-comment">// depth 0</span>
     },
-    multi: <span class="hljs-literal">true</span>
-  }
-]
+    multi: <span class="hljs-literal">true</span>,
+  },
+];
 </code></pre>
 <p>(The <code>multi</code> property is only useful for interceptors.)</p>
 <p>A factory may have its (injectable) dependencies too - while the above is a bit convoluted, here&#39;s a simpler example:</p>
@@ -252,9 +258,9 @@
   {
     provide: PollService,
     useFactory: <span class="hljs-function">(<span class="hljs-params">logger: Logger</span>) =&gt;</span> <span class="hljs-keyword">new</span> PollService(logger),
-    deps: [Logger]
-  }
-]
+    deps: [Logger],
+  },
+];
 </code></pre>
 </div>
     <script src="../../../main.js?v=2.0.0"></script>

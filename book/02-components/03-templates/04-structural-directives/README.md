@@ -10,4 +10,3 @@ Only one may be present on an element.
   - with observable and async pipe:
     `let user of usersObservable | async as users`
 - **switch**: `[ngSwitch]` + `*ngSwitchCase` + `*ngSwitchDefault`
-

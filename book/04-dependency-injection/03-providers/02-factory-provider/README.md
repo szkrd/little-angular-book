@@ -1,4 +1,3 @@
-
 # Factory provider
 
 Sometimes the class we want to inject needs to have its own parameters.
@@ -16,9 +15,9 @@ providers: [
       const httpCacheBackend = new StorageCacheService(sessionStorage); // depth -1
       return new HttpGetCacheInterceptor(httpCacheBackend); // depth 0
     },
-    multi: true
-  }
-]
+    multi: true,
+  },
+];
 ```
 
 (The `multi` property is only useful for interceptors.)
@@ -30,8 +29,7 @@ A factory may have its (injectable) dependencies too - while the above is a bit 
   {
     provide: PollService,
     useFactory: (logger: Logger) => new PollService(logger),
-    deps: [Logger]
-  }
-]
+    deps: [Logger],
+  },
+];
 ```
-

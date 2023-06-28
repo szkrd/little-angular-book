@@ -33,7 +33,7 @@ using `{Router}` from `@angular/router`:
 
 ```typescript
 this.router.navigate(['view/posts'], {
-  queryParams: {q: this.searchText}
+  queryParams: { q: this.searchText },
 });
 ```
 
@@ -43,12 +43,7 @@ this.router.navigate(['view/posts'], {
 Use `combineLatest` (from _rxjs/observable/combineLatest_) to get them both:
 
 ```typescript
-combineLatest(
-  this.activatedRoute.queryParamMap,
-  this.activatedRoute.paramMap
-).subscribe(this.onRouteAnyParamChange);
+combineLatest(this.activatedRoute.queryParamMap, this.activatedRoute.paramMap).subscribe(this.onRouteAnyParamChange);
 ```
 
 The bound `onRouteAnyParamChange` will accept an array param, the first item is the queryParam map, the second is the param map.
-
-

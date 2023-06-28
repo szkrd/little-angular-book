@@ -3,10 +3,7 @@
 in parent html:
 
 ```html
-<app-search-form
-  [query]="queryString"
-  (query-change)="onSearchFormChange($event)"
->
+<app-search-form [query]="queryString" (query-change)="onSearchFormChange($event)">
   Search for posts:
 </app-search-form>
 ```
@@ -35,7 +32,7 @@ ngOnChanges (changes) {
 
 :bomb: Circumventing an I/O interface:
 
-1. Accessing a child's internals via referencing (` <app-timer #timer></app-timer>`) **from the parent template** is possible.
+1. Accessing a child's internals via referencing (`<app-timer #timer></app-timer>`) **from the parent template** is possible.
 2. Or **from the parent class** itself with `@ViewChild`.
 
 This technique _may_ be useful during component testing (creating a temporary wrapper component that can manipulate the subject's internals).
@@ -47,5 +44,4 @@ Some of the popular approaches:
 - via services (subject, behaviour subjects)
 - common store ([ngrx](https://github.com/ngrx/store))
 - eventbus ([eventemitters](https://nodejs.org/api/events.html))
-- custom DOM events (see: bubbles and composed) 
-
+- custom DOM events (see: bubbles and composed)

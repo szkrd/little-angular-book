@@ -75,6 +75,12 @@
       
       <div class="menu-item depth-3 ">
         ▹
+        <a href="../../01-typescript/06-utility-types/index.html">Utility types</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
         <a href="../../01-typescript/07-generics/index.html">Generics</a>
         
       </div>
@@ -239,22 +245,33 @@
     <div class="markdown-body"><h1 id="enums">Enums</h1>
 <p>Enums are named constants and can really help with code readability.</p>
 <p>They are by default 0 based numbers, but it&#39;s possible to define the number itself:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">enum</span> Control { Up, Down, Left, Right, Space } <span class="hljs-comment">// 0 based</span>
-<span class="hljs-built_in">enum</span> Letter { A = <span class="hljs-number">97</span>, B, C, D } <span class="hljs-comment">// starts with 97, B will be 98</span>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">enum</span> Control {
+  Up,
+  Down,
+  Left,
+  Right,
+  Space,
+} <span class="hljs-comment">// 0 based</span>
+<span class="hljs-built_in">enum</span> Letter {
+  A = <span class="hljs-number">97</span>,
+  B,
+  C,
+  D,
+} <span class="hljs-comment">// starts with 97, B will be 98</span>
 </code></pre>
 <p>Or the value (using strings):</p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">enum</span> Direction {
   Up = <span class="hljs-string">&#x27;VK_ARROW_UP&#x27;</span>,
   Down = <span class="hljs-string">&#x27;VK_ARROW_DOWN&#x27;</span>,
   Left = <span class="hljs-string">&#x27;VK_ARROW_LEFT&#x27;</span>,
-  Right = <span class="hljs-string">&#x27;VK_ARROW_RIGHT&#x27;</span>
+  Right = <span class="hljs-string">&#x27;VK_ARROW_RIGHT&#x27;</span>,
 }
 </code></pre>
 <h2><a name="1">Advanced uses</a></h2>
 <p>🚀 Typescript enums can have dynamically initialized values:</p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">enum</span> Week {
   NumberOfDays = <span class="hljs-number">7</span>,
-  Today = (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()).getDay() <span class="hljs-comment">// today is saturday, so it would be 6</span>
+  Today = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getDay(), <span class="hljs-comment">// today is saturday, so it would be 6</span>
 }
 </code></pre>
 <p>🚀 Number based enums have reversed mapping too:</p>
@@ -264,7 +281,11 @@
 </ul>
 <p>🚀 Const enums are replaced inline by the compiler:</p>
 <pre class="hljs"><code class="language-typescript"><span class="hljs-comment">//                    0       1       2</span>
-<span class="hljs-keyword">const</span> <span class="hljs-built_in">enum</span> States { Select, Search, Result }
+<span class="hljs-keyword">const</span> <span class="hljs-built_in">enum</span> States {
+  Select,
+  Search,
+  Result,
+}
 
 <span class="hljs-keyword">let</span> getState = <span class="hljs-function">() =&gt;</span> States.Search; <span class="hljs-comment">// will be replaced with the raw value</span>
 assert.equal(getState.toString(), <span class="hljs-string">&#x27;() =&gt; 1&#x27;</span>); <span class="hljs-comment">// the stringified compiled javascript code</span>

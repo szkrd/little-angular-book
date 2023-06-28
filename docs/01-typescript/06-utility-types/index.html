@@ -66,9 +66,23 @@
         
       </div>
       
-      <div class="menu-item depth-3 ">
+      <div class="menu-item depth-3 selected">
         ▹
         <a href="../../01-typescript/06-utility-types/index.html">Utility types</a>
+        
+        <div class="menu-section depth-4">
+          ◦
+          <a href="#1">
+            Basic utility types
+          </a>
+        </div>
+        
+        <div class="menu-section depth-4">
+          ◦
+          <a href="#2">
+            Other utility types
+          </a>
+        </div>
         
       </div>
       
@@ -162,7 +176,7 @@
         
       </div>
       
-      <div class="menu-item depth-3 selected">
+      <div class="menu-item depth-3 ">
         ▹
         <a href="../../04-dependency-injection/02-sharing-services/index.html">Sharing services</a>
         
@@ -235,37 +249,66 @@
       </div>
       
     </div>
-    <div class="markdown-body"><h1 id="sharing-services">Sharing services</h1>
-<p>The simplest use case for DI is to instanciate a service once and then give that instance (provide) to every component that needs it:</p>
-<p><em>app.module.ts</em></p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@NgModule</span>({
-  <span class="hljs-comment">// ...</span>
-  declarations: [
-    PostsPageComponent
-  ],
-  providers: [
-    PostsService
-  ],
-  <span class="hljs-comment">// ...</span>
-})
-</code></pre>
-<p>PostsService (which is an injectable class) will be instanciated by the App module.</p>
-<p>💡 Writing <code>@Injectable</code> is not needed for classes without dependencies or already decorated classes, but it really helps readability.</p>
-<p><em>services/posts.service.ts</em></p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@Injectable</span>()
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> PostsService {
-  <span class="hljs-comment">// ...</span>
+    <div class="markdown-body"><h1 id="utility-types">Utility types</h1>
+<h2><a name="1">Basic utility types</a></h2>
+<p>I usually use the <code>Partial</code>, <code>Record</code>, <code>Pick</code>, <code>Omit</code>, <code>Readonly</code> types, the rest not so often.</p>
+<p><code>Partial</code> sets all interface properties optional:</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> IUser {
+  name: <span class="hljs-built_in">string</span>;
+  age: <span class="hljs-built_in">number</span>;
+  id: <span class="hljs-built_in">number</span>;
 }
+<span class="hljs-keyword">const</span> jane: IUser = { name: <span class="hljs-string">&#x27;Jane Doe&#x27;</span>, age: <span class="hljs-number">37</span>, id: <span class="hljs-number">13459</span> };
+
+<span class="hljs-keyword">type</span> IFuzzyUser = Partial&lt;IUser&gt;;
+<span class="hljs-keyword">const</span> john: IFuzzyUser = { name: <span class="hljs-string">&#x27;John Doe&#x27;</span> }; <span class="hljs-comment">// all keys are optional</span>
 </code></pre>
-<p>The PostsPage component can access this dependency:</p>
-<p><em>components/posts-page.component.ts</em></p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> PostsPageComponent <span class="hljs-keyword">implements</span> OnInit {
-  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> postsService: PostsService</span>) {}
-  <span class="hljs-comment">// ...</span>
+<p><code>Record</code> is a useful shorthand for dealing with fuzzy key-value objects:</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">const</span> users: Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">number</span>&gt; = { john: <span class="hljs-number">20</span>, peter: <span class="hljs-number">35</span>, jill: <span class="hljs-number">31</span> };
+users.jane = <span class="hljs-number">27</span>;
+</code></pre>
+<p><code>Pick</code> can set some keys required, while <code>Omit</code> can remove keys:</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> ITodoItem {
+  title: <span class="hljs-built_in">string</span>;
+  description: <span class="hljs-built_in">string</span>;
+  completed: <span class="hljs-built_in">boolean</span>;
 }
+
+<span class="hljs-keyword">type</span> ITodoItemPreview = Pick&lt;ITodoItem, <span class="hljs-string">&#x27;title&#x27;</span>&gt;;
+<span class="hljs-keyword">const</span> todo: ITodoItemPreview = { title: <span class="hljs-string">&#x27;Buy catfood&#x27;</span> };
 </code></pre>
-<p>Under the hood <code>this.postsService = new PostsService()</code> &quot;happens&quot; in the constructor.</p>
-<p>💡 With a shared service and rxjs subjects it&#39;s trivial to setup an eventemitter or pubsub messaging.</p>
+<p>The above with omit: <code>type ITodoItemPreview = Omit&lt;ITodoItem, &#39;description&#39;, &#39;completed&#39;&gt;;</code></p>
+<p>An example for <code>Omit</code> from Fluent UI:</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">type</span> SelectedFormFieldCustomProps = Omit&lt;
+  FormFieldBaseProps,
+  <span class="hljs-string">&#x27;control&#x27;</span> | <span class="hljs-string">&#x27;styles&#x27;</span> | <span class="hljs-string">&#x27;accessibility&#x27;</span> | <span class="hljs-string">&#x27;design&#x27;</span> | <span class="hljs-string">&#x27;variables&#x27;</span>
+&gt;;
+</code></pre>
+<p><code>Readonly</code> will make typescript check if we&#39;re trying to overwrite a value:</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> ITodo {
+  title: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-keyword">type</span> IReadonlyTodo = Readonly&lt;ITodo&gt;;
+</code></pre>
+<h2><a name="2">Other utility types</a></h2>
+<ul>
+<li><code>Required</code>: makes all keys required</li>
+<li><code>Exclude</code>: removes items from a set (<code>type TPets = Exclude&lt;&quot;dog&quot; | &quot;cat&quot; | &quot;lion&quot;, &quot;lion&quot;&gt;;</code>)</li>
+<li><code>Extract</code>: opposite of exclude (<code>type TWildAnimals = Extract&lt;&quot;dog&quot; | &quot;cat&quot; | &quot;lion&quot; | &quot;bear&quot;, &quot;lion&quot; | &quot;bear&quot;&gt;</code>)</li>
+<li><code>NonNullable</code>: excludes null and undefined from a type</li>
+<li><code>Awaited</code>: for async await promise unwrapping (<code>type A = Awaited&lt;Promise&lt;string&gt;&gt;;</code>)</li>
+</ul>
+<p>Types dealing with function/class parameters and the <code>this</code> context:</p>
+<ul>
+<li><code>Parameters</code>: creates an array (tuple) from a function definition&#39;s arguments</li>
+<li><code>ConstructorParameters</code>: parameters for object constructors (<code>ConstructorParameters&lt;ErrorConstructor&gt;</code> is <code>[message?: string]</code>)</li>
+<li><code>ReturnType</code>: return type of function type</li>
+<li><code>InstanceType</code>: constructs a type consisting of the instance type</li>
+<li><code>ThisParameterType</code>: extracts the type of the this parameter for a function type</li>
+<li><code>OmitThisParameter</code>: removes the this parameter from type</li>
+<li><code>ThisType</code>: serves as a marker for a contextual this type</li>
+</ul>
 </div>
     <script src="../../main.js?v=2.0.0"></script>
   </body>

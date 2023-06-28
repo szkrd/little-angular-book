@@ -5,12 +5,16 @@
 3. [Functions](03-functions/README.md)
 4. [Enums](04-enums/README.md)
 5. [Advanced types](05-advanced-types/README.md)
-6. [Decorators](06-decorators/README.md)
-7. [Generics](07-generics/README.md)
+6. [Utility types](06-utility-types/README.md)
+7. [Decorators](07-decorators/README.md)
+8. [Generics](08-generics/README.md)
 
 Angular uses TypeScript. While you can omit all type definitions, trying to ignore TS (not including it in an angular project) and going all js would not be a good idea.
 
 :bulb: Angular devs wanted to create another language on top of javascript, because they needed to rely heavily on code annotations (decorators, hence the @ naming) which are not yet part of the js spec. Fortunately TS decided to add decorator support and Angular went with TypeScript.
+
+:bulb: When in doubt, use the [Typescript playground](https://www.typescriptlang.org/play) where you can check how smaller code snippets
+are transpiled and if they have errors.
 
 ## What is TypeScript
 
@@ -24,10 +28,11 @@ TS feels like a bridge between java and javascript and it is rather close to the
 
 ## Keeping your code clean: linting
 
-- Coding style should be enforced by a linter. Use **tslint** for TS.
-- eslint _may_ work to a certain extent with babel parser or typescript eslint parser. :question:
-- `tslint:recommended` seems to be a sane default, but it feels different from the standard/semistandard world.
-- `"extends": "tslint-config-semistandard"` works, but feels out of place and triggers warnings during script execution (unrelated to the code itself).
+- Coding style should be enforced by a linter. Use **eslint** for TS (and JS); tslint fortunately is no more.
+- For Angular use `ng lint` and let it be auto installed.
+- For non-angular projects the easiest setup is the auto init via `npm init @eslint/config`.
+- If you're setting up the linter manually (along with prettier), then probably the minimum set of rules you need
+  is `['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended']`.
 
 ## Shims, transpilers, ES5-6-7
 
@@ -50,7 +55,7 @@ TS can implicitly assign types to a variable (for example in `const foo = 'bar'`
 
 If you are not going to initialize your variable then the compiler will assume an `any` type. This may lead to bugs but in the early days it may be helpful, especially if you're new to typescript. This behaviour may be disabled with `noImplicitAny: true` in tsconfig.
 
-TS does some clever things in the background to infer types for you, so while `const foo = 'bar'` is trivial, it knows that if you use something with `window.onmousedown` for example, then that should be a function with a MouseEvent input parameter (this is called contextual typing).
+TS does some clever things in the background to infer types for you, so while `const foo = 'bar'` is trivial, it knows that if you use something with `window.onmousedown` for example, then that should be a function with a _MouseEvent_ input parameter (this is called contextual typing).
 
 ## Safeguards against nulls
 
@@ -68,7 +73,7 @@ I tried to find a middle ground with examples and relevancy, for an in depth gui
    or [this nice article](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/).
 2. Iterators and generators: ts has es6 iterable support, see spec
    or [this mdn example](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator).
-3. Modules: es6 import export (which you probably already know about), tsc packaging, advanced topics like
+3. Modules: es6 import/export (which you probably already know about), tsc packaging, advanced topics like
    CommonJS, SystemJS, AMD, UMD/isomorphic, es6 native modules.
 4. Namespaces (used to be "internal modules"): it feels like a legacy concept.
    Just use es6 modules and try to skip the multi-file namespace with its triple-slash metadata.

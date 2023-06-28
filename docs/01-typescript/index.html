@@ -117,6 +117,12 @@
       
       <div class="menu-item depth-3 ">
         ▹
+        <a href="../01-typescript/06-utility-types/index.html">Utility types</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
         <a href="../01-typescript/07-generics/index.html">Generics</a>
         
       </div>
@@ -285,11 +291,14 @@
 <li><a href="../01-typescript/03-functions/index.html">Functions</a></li>
 <li><a href="../01-typescript/04-enums/index.html">Enums</a></li>
 <li><a href="../01-typescript/05-advanced-types/index.html">Advanced types</a></li>
-<li><a href="../01-typescript/06-decorators/index.html">Decorators</a></li>
-<li><a href="../01-typescript/07-generics/index.html">Generics</a></li>
+<li><a href="../01-typescript/06-utility-types/index.html">Utility types</a></li>
+<li><a href="../01-typescript/07-decorators/index.html">Decorators</a></li>
+<li><a href="../01-typescript/08-generics/index.html">Generics</a></li>
 </ol>
 <p>Angular uses TypeScript. While you can omit all type definitions, trying to ignore TS (not including it in an angular project) and going all js would not be a good idea.</p>
 <p>💡 Angular devs wanted to create another language on top of javascript, because they needed to rely heavily on code annotations (decorators, hence the @ naming) which are not yet part of the js spec. Fortunately TS decided to add decorator support and Angular went with TypeScript.</p>
+<p>💡 When in doubt, use the <a href="https://www.typescriptlang.org/play">Typescript playground</a> where you can check how smaller code snippets
+are transpiled and if they have errors.</p>
 <h2><a name="1">What is TypeScript</a></h2>
 <p>TypeScript (TS) is a strict <strong>syntactical superset</strong> of JavaScript, and adds <strong>optional static typing</strong> to the language.</p>
 <p>Syntactical superset means that the TS compiler will <strong>not</strong> transpile your code to ES5 or add polyfills for ES6/7 so if you are using object spread for example (<code>{...}</code>) and the target browser does not support object spread then you <strong>must</strong> transpile your code (probably with Babel or Bublé).</p>
@@ -297,10 +306,11 @@
 <p>💡 Anders Hejlsberg, grand daddy of Turbo Pascal, Delphi and C#, is the lead architect of TypeScript.</p>
 <h2><a name="2">Keeping your code clean: linting</a></h2>
 <ul>
-<li>Coding style should be enforced by a linter. Use <strong>tslint</strong> for TS.</li>
-<li>eslint <em>may</em> work to a certain extent with babel parser or typescript eslint parser. ❓</li>
-<li><code>tslint:recommended</code> seems to be a sane default, but it feels different from the standard/semistandard world.</li>
-<li><code>&quot;extends&quot;: &quot;tslint-config-semistandard&quot;</code> works, but feels out of place and triggers warnings during script execution (unrelated to the code itself).</li>
+<li>Coding style should be enforced by a linter. Use <strong>eslint</strong> for TS (and JS); tslint fortunately is no more.</li>
+<li>For Angular use <code>ng lint</code> and let it be auto installed.</li>
+<li>For non-angular projects the easiest setup is the auto init via <code>npm init @eslint/config</code>.</li>
+<li>If you&#39;re setting up the linter manually (along with prettier), then probably the minimum set of rules you need
+is <code>[&#39;eslint:recommended&#39;, &#39;plugin:@typescript-eslint/recommended&#39;, &#39;plugin:prettier/recommended&#39;]</code>.</li>
 </ul>
 <h2><a name="3">Shims, transpilers, ES5-6-7</a></h2>
 <p>Don&#39;t forget to use target <code>es6</code> in tsconfig (es5 target will break with es6 language features, like <code>Set</code> for example) -
@@ -313,7 +323,7 @@
 <h2><a name="5">Automatically detected types</a></h2>
 <p>TS can implicitly assign types to a variable (for example in <code>const foo = &#39;bar&#39;</code> foo will be a string type).</p>
 <p>If you are not going to initialize your variable then the compiler will assume an <code>any</code> type. This may lead to bugs but in the early days it may be helpful, especially if you&#39;re new to typescript. This behaviour may be disabled with <code>noImplicitAny: true</code> in tsconfig.</p>
-<p>TS does some clever things in the background to infer types for you, so while <code>const foo = &#39;bar&#39;</code> is trivial, it knows that if you use something with <code>window.onmousedown</code> for example, then that should be a function with a MouseEvent input parameter (this is called contextual typing).</p>
+<p>TS does some clever things in the background to infer types for you, so while <code>const foo = &#39;bar&#39;</code> is trivial, it knows that if you use something with <code>window.onmousedown</code> for example, then that should be a function with a <em>MouseEvent</em> input parameter (this is called contextual typing).</p>
 <h2><a name="6">Safeguards against nulls</a></h2>
 <p>Null and undefined &quot;values&quot; are considered dangerous and are prone to introducing bugs.</p>
 <p>With <code>let name = &#39;John&#39;</code> we know that &quot;name&quot; is a string and has the intrinsic properties of strings (has a length, has a toUpperCase method, can be concatenated with the + operator etc.) - but <code>name = null</code> destroys the intrinsic nature of this variable, so extra safeguards are needed in the software.</p>
@@ -325,7 +335,7 @@
 or <a href="https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/">this nice article</a>.</li>
 <li>Iterators and generators: ts has es6 iterable support, see spec
 or <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator">this mdn example</a>.</li>
-<li>Modules: es6 import export (which you probably already know about), tsc packaging, advanced topics like
+<li>Modules: es6 import/export (which you probably already know about), tsc packaging, advanced topics like
 CommonJS, SystemJS, AMD, UMD/isomorphic, es6 native modules.</li>
 <li>Namespaces (used to be &quot;internal modules&quot;): it feels like a legacy concept.
 Just use es6 modules and try to skip the multi-file namespace with its triple-slash metadata.</li>

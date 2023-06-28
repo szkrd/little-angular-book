@@ -2,58 +2,56 @@
 
 - Decorators are functions when placed in a decorator context will be called with special contextual parameters.
 - If you want to create decorators that accept parameters during "decoration", use a factory.
+- Ecmascript **stage 3** decorators are supported since TS 5.0 (this is a breaking change over the old decorator handling).
+- The **old** (stage 2) decorator handling is (still) available with `experimentalDecorators`.
 
-## Class decorators
+:rocket: With the new decorator handling most of this section has been removed and I consider it to be an "advanced" topic;
+feel free to check the [TS5 decorator announcement](https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators) for details (or TS docs, should Microsoft update it; as of this writing it still reflects the stage 2 description).
 
-Called with the **constructor** function.
+## A method decorator
 
-```typescript
-function sealed(ctor: Function) {
-  Object.seal(ctor);
-  Object.seal(ctor.prototype);
-}
-
-@sealed
-class Greeter {
-  greeting: string;
-  // ...
-}
-```
-
-## Method and accessor decorators
-
-Parameters:
-
-1. constructor (static member) or prototype (instance member)
-2. name
-3. [property descriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
-
-Only one accessor (either the getter or the setter) may be decorated, since the very same decorator would operate on the same member.
+We want to add a logger to method calls using decorators.
 
 ```typescript
-function friendly (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-  let oldFn = descriptor.value;
-  descriptor.value = function () { return oldFn.call(this) + ', my friend'; };
-}
-
-class GreeterBot {
-  greeting: string;
-  constructor (message: string) {
-    this.greeting = message;
+class Person {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
   }
 
-  @friendly
-  public greet () {
-    return 'Hello, ' + this.greeting;
+  @logMethod
+  greet() {
+    console.log(`Hello, my name is ${this.name}.`);
   }
 }
 
-let rosey = new GreeterBot('Judy');
-rosey.greet(); // prints "Hello Judy, my friend"
+const ron = new Person('Ron');
+ron.greet();
 ```
 
-## Property and parameter decorators
+The decorator (simplified somewhat, addig proper type annotations is not trivial):
 
-:rocket: Since es6 class properties are not enumerable, manipulating their descriptors is not exactly trivial.
-  The official examples themselves are relying heavily on the `reflect-metadata` package (future metadata API polyfill) for easier reflection.
+```typescript
+function loggedMethod(originalMethod: any, _context: any) {
+  function replacementMethod(this: any, ...args: any[]) {
+    console.log('LOG: Entering method.');
+    const result = originalMethod.call(this, ...args);
+    console.log('LOG: Exiting method.');
+    return result;
+  }
 
+  return replacementMethod;
+}
+```
+
+An example `bound` decorator (for auto binding methods):
+
+```typescript
+function bound(originalMethod: any, context: ClassMethodDecoratorContext) {
+  const methodName = context.name;
+  if (context.private) throw new Error(`Cannot decorate private properties (${methodName as string}).`);
+  context.addInitializer(function () {
+    (this as any)[methodName] = (this as any)[methodName].bind(this);
+  });
+}
+```

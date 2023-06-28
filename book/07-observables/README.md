@@ -20,7 +20,7 @@ See [examples](01-examples/README.md).
 - same data is shared among subscribers
 - new values can be "added" in time (bi-directional, multicast)
 - use `BehaviorSubject` if you need access to the last emitted value
-- use `ReplaySubject` if you need access to all the values (replayed) 
+- use `ReplaySubject` if you need access to all the values (replayed)
 
 ## Creating observables using shorthands
 

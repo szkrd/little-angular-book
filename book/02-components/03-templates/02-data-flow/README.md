@@ -1,6 +1,6 @@
 # Data flow
 
-## via dynamic attributes (props) 
+## via dynamic attributes (props)
 
 :package: `<img [src]="avatar">`
 
@@ -22,7 +22,7 @@
 
 ```html
 <a href="#" (click)="onYearToggleClick(item.year); false">...</a>
-``` 
+```
 
 ## two-way
 

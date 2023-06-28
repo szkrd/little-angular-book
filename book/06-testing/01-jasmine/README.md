@@ -69,7 +69,7 @@ Spy naming (`aName`) is optional, like most other parameters (lots of :duck: typ
 
 - spying on existing objects
   1. **spyOn**: spy on a method - `spyOn(obj, methodName)`
-  2. **spyOnProperty**: spy on a prop (with defineProperty) - `spyOnProperty(obj, propName, 'get'/'set')` 
+  2. **spyOnProperty**: spy on a prop (with defineProperty) - `spyOnProperty(obj, propName, 'get'/'set')`
   3. **spyOnAllFunctions**: `spyOnAllFunctions(obj)`
 - spy creation from scratch
   1. **jasmine.createSpy**: `jasmine.createSpy(aName, fn)`

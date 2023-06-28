@@ -12,9 +12,9 @@ let answer: number = 42;
 
 ```typescript
 let lotteryNumbers: number[] = [22, 48, 16, 45, 7];
-let dogs: Array<string> = [ 'Fido', 'Butch', 'Killer', 'Snoopy' ];
-let cats: ReadonlyArray<string> = [ 'Princess', 'Shadow', 'Tabby', 'Puffy']; // with mutators removed
-let whatevs: any[] = [ 'foo', 42, true ];
+let dogs: Array<string> = ['Fido', 'Butch', 'Killer', 'Snoopy'];
+let cats: ReadonlyArray<string> = ['Princess', 'Shadow', 'Tabby', 'Puffy']; // with mutators removed
+let whatevs: any[] = ['foo', 42, true];
 ```
 
 ## tuples
@@ -22,7 +22,7 @@ let whatevs: any[] = [ 'foo', 42, true ];
 Arrays with fixed number of items.
 
 ```typescript
-let buyThis: [ string, number ] = [ 'eggs', 6 ];
+let buyThis: [string, number] = ['eggs', 6];
 ```
 
 ## enums
@@ -30,17 +30,25 @@ let buyThis: [ string, number ] = [ 'eggs', 6 ];
 Array of named numbers. It's possible to use strings, instead of numbers though.
 
 ```typescript
-enum states { SelectAirport, PickDate, SetPassengerCount } // 0, 1, 2
+enum states {
+  SelectAirport,
+  PickDate,
+  SetPassengerCount,
+} // 0, 1, 2
 let currentState: states = states.SelectAirport;
 ```
 
 ## void, null, undefined, never
 
 ```typescript
-let run = (s: string): void => { console.log(s); };
+let run = (s: string): void => {
+  console.log(s);
+};
 let thinAir: null = null;
 let horror: undefined;
-let die = (lastWords: string[]) => { throw new Error(lastWords.join(', ')); };
+let die = (lastWords: string[]) => {
+  throw new Error(lastWords.join(', '));
+};
 ```
 
 ## type assertion (type casting)
@@ -48,7 +56,7 @@ let die = (lastWords: string[]) => { throw new Error(lastWords.join(', ')); };
 ```typescript
 let cat = 'Garfield'; // implicit string, let's say this variable is coming outside of TS
 
-let catNameLen = (cat as string).length; // tsx safe syntax
-let catNameLen = <string>cat.length;
+let catNameLen = (cat as string).length; // tsx-safe syntax
+let catNameLen = <string>cat.length; // alternate syntax
+let catNameLen = String(cat).length; // javascript type conversion
 ```
-

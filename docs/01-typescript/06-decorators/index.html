@@ -67,23 +67,15 @@
         <div class="menu-section depth-4">
           ◦
           <a href="#1">
-            Class decorators
+            A method decorator
           </a>
         </div>
         
-        <div class="menu-section depth-4">
-          ◦
-          <a href="#2">
-            Method and accessor decorators
-          </a>
-        </div>
-        
-        <div class="menu-section depth-4">
-          ◦
-          <a href="#3">
-            Property and parameter decorators
-          </a>
-        </div>
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../01-typescript/06-utility-types/index.html">Utility types</a>
         
       </div>
       
@@ -254,51 +246,49 @@
 <ul>
 <li>Decorators are functions when placed in a decorator context will be called with special contextual parameters.</li>
 <li>If you want to create decorators that accept parameters during &quot;decoration&quot;, use a factory.</li>
+<li>Ecmascript <strong>stage 3</strong> decorators are supported since TS 5.0 (this is a breaking change over the old decorator handling).</li>
+<li>The <strong>old</strong> (stage 2) decorator handling is (still) available with <code>experimentalDecorators</code>.</li>
 </ul>
-<h2><a name="1">Class decorators</a></h2>
-<p>Called with the <strong>constructor</strong> function.</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sealed</span>(<span class="hljs-params">ctor: <span class="hljs-built_in">Function</span></span>) </span>{
-  <span class="hljs-built_in">Object</span>.seal(ctor);
-  <span class="hljs-built_in">Object</span>.seal(ctor.prototype);
-}
-
-<span class="hljs-meta">@sealed</span>
-<span class="hljs-keyword">class</span> Greeter {
-  greeting: <span class="hljs-built_in">string</span>;
-  <span class="hljs-comment">// ...</span>
-}
-</code></pre>
-<h2><a name="2">Method and accessor decorators</a></h2>
-<p>Parameters:</p>
-<ol>
-<li>constructor (static member) or prototype (instance member)</li>
-<li>name</li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty">property descriptor</a></li>
-</ol>
-<p>Only one accessor (either the getter or the setter) may be decorated, since the very same decorator would operate on the same member.</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">friendly</span> (<span class="hljs-params">target: <span class="hljs-built_in">any</span>, propertyKey: <span class="hljs-built_in">string</span>, descriptor: PropertyDescriptor</span>) </span>{
-  <span class="hljs-keyword">let</span> oldFn = descriptor.value;
-  descriptor.value = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> oldFn.call(<span class="hljs-built_in">this</span>) + <span class="hljs-string">&#x27;, my friend&#x27;</span>; };
-}
-
-<span class="hljs-keyword">class</span> GreeterBot {
-  greeting: <span class="hljs-built_in">string</span>;
-  <span class="hljs-keyword">constructor</span> (<span class="hljs-params">message: <span class="hljs-built_in">string</span></span>) {
-    <span class="hljs-built_in">this</span>.greeting = message;
+<p>🚀 With the new decorator handling most of this section has been removed and I consider it to be an &quot;advanced&quot; topic;
+feel free to check the <a href="https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators">TS5 decorator announcement</a> for details (or TS docs, should Microsoft update it; as of this writing it still reflects the stage 2 description).</p>
+<h2><a name="1">A method decorator</a></h2>
+<p>We want to add a logger to method calls using decorators.</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">class</span> Person {
+  name: <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span></span>) {
+    <span class="hljs-built_in">this</span>.name = name;
   }
 
-  <span class="hljs-meta">@friendly</span>
-  <span class="hljs-keyword">public</span> greet () {
-    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Hello, &#x27;</span> + <span class="hljs-built_in">this</span>.greeting;
+  <span class="hljs-meta">@logMethod</span>
+  greet() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Hello, my name is <span class="hljs-subst">${<span class="hljs-built_in">this</span>.name}</span>.`</span>);
   }
 }
 
-<span class="hljs-keyword">let</span> rosey = <span class="hljs-keyword">new</span> GreeterBot(<span class="hljs-string">&#x27;Judy&#x27;</span>);
-rosey.greet(); <span class="hljs-comment">// prints &quot;Hello Judy, my friend&quot;</span>
+<span class="hljs-keyword">const</span> ron = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">&#x27;Ron&#x27;</span>);
+ron.greet();
 </code></pre>
-<h2><a name="3">Property and parameter decorators</a></h2>
-<p>🚀 Since es6 class properties are not enumerable, manipulating their descriptors is not exactly trivial.
-  The official examples themselves are relying heavily on the <code>reflect-metadata</code> package (future metadata API polyfill) for easier reflection.</p>
+<p>The decorator (simplified somewhat, addig proper type annotations is not trivial):</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loggedMethod</span>(<span class="hljs-params">originalMethod: <span class="hljs-built_in">any</span>, _context: <span class="hljs-built_in">any</span></span>) </span>{
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">replacementMethod</span>(<span class="hljs-params"><span class="hljs-built_in">this</span>: <span class="hljs-built_in">any</span>, ...args: <span class="hljs-built_in">any</span>[]</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;LOG: Entering method.&#x27;</span>);
+    <span class="hljs-keyword">const</span> result = originalMethod.call(<span class="hljs-built_in">this</span>, ...args);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;LOG: Exiting method.&#x27;</span>);
+    <span class="hljs-keyword">return</span> result;
+  }
+
+  <span class="hljs-keyword">return</span> replacementMethod;
+}
+</code></pre>
+<p>An example <code>bound</code> decorator (for auto binding methods):</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bound</span>(<span class="hljs-params">originalMethod: <span class="hljs-built_in">any</span>, context: ClassMethodDecoratorContext</span>) </span>{
+  <span class="hljs-keyword">const</span> methodName = context.name;
+  <span class="hljs-keyword">if</span> (context.private) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Cannot decorate private properties (<span class="hljs-subst">${methodName <span class="hljs-keyword">as</span> <span class="hljs-built_in">string</span>}</span>).`</span>);
+  context.addInitializer(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    (<span class="hljs-built_in">this</span> <span class="hljs-keyword">as</span> <span class="hljs-built_in">any</span>)[methodName] = (<span class="hljs-built_in">this</span> <span class="hljs-keyword">as</span> <span class="hljs-built_in">any</span>)[methodName].bind(<span class="hljs-built_in">this</span>);
+  });
+}
+</code></pre>
 </div>
     <script src="../../main.js?v=2.0.0"></script>
   </body>
