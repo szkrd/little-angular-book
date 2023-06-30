@@ -1,11 +1,17 @@
 // @import "../../../styles/common";
-
 //@import "/src/styles/mixins";
 @import 'mixins';
 
 :host {
-  //border: 1px solid lime;
-  //@include button-shadow();
-  //@include button-shadow;
+  display: inline-block;
+}
+
+button {
+  display: inline-block;
+  border-radius: 3px;
+  background-color: lightgray;
+  border: 2px outset gray;
+  color: #333;
+  font-weight: bold;
   @include button-shadow();
 }

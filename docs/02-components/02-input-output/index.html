@@ -97,6 +97,13 @@
         <div class="menu-section depth-4">
           ◦
           <a href="#1">
+            @Input decorator options
+          </a>
+        </div>
+        
+        <div class="menu-section depth-4">
+          ◦
+          <a href="#2">
             Inter-component communication
           </a>
         </div>
@@ -136,6 +143,12 @@
       <div class="menu-item depth-3 ">
         ▹
         <a href="../../02-components/04-styles/index.html">Styles</a>
+        
+      </div>
+      
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../../02-components/05-standalone-components/index.html">Standalone components</a>
         
       </div>
       
@@ -272,7 +285,15 @@ ngOnChanges (changes) {
 <li>Or <strong>from the parent class</strong> itself with <code>@ViewChild</code>.</li>
 </ol>
 <p>This technique <em>may</em> be useful during component testing (creating a temporary wrapper component that can manipulate the subject&#39;s internals).</p>
-<h2><a name="1">Inter-component communication</a></h2>
+<h2><a name="1">@Input decorator options</a></h2>
+<ol>
+<li><strong>alias</strong> = <code>@Input(&#39;query&#39;) defaultQuery = &#39;&#39;;</code> or <code>@Input({ alias: &#39;query&#39;}) defaultQuery = &#39;&#39;;</code>,<br>input property aliasing is <a href="https://angular.io/guide/styleguide#style-05-13">NOT recommended</a>
+because two names for one variable may be confusing!</li>
+<li><strong>required</strong> = <code>@Input({ required: true }) text!: string;</code></li>
+<li><strong>transform</strong> = <code>@Input({ transform: toUpper }) text!: string;</code>,<br>transformer functions can only be functions proper, NOT fat arrows!
+not even a plain lodash function would work!<br>So this leaves us with <code>function toUpper(value: string) { return String(value).toUpperCase(); }</code></li>
+</ol>
+<h2><a name="2">Inter-component communication</a></h2>
 <p>Some of the popular approaches:</p>
 <ul>
 <li>via services (subject, behaviour subjects)</li>

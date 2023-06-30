@@ -37,6 +37,17 @@ ngOnChanges (changes) {
 
 This technique _may_ be useful during component testing (creating a temporary wrapper component that can manipulate the subject's internals).
 
+## @Input decorator options
+
+1. **alias** = `@Input('query') defaultQuery = '';` or `@Input({ alias: 'query'}) defaultQuery = '';`,  
+   input property aliasing is [NOT recommended](https://angular.io/guide/styleguide#style-05-13)
+   because two names for one variable may be confusing!
+2. **required** = `@Input({ required: true }) text!: string;`
+3. **transform** = `@Input({ transform: toUpper }) text!: string;`,  
+   transformer functions can only be functions proper, NOT fat arrows!
+   not even a plain lodash function would work!  
+   So this leaves us with `function toUpper(value: string) { return String(value).toUpperCase(); }`
+
 ## Inter-component communication
 
 Some of the popular approaches:

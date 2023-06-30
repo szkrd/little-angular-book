@@ -1,7 +1,6 @@
 # Lifecycle events
 
-:bulb: The most important ones
-are  
+:bulb: The most important ones are  
 **ngOnChanges** :door:, **ngOnInit** :alarm_clock: and **ngOnDestroy** :bomb:!
 
 All events:

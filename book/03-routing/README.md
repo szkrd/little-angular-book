@@ -47,5 +47,7 @@ export class AppRoutingModule {}
 ## Target outlets
 
 - Target slot is `<router-outlet></router-outlet>` in the html template.
-- Multiple outlets may be used (must for a child component)
-- named router outlet: `<router-outlet name="sidebar"></router-outlet>`
+- Multiple outlets may be used (must for a child component).
+- named router outlet: `<router-outlet name="sidebar"></router-outlet>`.
+- :exclamation: your content will be right AFTER (not inside) the `<router-outlet>`,
+  this is [intentional](https://github.com/angular/angular/issues/8529#issuecomment-217718704).

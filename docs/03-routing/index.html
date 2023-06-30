@@ -132,6 +132,12 @@
         
       </div>
       
+      <div class="menu-item depth-3 ">
+        ▹
+        <a href="../02-components/05-standalone-components/index.html">Standalone components</a>
+        
+      </div>
+      
       <div class="menu-item depth-2 selected">
         ▸
         <a href="../03-routing/index.html">Routing</a>
@@ -285,8 +291,10 @@
 <h2><a name="1">Target outlets</a></h2>
 <ul>
 <li>Target slot is <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> in the html template.</li>
-<li>Multiple outlets may be used (must for a child component)</li>
-<li>named router outlet: <code>&lt;router-outlet name=&quot;sidebar&quot;&gt;&lt;/router-outlet&gt;</code></li>
+<li>Multiple outlets may be used (must for a child component).</li>
+<li>named router outlet: <code>&lt;router-outlet name=&quot;sidebar&quot;&gt;&lt;/router-outlet&gt;</code>.</li>
+<li>‼️ your content will be right AFTER (not inside) the <code>&lt;router-outlet&gt;</code>,
+this is <a href="https://github.com/angular/angular/issues/8529#issuecomment-217718704">intentional</a>.</li>
 </ul>
 </div>
     <script src="../main.js?v=2.0.0"></script>
