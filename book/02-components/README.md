@@ -10,3 +10,6 @@ Components should have a clear way of communicating with the outside world (thei
 
 - smart (container) component: component with data model wired in (through store, service, inline ajax etc.), possibly stateful, usable in certain contexts only
 - dumb (presentational) component: communicates through input and output channels, stateless, properly encapsulated, highly reusable
+
+To **g**enerate a **c**omponent (with ng cli): `cd src/app/ && ng g c components/MyButton`  
+(it will create the my-button files in a my-button directory).

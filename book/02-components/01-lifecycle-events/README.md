@@ -24,3 +24,27 @@ class Sample implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy(): void {}
 }
 ```
+
+## Example for init and destroy
+
+Logging a DOM element to the console (on insert, on remove), using a simple directive:
+
+```typescript
+@Directive({ selector: '[appLogDom]' })
+export class LogDomDirective implements OnInit, OnDestroy {
+  constructor(private el: ElementRef) {}
+  ngOnInit() {
+    console.log('element inserted into dom', this.el.nativeElement);
+  }
+  ngOnDestroy() {
+    console.log('element removed from dom', this.el.nativeElement);
+  }
+}
+```
+
+and then use it in a template:
+
+```html
+<p><button (click)="sectionVisible = !sectionVisible">toggle</button></p>
+<p *ngIf="sectionVisible" appLogDom>lorem ipsum</p>
+```

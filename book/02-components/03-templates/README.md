@@ -1,5 +1,13 @@
 # Templates
 
+1. [Raw HTML](./01-raw-html/README.md)
+2. [Data flow](./02-data-flow/README.md)
+3. [Class and style](./03-class-style/README.md)
+4. [Structural directives](./04-structural-directives/README.md)
+5. [Content projectsion (slots)](./05-content-projection/README.md)
+
+---
+
 - `script` tags are not allowed, top level html/body are pointless of course
 - expressions only: `{{userName}}`, `{{1 + 1}}`
   - supports null coalescing operator `{{post?.category}}`

@@ -120,15 +120,29 @@
         
       </div>
       
-      <div class="menu-item depth-4 selected">
+      <div class="menu-item depth-4 ">
         ▪
         <a href="../../../02-components/03-templates/04-structural-directives/index.html">Structural directives</a>
         
       </div>
       
-      <div class="menu-item depth-4 ">
+      <div class="menu-item depth-4 selected">
         ▪
         <a href="../../../02-components/03-templates/05-content-projection/index.html">Content projection (slots)</a>
+        
+        <div class="menu-section depth-5">
+          ◦
+          <a href="#1">
+            Fallback
+          </a>
+        </div>
+        
+        <div class="menu-section depth-5">
+          ◦
+          <a href="#2">
+            Named slots
+          </a>
+        </div>
         
       </div>
       
@@ -247,20 +261,34 @@
       </div>
       
     </div>
-    <div class="markdown-body"><h1 id="structural-directives">Structural directives</h1>
-<p>Only one may be present on an element.</p>
-<ul>
-<li><strong>if</strong>: <code>*ngIf</code></li>
-<li><strong>for</strong>: <code>*ngFor</code><ul>
-<li>the minimum: <code>let tag of tags</code></li>
-<li>extras: <code>let tag of tags; index as i; trackBy: tag.slug;</code>
-(index, first, last, even, odd)</li>
-<li>with observable and async pipe:
-<code>let user of usersObservable | async as users</code></li>
-</ul>
-</li>
-<li><strong>switch</strong>: <code>[ngSwitch]</code> + <code>*ngSwitchCase</code> + <code>*ngSwitchDefault</code></li>
-</ul>
+    <div class="markdown-body"><h1 id="content-projection-slots">Content projection (slots)</h1>
+<p>Simple single slot: <code>&lt;ng-content&gt;&lt;/ng-content&gt;</code></p>
+<p>The <code>ng-content</code> &quot;element&quot; is a pseudo element, it has no dom wrapper, it can not be styled, like a custom element.</p>
+<h2><a name="1">Fallback</a></h2>
+<p>🚀 Fallback is <a href="https://github.com/angular/angular/issues/12530">NOT</a> as simple as putting anything into the <em>ng-content</em> element!;
+one can use dom empty detection (or do the same with CSS <code>:empty</code> of course):</p>
+<ol>
+<li>Reference the slot&#39;s parent with <code>#name</code>,</li>
+<li>then inject value into that element if it&#39;s empty.</li>
+</ol>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> #<span class="hljs-attr">slot</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">ng-content</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-content</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+</code></pre>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;!slot.hasChildNodes()&quot;</span>&gt;</span>default text<span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span>
+</code></pre>
+<h2><a name="2">Named slots</a></h2>
+<p>The <code>ng-container</code> element can use a CSS selector to reference its source:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">app-colored-text</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">tooltip</span>&gt;</span>Great discount! One time offer!<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">text</span>&gt;</span>Buy now<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">app-colored-text</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre>
+<p>The <code>tooltip</code> and the <code>text</code> are plain html attributes, the child can reference them using css selectors:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;tooltip&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">ng-content</span> <span class="hljs-attr">select</span>=<span class="hljs-string">&quot;[tooltip]&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-content</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">ng-content</span> <span class="hljs-attr">select</span>=<span class="hljs-string">&quot;[text]&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-content</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+</code></pre>
+<p>💡 Playing with CSS empty can still be helpful (ie. <code>.tooltip:not(:empty) { display: none; ... }</code><br>and then show it on hover with <code>:host:hover .tooltip { display: block; }</code>).</p>
 </div>
     <script src="../../../main.js?v=2.0.0"></script>
   </body>

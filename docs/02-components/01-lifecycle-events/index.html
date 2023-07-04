@@ -88,6 +88,13 @@
         ▹
         <a href="../../02-components/01-lifecycle-events/index.html">Lifecycle events</a>
         
+        <div class="menu-section depth-4">
+          ◦
+          <a href="#1">
+            Example for init and destroy
+          </a>
+        </div>
+        
       </div>
       
       <div class="menu-item depth-3 ">
@@ -123,6 +130,12 @@
       <div class="menu-item depth-4 ">
         ▪
         <a href="../../02-components/03-templates/04-structural-directives/index.html">Structural directives</a>
+        
+      </div>
+      
+      <div class="menu-item depth-4 ">
+        ▪
+        <a href="../../02-components/03-templates/05-content-projection/index.html">Content projection (slots)</a>
         
       </div>
       
@@ -264,6 +277,23 @@
   ngOnChanges(changes: SimpleChanges): <span class="hljs-built_in">void</span> {}
   ngOnDestroy(): <span class="hljs-built_in">void</span> {}
 }
+</code></pre>
+<h2><a name="1">Example for init and destroy</a></h2>
+<p>Logging a DOM element to the console (on insert, on remove), using a simple directive:</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@Directive</span>({ selector: <span class="hljs-string">&#x27;[appLogDom]&#x27;</span> })
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> LogDomDirective <span class="hljs-keyword">implements</span> OnInit, OnDestroy {
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> el: ElementRef</span>) {}
+  ngOnInit() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;element inserted into dom&#x27;</span>, <span class="hljs-built_in">this</span>.el.nativeElement);
+  }
+  ngOnDestroy() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;element removed from dom&#x27;</span>, <span class="hljs-built_in">this</span>.el.nativeElement);
+  }
+}
+</code></pre>
+<p>and then use it in a template:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;sectionVisible = !sectionVisible&quot;</span>&gt;</span>toggle<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;sectionVisible&quot;</span> <span class="hljs-attr">appLogDom</span>&gt;</span>lorem ipsum<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 </code></pre>
 </div>
     <script src="../../main.js?v=2.0.0"></script>
