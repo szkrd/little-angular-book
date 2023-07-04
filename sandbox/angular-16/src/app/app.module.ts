@@ -9,6 +9,7 @@ import { ButtonComponent } from './components/button/button.component';
 import {StandaloneButtonComponent} from "./components/standalone-button/standalone-button.component";
 import {ColoredTextComponent} from "./components/standalone-button/colored-text/colored-text.component";
 import { LogDomDirective } from './directives/log-dom.directive';
+import { ForRangePipe } from './pipes/for-range.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { LogDomDirective } from './directives/log-dom.directive';
     ProfilePageComponent,
     ButtonComponent,
     LogDomDirective,
+    ForRangePipe,
   ],
   imports: [BrowserModule, AppRoutingModule, StandaloneButtonComponent, ColoredTextComponent],
   providers: [],

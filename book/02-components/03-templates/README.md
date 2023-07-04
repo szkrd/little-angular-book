@@ -5,6 +5,7 @@
 3. [Class and style](./03-class-style/README.md)
 4. [Structural directives](./04-structural-directives/README.md)
 5. [Content projectsion (slots)](./05-content-projection/README.md)
+6. [Pipes](./06-pipes/README.md)
 
 ---
 

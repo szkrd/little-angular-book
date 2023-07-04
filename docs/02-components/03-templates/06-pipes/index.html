@@ -132,7 +132,7 @@
         
       </div>
       
-      <div class="menu-item depth-4 ">
+      <div class="menu-item depth-4 selected">
         ▪
         <a href="../../../02-components/03-templates/06-pipes/index.html">Pipes</a>
         
@@ -198,7 +198,7 @@
         
       </div>
       
-      <div class="menu-item depth-4 selected">
+      <div class="menu-item depth-4 ">
         ▪
         <a href="../../../04-dependency-injection/03-providers/02-factory-provider/index.html">Factory provider</a>
         
@@ -253,33 +253,26 @@
       </div>
       
     </div>
-    <div class="markdown-body"><h1 id="factory-provider">Factory provider</h1>
-<p>Sometimes the class we want to inject needs to have its own parameters.</p>
-<p>For example I have a cache interceptor that can work with multiple backends (like a web storage service):</p>
-<pre class="hljs"><code class="language-typescript">providers: [
-  RepoService,
-  IssueService,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useFactory: <span class="hljs-function">() =&gt;</span> {
-      <span class="hljs-keyword">const</span> sessionStorage = <span class="hljs-keyword">new</span> SessionStorageService(); <span class="hljs-comment">// depth -2</span>
-      <span class="hljs-keyword">const</span> httpCacheBackend = <span class="hljs-keyword">new</span> StorageCacheService(sessionStorage); <span class="hljs-comment">// depth -1</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> HttpGetCacheInterceptor(httpCacheBackend); <span class="hljs-comment">// depth 0</span>
-    },
-    multi: <span class="hljs-literal">true</span>,
-  },
-];
+    <div class="markdown-body"><h1 id="pipes">Pipes</h1>
+<p>Builtin pipes:</p>
+<ul>
+<li>date: <code>{{1688476095982 | date:&#39;YYYY-MM-dd EEEE&#39; }}</code> = <em>2023-07-04 Tuesday</em> (<a href="https://angular.io/api/common/DatePipe#usage-notes">options</a>)</li>
+<li>uppercase: <code>{{&#39;foo bar&#39; | uppercase }}</code> = <em>FOO BAR</em></li>
+<li>lowercase: <code>{{&#39;FOO BAR&#39; | lowercase }}</code> = <em>foo bar</em></li>
+<li>currency: <code>{{15000000 | currency:&#39;HUF&#39; }}</code> = <em>HUF15,000,000.00</em> (which is wrong)</li>
+<li>decimal: <code>{{15000000.12345 | number }}</code> = <em>15,000,000.123</em> (<a href="https://angular.io/api/common/DecimalPipe#digitsinfo">options</a>)</li>
+<li>percent: <code>{{0.99 | percent}}</code> = <em>99%</em></li>
+<li>async: <code>{{userName$ | async}}</code> with a minimal observable that sets the username to <em>John Doe</em> in 2 seconds:<br><code>userName$ = new Observable((obs) =&gt; { setTimeout(() =&gt; obs.next(&#39;John Doe&#39;), 2000); });</code><br>(with the async pipe, unsubscribe happens automatically).</li>
+</ul>
+<p>A simple pipe with no parameters to emulate a <code>for</code> loop (created with <code>ng g pipe pipes/ForRange</code>):</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@Pipe</span>({ name: <span class="hljs-string">&#x27;forRange&#x27;</span> })
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> ForRangePipe <span class="hljs-keyword">implements</span> PipeTransform {
+  transform(value: unknown, ...args: unknown[]): Iterable&lt;<span class="hljs-built_in">number</span>&gt; {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-built_in">parseInt</span>(<span class="hljs-built_in">String</span>(value ?? <span class="hljs-number">0</span>), <span class="hljs-number">10</span>)).fill(<span class="hljs-string">&#x27;&#x27;</span>).map(<span class="hljs-function">(<span class="hljs-params">val, idx</span>) =&gt;</span> idx);
+  }
+}
 </code></pre>
-<p>(The <code>multi</code> property is only useful for interceptors.)</p>
-<p>A factory may have its (injectable) dependencies too - while the above is a bit convoluted, here&#39;s a simpler example:</p>
-<pre class="hljs"><code class="language-typescript">[
-  {
-    provide: PollService,
-    useFactory: <span class="hljs-function">(<span class="hljs-params">logger: Logger</span>) =&gt;</span> <span class="hljs-keyword">new</span> PollService(logger),
-    deps: [Logger],
-  },
-];
-</code></pre>
+<p>Usage: <code>&lt;span *ngFor=&quot;let i of 10 | forRange&quot;&gt;⭐&lt;/span&gt;</code> - prints 10 stars.</p>
 </div>
     <script src="../../../main.js?v=2.0.0"></script>
   </body>

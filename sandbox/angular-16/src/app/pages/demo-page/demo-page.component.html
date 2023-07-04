@@ -2,3 +2,23 @@
 <p>App button: <app-button text="OK" /> Plain button: <button>OK</button></p>
 <p><app-button [text]="'toggle paragraph'" (click)="sectionVisible = !sectionVisible" /></p>
 <p appLogDom *ngIf="sectionVisible">Standalone button: <app-standalone-button /></p>
+
+<!--https://angular.io/api/common/DatePipe#usage-notes-->
+<!--https://angular.io/api/common/DecimalPipe#digitsinfo-->
+<p>
+  Date {{1688476095982 | date:'YYYY-MM-dd EEEE' }}
+  <br>
+  {{'foo bar' | uppercase }}
+  <br>
+  {{'FOO BAR' | lowercase }}
+  <br>
+  {{15000000 | currency:'HUF' }}
+  <br>
+  {{15000000.12345 | number }}
+  <br>
+  {{0.99 | percent}}
+  <br>
+  {{userName$ | async}}
+  <br>
+  <span *ngFor="let i of 10 | forRange">⭐</span>
+</p>
