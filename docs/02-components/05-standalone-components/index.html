@@ -255,14 +255,20 @@
     </div>
     <div class="markdown-body"><h1 id="standalone-components">Standalone components</h1>
 <ul>
+<li>Requires version 14 or newer; docs are <a href="https://angular.io/guide/standalone-components">here</a>,
+and there&#39;s a good <a href="https://netbasal.com/angular-standalone-components-welcome-to-a-world-without-ngmodule-abd3963e89c5">tutorial</a>
+for a fully standalone component based app.</li>
+<li>In the <code>@Component</code> decorator use <code>standalone: true</code>.</li>
 <li>If the project is not a fully standalone component based one, then you can skip the declaration in <code>@NgModule</code>,
 but NOT the <code>imports:</code> part (in <em>app.module.ts</em>).</li>
 <li>Use <code>imports: []</code> in the decorator for child component dependencies.</li>
 </ul>
 <p>Use ng cli to generate a standalone component: <code>ng g c components/standalone-button/colored-text --standalone</code><br>(params for all in one file: <code>--inline-style</code> <code>--inline-template</code> and <code>--skip-tests</code>).</p>
-<p>TODO</p>
-<p><a href="https://angular.io/guide/standalone-components">https://angular.io/guide/standalone-components</a></p>
-<p><a href="https://netbasal.com/angular-standalone-components-welcome-to-a-world-without-ngmodule-abd3963e89c5">https://netbasal.com/angular-standalone-components-welcome-to-a-world-without-ngmodule-abd3963e89c5</a></p>
+<p>The providers will need to be added to <em>main.ts</em> (routes is the same old route definition we used before):</p>
+<pre class="hljs"><code class="language-typescript">bootstrapApplication(AppComponent, {
+  providers: [provideRouter(routes), provideHttpClient()],
+}).catch(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> <span class="hljs-built_in">console</span>.error(err));
+</code></pre>
 </div>
     <script src="../../main.js?v=2.0.0"></script>
   </body>
