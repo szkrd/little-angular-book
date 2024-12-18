@@ -235,15 +235,23 @@
 </ul>
 </li>
 <li>bound properties must be <em>public</em> in the class (see <a href="https://github.com/angular/angular-cli/issues/5621#issuecomment-290896552">here</a>)</li>
-<li>referencing: <code>&lt;input #username&gt; {{username.value}}</code></li>
+<li>referencing: <code>&lt;input #username&gt; {{username.value}}</code><br>referencing in the class:  <pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">&#x27;username&#x27;</span>)
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> usernameInputRef: ElementRef&lt;HTMLInputElement&gt;;</code></pre>
+</li>
 <li>data flow and binding:<ul>
 <li>box, banana, banana in a box  </li>
 <li><code>[attr/prop]</code>, <code>(event)</code>, <code>[(two-way)]</code></li>
 </ul>
 </li>
-<li>class and style:<ul>
-<li><code>[class]</code>, <code>[class.foo]</code>, <code>[style]</code>, <code>[style.width.%]</code></li>
-<li><code>[ngClass]</code>, <code>[ngStyle]</code></li>
+<li>class, style, attr:<ul>
+<li><code>[class]</code>, <code>[class.foo]</code>,<br>
+ <code>[class]=&quot;isOpen ? &#39;far fa-minus-square&#39; : &#39;far fa-plus-square&#39;&quot;</code>,<br>
+ <code>[class]=&quot;[&#39;pill&#39;, &#39;pill-&#39; + name]&quot;</code>,<br>
+ <code>[class]=&quot;{&#39;hidden&#39;: !isVisible, &#39;expanded&#39;: isExpanded}&quot;</code></li>
+<li><code>[style]</code>, <code>[style.width.%]</code>, <code>[style.width.px]</code></li>
+<li><code>[attr.colspan]=&quot;colCount&quot;</code>, <code>[attr.disabled]=&quot;!canSubmit&quot;</code></li>
+<li><code>[ngClass]</code>, <code>[ngStyle]</code> = classic directive, 👴 <a href="https://github.com/angular/angular/pull/58860">probably will be</a>
+ <a href="https://angular.schule/blog/2024-11-ngclass-ngstyle">deprecated</a></li>
 </ul>
 </li>
 <li>structural directives: <code>*ngIf</code>, <code>*ngFor</code>, <code>*ngSwitch</code></li>

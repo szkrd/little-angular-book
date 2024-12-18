@@ -37,4 +37,5 @@ I (as the omnipotent narrator) will try to keep my snarky comments out of this b
 - :question: - questionable statement
 - :exclamation: - notice or warning
 - :bomb: - bad idea
+- :older_man: - deprecation
 
