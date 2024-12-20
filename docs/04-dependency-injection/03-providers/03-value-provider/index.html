@@ -238,37 +238,37 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="value-provider">Value provider</h1>
+<div class="markdown-body"><h1>Value provider</h1>
 <p>Here&#39;s the previous example, but with a value, not a wrapper class.</p>
 <p>Since this is not a class, we&#39;re not instanciating anything this time.</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> {MarkedOptions, parse} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;marked&#x27;</span>;
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">MarkedOptions</span>, parse} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;marked&#x27;</span>;
 
-<span class="hljs-keyword">type</span> MarkedParser = <span class="hljs-function">(<span class="hljs-params">src: <span class="hljs-built_in">string</span>, options?: MarkedOptions</span>) =&gt;</span> <span class="hljs-built_in">string</span>;
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">MarkedParser</span> = <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">src</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">options</span>?: <span class="hljs-title class_">MarkedOptions</span></span>) =&gt;</span> <span class="hljs-built_in">string</span>;
 
 <span class="hljs-meta">@Directive</span>({
-  selector: <span class="hljs-string">&#x27;[appMarkdown]&#x27;</span>,
-  providers: [
-    { provide: <span class="hljs-string">&#x27;toMarkdown&#x27;</span>, useValue: parse } <span class="hljs-comment">// &lt;-- !!</span>
+  <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;[appMarkdown]&#x27;</span>,
+  <span class="hljs-attr">providers</span>: [
+    { <span class="hljs-attr">provide</span>: <span class="hljs-string">&#x27;toMarkdown&#x27;</span>, <span class="hljs-attr">useValue</span>: parse } <span class="hljs-comment">// &lt;-- !!</span>
   ]
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MarkdownDirective <span class="hljs-keyword">implements</span> OnChanges, OnInit {
-  toMarkdown: MarkedParser;
-  <span class="hljs-meta">@Input</span>(<span class="hljs-string">&#x27;appMarkdown&#x27;</span>) text: <span class="hljs-built_in">string</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MarkdownDirective</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnChanges</span>, <span class="hljs-title class_">OnInit</span> {
+  <span class="hljs-attr">toMarkdown</span>: <span class="hljs-title class_">MarkedParser</span>;
+  <span class="hljs-meta">@Input</span>(<span class="hljs-string">&#x27;appMarkdown&#x27;</span>) <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;
 
-  <span class="hljs-keyword">constructor</span>(<span class="hljs-params">
-    <span class="hljs-keyword">private</span> el: ElementRef,
-    <span class="hljs-meta">@Inject</span>(<span class="hljs-string">&#x27;toMarkdown&#x27;</span>) toMarkdown: MarkedParser <span class="hljs-comment">// &lt;-- !!</span>
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">
+    <span class="hljs-keyword">private</span> <span class="hljs-attr">el</span>: <span class="hljs-title class_">ElementRef</span>,
+    <span class="hljs-meta">@Inject</span>(<span class="hljs-string">&#x27;toMarkdown&#x27;</span>) <span class="hljs-attr">toMarkdown</span>: <span class="hljs-title class_">MarkedParser</span> <span class="hljs-comment">// &lt;-- !!</span>
   </span>) {
-    <span class="hljs-built_in">this</span>.toMarkdown = toMarkdown;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">toMarkdown</span> = toMarkdown;
   }
-
+  
   <span class="hljs-comment">// ...</span>
-}</code></pre>
-<p>The &quot;toMarkdown&quot; id is a string (but we could&#39;ve used anything else with the provide property).</p>
+}
+</code></pre><p>The &quot;toMarkdown&quot; id is a string (but we could&#39;ve used anything else with the provide property).</p>
 <p>To avoid name collisions one may use a unique value - the recommended wrapper is the <code>InjectionToken</code> (its previous version, the OpaqueToken, has been deprecated) class:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">const</span> injectableId = <span class="hljs-keyword">new</span> InjectionToken&lt;MarkedParser&gt;(<span class="hljs-string">&#x27;toMarkDown&#x27;</span>);</code></pre>
-<p>Then use the &quot;symbolish&quot; id in <code>@Inject(injectableId)</code>.</p>
-<p>💣 For some reason Symbol as an id doesn&#39;t work with Angular 5, though it clearly should. This may be a <a href="https://github.com/angular/angular/issues/12082">regression</a>.</p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">const</span> injectableId = <span class="hljs-keyword">new</span> <span class="hljs-title class_">InjectionToken</span>&lt;<span class="hljs-title class_">MarkedParser</span>&gt;(<span class="hljs-string">&#x27;toMarkDown&#x27;</span>);
+</code></pre><p>Then use the &quot;symbolish&quot; id in <code>@Inject(injectableId)</code>.</p>
+<p>:bomb: For some reason Symbol as an id doesn&#39;t work with Angular 5, though it clearly should. This may be a <a href="https://github.com/angular/angular/issues/12082">regression</a>.</p>
 </div>
 <script src="../../../main.js?v=2.0.0"></script>
 </body>

@@ -287,7 +287,7 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="typescript">TypeScript</h1>
+<div class="markdown-body"><h1>TypeScript</h1>
 <ol>
 <li><a href="../01-typescript/01-basic-types/index.html">Basic types</a></li>
 <li><a href="../01-typescript/02-classes-interfaces/index.html">Classes and interfaces</a></li>
@@ -298,16 +298,16 @@
 <li><a href="../01-typescript/07-generics/index.html">Generics</a></li>
 </ol>
 <p>Angular uses TypeScript. While you can omit all type definitions, trying to ignore TS (not including it in an angular project) and going all js would not be a good idea.</p>
-<p>💡 Angular devs wanted to create another language on top of javascript, because they needed to rely heavily on code annotations (decorators, hence the @ naming) which are not yet part of the js spec. Fortunately TS decided to add decorator support and Angular went with TypeScript.</p>
+<p>:bulb: Angular devs wanted to create another language on top of javascript, because they needed to rely heavily on code annotations (decorators, hence the @ naming) which are not yet part of the js spec. Fortunately TS decided to add decorator support and Angular went with TypeScript.</p>
 <h2><a name="1">What is TypeScript</a></h2>
 <p>TypeScript (TS) is a strict <strong>syntactical superset</strong> of JavaScript, and adds <strong>optional static typing</strong> to the language.</p>
 <p>Syntactical superset means that the TS compiler will <strong>not</strong> transpile your code to ES5 or add polyfills for ES6/7 so if you are using object spread for example (<code>{...}</code>) and the target browser does not support object spread then you <strong>must</strong> transpile your code (probably with Babel or Bublé).</p>
 <p>TS feels like a bridge between java and javascript and it is rather close to the failed and forgotten <strong>ES4</strong> (or ActionScript / <strong>AS3</strong>) - the type system is optional and noone stops you from using functional concepts if you prefer those (though some people would argue that the class system and the philosophy around types is a deviation from the functional nature of the language).</p>
-<p>💡 Anders Hejlsberg, grand daddy of Turbo Pascal, Delphi and C#, is the lead architect of TypeScript.</p>
+<p>:bulb: Anders Hejlsberg, grand daddy of Turbo Pascal, Delphi and C#, is the lead architect of TypeScript.</p>
 <h2><a name="2">Keeping your code clean: linting</a></h2>
 <ul>
 <li>Coding style should be enforced by a linter. Use <strong>tslint</strong> for TS.</li>
-<li>eslint <em>may</em> work to a certain extent with babel parser or typescript eslint parser. ❓</li>
+<li>eslint <em>may</em> work to a certain extent with babel parser or typescript eslint parser. :question:</li>
 <li><code>tslint:recommended</code> seems to be a sane default, but it feels different from the standard/semistandard world.</li>
 <li><code>&quot;extends&quot;: &quot;tslint-config-semistandard&quot;</code> works, but feels out of place and triggers warnings during script execution (unrelated to the code itself).</li>
 </ul>
@@ -315,7 +315,7 @@
 <p>Don&#39;t forget to use target <code>es6</code> in tsconfig (es5 target will break with es6 language features, like <code>Set</code> for example) -
 <code>@types/es6-shim</code> and <code>es6-shim</code> will <a href="https://github.com/Microsoft/TypeScript/issues/6842">not help</a>.</p>
 <p>If you want <code>array.includes</code> for example, then add the es7 option to tsconfig (<code>lib: [&#39;es7&#39;]</code>)</p>
-<p>💡 ES7 has <code>array.includes</code> and the exponentiation operator (<code>**</code>, Math.pow).</p>
+<p>:bulb: ES7 has <code>array.includes</code> and the exponentiation operator (<code>**</code>, Math.pow).</p>
 <h2><a name="4">External dependencies, type definitions</a></h2>
 <p>If you are using 3rd party libraries then you will have to interface with them somehow (or at least let the TS compiler know about those interfaces). Use <a href="http://definitelytyped.org/">Definitely Typed</a> to find and then install (<code>npm install --save @types/foo</code>) type definitions.</p>
 <p>For example the <code>TS7026: JSX element implicitly has type &#39;any&#39; because no interface &#39;JSX.IntrinsicElements&#39; exists.</code> error means just that (and may be solved with <code>npm i -S @types/react @types/react-dom</code>). This may sound optional, but for tsc this is <strong>not</strong>.</p>

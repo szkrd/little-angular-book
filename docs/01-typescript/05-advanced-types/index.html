@@ -266,7 +266,7 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="advanced-types">Advanced types</h1>
+<div class="markdown-body"><h1>Advanced types</h1>
 <ul>
 <li>intersection (&amp;) and union (|)</li>
 <li>runtime type guards (is)</li>
@@ -282,65 +282,65 @@
 <li>unlike interfaces type aliases are just aliases, they have no &quot;real names&quot; (for example in error messages)</li>
 <li>they can&#39;t be implemented or extended (if possible, try to use interfaces)</li>
 </ul>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">type</span> Name = <span class="hljs-built_in">string</span>;
-<span class="hljs-keyword">type</span> Box&lt;T&gt; = { value: T };
-<span class="hljs-keyword">type</span> LinkedList&lt;T&gt; = T &amp; { next: LinkedList&lt;T&gt; };
-<span class="hljs-keyword">type</span> Easing = <span class="hljs-string">&#x27;ease-in&#x27;</span> | <span class="hljs-string">&#x27;ease-out&#x27;</span> | <span class="hljs-string">&#x27;ease-in-out&#x27;</span> | <span class="hljs-string">&#x27;linear&#x27;</span>;
-<span class="hljs-keyword">type</span> Truthy = <span class="hljs-string">&#x27;enabled&#x27;</span> | <span class="hljs-string">&#x27;yes&#x27;</span> | <span class="hljs-string">&#x27;ok&#x27;</span> | <span class="hljs-string">&#x27;on&#x27;</span> | <span class="hljs-string">&#x27;true&#x27;</span>;
-<span class="hljs-keyword">type</span> DiceRoll = <span class="hljs-number">1</span> | <span class="hljs-number">2</span> | <span class="hljs-number">3</span> | <span class="hljs-number">4</span> | <span class="hljs-number">5</span> | <span class="hljs-number">6</span>;
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">type</span> <span class="hljs-title class_">Name</span> = <span class="hljs-built_in">string</span>;
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">Box</span>&lt;T&gt; = { <span class="hljs-attr">value</span>: T };
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">LinkedList</span>&lt;T&gt; = T &amp; { <span class="hljs-attr">next</span>: <span class="hljs-title class_">LinkedList</span>&lt;T&gt; };
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">Easing</span> = <span class="hljs-string">&#x27;ease-in&#x27;</span> | <span class="hljs-string">&#x27;ease-out&#x27;</span> | <span class="hljs-string">&#x27;ease-in-out&#x27;</span> | <span class="hljs-string">&#x27;linear&#x27;</span>;
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">Truthy</span> = <span class="hljs-string">&#x27;enabled&#x27;</span> | <span class="hljs-string">&#x27;yes&#x27;</span> | <span class="hljs-string">&#x27;ok&#x27;</span> | <span class="hljs-string">&#x27;on&#x27;</span> | <span class="hljs-string">&#x27;true&#x27;</span>;
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">DiceRoll</span> = <span class="hljs-number">1</span> | <span class="hljs-number">2</span> | <span class="hljs-number">3</span> | <span class="hljs-number">4</span> | <span class="hljs-number">5</span> | <span class="hljs-number">6</span>;
 
-<span class="hljs-keyword">let</span> rolled: DiceRoll = <span class="hljs-number">9</span>; <span class="hljs-comment">// TS will mark this as an invalid assignment</span></code></pre>
-<h2><a name="2">Intersection (&amp;) and union (|)</a></h2>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">rolled</span>: <span class="hljs-title class_">DiceRoll</span> = <span class="hljs-number">9</span>; <span class="hljs-comment">// TS will mark this as an invalid assignment</span>
+</code></pre><h2><a name="2">Intersection (&amp;) and union (|)</a></h2>
 <ul>
 <li><code>T &amp; U</code> = contains props from both T and U (useful for extends and mixins)</li>
 <li><code>id: string | number</code> = &quot;either or&quot; (useful for function signatures)</li>
 </ul>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">extend</span>&lt;<span class="hljs-title">T</span>, <span class="hljs-title">U</span>&gt; (<span class="hljs-params">a: T, b: U</span>): <span class="hljs-title">T</span> &amp; <span class="hljs-title">U</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, a, b); }
-<span class="hljs-keyword">let</span> foo = { foo: <span class="hljs-number">1</span>, qux: <span class="hljs-number">2</span> };
-<span class="hljs-keyword">let</span> bar = { bar: <span class="hljs-number">1</span> };
-<span class="hljs-keyword">let</span> baz = extend(foo, bar);</code></pre>
-<p>This is a bit like overloading, but with the returning type we have less granularity.</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">let</span> multiply = (source: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>, times: <span class="hljs-built_in">number</span> = <span class="hljs-number">1</span>): <span class="hljs-function"><span class="hljs-params">any</span> =&gt;</span> {
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">function</span> extend&lt;T, U&gt; (<span class="hljs-attr">a</span>: T, <span class="hljs-attr">b</span>: U): T &amp; U { <span class="hljs-keyword">return</span> <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">assign</span>({}, a, b); }
+<span class="hljs-keyword">let</span> foo = { <span class="hljs-attr">foo</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">qux</span>: <span class="hljs-number">2</span> };
+<span class="hljs-keyword">let</span> bar = { <span class="hljs-attr">bar</span>: <span class="hljs-number">1</span> };
+<span class="hljs-keyword">let</span> baz = <span class="hljs-title function_">extend</span>(foo, bar);
+</code></pre><p>This is a bit like overloading, but with the returning type we have less granularity.</p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">let</span> multiply = (<span class="hljs-attr">source</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>, <span class="hljs-attr">times</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">1</span>): <span class="hljs-function"><span class="hljs-params">any</span> =&gt;</span> {
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> source === <span class="hljs-string">&#x27;number&#x27;</span>) {
     <span class="hljs-keyword">return</span> source * times;
   }
-  <span class="hljs-keyword">return</span> (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(times)).fill(source).join(<span class="hljs-string">&#x27;&#x27;</span>);
+  <span class="hljs-keyword">return</span> (<span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(times)).<span class="hljs-title function_">fill</span>(source).<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;&#x27;</span>);
 };
 
-<span class="hljs-keyword">let</span> x: <span class="hljs-built_in">string</span> = multiply(<span class="hljs-string">&#x27;ho&#x27;</span>, <span class="hljs-number">3</span>);
-<span class="hljs-keyword">let</span> y: <span class="hljs-built_in">number</span> = multiply(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-attr">x</span>: <span class="hljs-built_in">string</span> = <span class="hljs-title function_">multiply</span>(<span class="hljs-string">&#x27;ho&#x27;</span>, <span class="hljs-number">3</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-attr">y</span>: <span class="hljs-built_in">number</span> = <span class="hljs-title function_">multiply</span>(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>);
 
-assert.equal(x + y, <span class="hljs-string">&#x27;hohoho25&#x27;</span>);</code></pre>
-<h2><a name="3">Nullables with strictNullChecks</a></h2>
+assert.<span class="hljs-title function_">equal</span>(x + y, <span class="hljs-string">&#x27;hohoho25&#x27;</span>);
+</code></pre><h2><a name="3">Nullables with strictNullChecks</a></h2>
 <ul>
 <li><code>strictNullChecks</code> enabled will disallow assigning null and undefined, unless explicitly allowed</li>
 <li>One can disable null guard with the ! postfix (only with strictNullChecks enabled)</li>
 </ul>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">let</span> foo = <span class="hljs-string">&#x27;bar&#x27;</span>;
-<span class="hljs-keyword">let</span> name: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>;
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">let</span> foo = <span class="hljs-string">&#x27;bar&#x27;</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>;
 
 foo = <span class="hljs-literal">null</span>; <span class="hljs-comment">// not allowed with strictNullChecks</span>
 name = <span class="hljs-literal">null</span>; <span class="hljs-comment">// we did let null to be assigned</span>
 
 <span class="hljs-keyword">interface</span> X {
-  a: <span class="hljs-built_in">number</span>;
-  b?: <span class="hljs-built_in">number</span>; <span class="hljs-comment">// same as `number | undefined`</span>
-}</code></pre>
-<h2><a name="4">Type guards</a></h2>
-<p>🚀 Writing better typechecks with the &quot;is&quot; keyword:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> Fish { swim: <span class="hljs-built_in">boolean</span>; name: <span class="hljs-built_in">string</span>; }
-<span class="hljs-keyword">interface</span> Bird { fly: <span class="hljs-built_in">boolean</span>; name: <span class="hljs-built_in">string</span>; }
+  <span class="hljs-attr">a</span>: <span class="hljs-built_in">number</span>;
+  <span class="hljs-attr">b</span>?: <span class="hljs-built_in">number</span>; <span class="hljs-comment">// same as `number | undefined`</span>
+}
+</code></pre><h2><a name="4">Type guards</a></h2>
+<p>:rocket: Writing better typechecks with the &quot;is&quot; keyword:</p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Fish</span> { <span class="hljs-attr">swim</span>: <span class="hljs-built_in">boolean</span>; <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>; }
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Bird</span> { <span class="hljs-attr">fly</span>: <span class="hljs-built_in">boolean</span>; <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>; }
 
-<span class="hljs-keyword">let</span> myBird: Bird = { name: <span class="hljs-string">&#x27;Tweetie&#x27;</span>, fly: <span class="hljs-literal">true</span> };
-<span class="hljs-keyword">let</span> myFish: Fish = { name: <span class="hljs-string">&#x27;Wanda&#x27;</span>, swim: <span class="hljs-literal">true</span> };
+<span class="hljs-keyword">let</span> <span class="hljs-attr">myBird</span>: <span class="hljs-title class_">Bird</span> = { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Tweetie&#x27;</span>, <span class="hljs-attr">fly</span>: <span class="hljs-literal">true</span> };
+<span class="hljs-keyword">let</span> <span class="hljs-attr">myFish</span>: <span class="hljs-title class_">Fish</span> = { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Wanda&#x27;</span>, <span class="hljs-attr">swim</span>: <span class="hljs-literal">true</span> };
 <span class="hljs-keyword">let</span> pets = [ myBird, myFish ];
 
 <span class="hljs-comment">//                                  item is Type</span>
 <span class="hljs-comment">//                                       ↓</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isFish</span> (<span class="hljs-params">pet: Fish | Bird</span>): <span class="hljs-title">pet</span> <span class="hljs-title">is</span> <span class="hljs-title">Fish</span> </span>{
-  <span class="hljs-keyword">return</span> (pet <span class="hljs-keyword">as</span> Fish).swim !== <span class="hljs-literal">undefined</span>;
-}</code></pre>
-</div>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">isFish</span> (<span class="hljs-params"><span class="hljs-attr">pet</span>: <span class="hljs-title class_">Fish</span> | <span class="hljs-title class_">Bird</span></span>): pet is <span class="hljs-title class_">Fish</span> {
+  <span class="hljs-keyword">return</span> (pet <span class="hljs-keyword">as</span> <span class="hljs-title class_">Fish</span>).<span class="hljs-property">swim</span> !== <span class="hljs-literal">undefined</span>;
+}
+</code></pre></div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>
 </html>

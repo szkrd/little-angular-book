@@ -252,98 +252,98 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="templates">Templates</h1>
+<div class="markdown-body"><h1>Templates</h1>
 <h2><a name="1">Standalone service</a></h2>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> { TestBed } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core/testing&#x27;</span>;
-<span class="hljs-keyword">import</span> { FooBarService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./foo-bar.service&#x27;</span>;
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">TestBed</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core/testing&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">FooBarService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./foo-bar.service&#x27;</span>;
 
-describe(<span class="hljs-string">&#x27;FooBarService&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
-    <span class="hljs-keyword">let</span> loggerServiceMock: jasmine.SpyObj&lt;LoggerService&gt;;
+<span class="hljs-title function_">describe</span>(<span class="hljs-string">&#x27;FooBarService&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">let</span> <span class="hljs-attr">loggerServiceMock</span>: jasmine.<span class="hljs-property">SpyObj</span>&lt;<span class="hljs-title class_">LoggerService</span>&gt;;
 
-    beforeEach(<span class="hljs-function">() =&gt;</span> {
-        loggerServiceMock = jasmine.createSpyObj&lt;LoggerService&gt;(<span class="hljs-string">&#x27;LoggerService&#x27;</span>, [<span class="hljs-string">&#x27;error&#x27;</span>]);
+    <span class="hljs-title function_">beforeEach</span>(<span class="hljs-function">() =&gt;</span> {
+        loggerServiceMock = jasmine.<span class="hljs-property">createSpyObj</span>&lt;<span class="hljs-title class_">LoggerService</span>&gt;(<span class="hljs-string">&#x27;LoggerService&#x27;</span>, [<span class="hljs-string">&#x27;error&#x27;</span>]);
 
-        TestBed.configureTestingModule({
-            providers: [
-                FooBarService,
-                { provide: LoggerService, useValue: loggerServiceMock },
+        <span class="hljs-title class_">TestBed</span>.<span class="hljs-title function_">configureTestingModule</span>({
+            <span class="hljs-attr">providers</span>: [
+                <span class="hljs-title class_">FooBarService</span>,
+                { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">LoggerService</span>, <span class="hljs-attr">useValue</span>: loggerServiceMock },
             ],
         });
     });
 
-    it(<span class="hljs-string">&#x27;should create&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;should create&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
         <span class="hljs-comment">// Assert</span>
-        expect(service).toBeInstanceOf(FooBarService);
+        <span class="hljs-title function_">expect</span>(service).<span class="hljs-title function_">toBeInstanceOf</span>(<span class="hljs-title class_">FooBarService</span>);
     });
 
-    describe(<span class="hljs-string">&#x27;something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
-        it(<span class="hljs-string">&#x27;should do something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">describe</span>(<span class="hljs-string">&#x27;something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;should do something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
             <span class="hljs-comment">// Arrange</span>
             <span class="hljs-comment">// Act</span>
             <span class="hljs-comment">// Assert</span>
-            expect(<span class="hljs-number">1</span>).toBe(<span class="hljs-number">1</span>);
+            <span class="hljs-title function_">expect</span>(<span class="hljs-number">1</span>).<span class="hljs-title function_">toBe</span>(<span class="hljs-number">1</span>);
         });
     });
-});</code></pre>
-<h2><a name="2">Standalone component</a></h2>
+});
+</code></pre><h2><a name="2">Standalone component</a></h2>
 <ul>
 <li>Since Angular 19 all components will be (are) standalone by default, the <code>standalone: true</code> can be omitted then.</li>
 <li>With <code>componentRef.setInput</code> there is no more need for a wrapper component.</li>
 </ul>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> { ChangeDetectionStrategy, Component } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
-<span class="hljs-keyword">import</span> { ComponentFixture, TestBed } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core/testing&#x27;</span>;
-<span class="hljs-keyword">import</span> { Router } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/router&#x27;</span>;
-<span class="hljs-keyword">import</span> { FooBarComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./foo-bar.component&#x27;</span>;
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ChangeDetectionStrategy</span>, <span class="hljs-title class_">Component</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">ComponentFixture</span>, <span class="hljs-title class_">TestBed</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core/testing&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Router</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/router&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">FooBarComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./foo-bar.component&#x27;</span>;
 
 <span class="hljs-meta">@Component</span>({
-    selector: <span class="hljs-string">&#x27;tt-corge-mock-component&#x27;</span>,
-    standalone: <span class="hljs-literal">true</span>,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;tt-corge-mock-component&#x27;</span>,
+    <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">changeDetection</span>: <span class="hljs-title class_">ChangeDetectionStrategy</span>.<span class="hljs-property">OnPush</span>,
 })
-<span class="hljs-keyword">class</span> CorgeMockComponent {}
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">CorgeMockComponent</span> {}
 
-describe(<span class="hljs-string">&#x27;FooBarComponent&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
-    <span class="hljs-keyword">let</span> component: FooBarComponent;
-    <span class="hljs-keyword">let</span> fixture: ComponentFixture&lt;FooBarComponent&gt;;
-    <span class="hljs-keyword">let</span> routerSpy: jasmine.SpyObj&lt;Router&gt;;
+<span class="hljs-title function_">describe</span>(<span class="hljs-string">&#x27;FooBarComponent&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">let</span> <span class="hljs-attr">component</span>: <span class="hljs-title class_">FooBarComponent</span>;
+    <span class="hljs-keyword">let</span> <span class="hljs-attr">fixture</span>: <span class="hljs-title class_">ComponentFixture</span>&lt;<span class="hljs-title class_">FooBarComponent</span>&gt;;
+    <span class="hljs-keyword">let</span> <span class="hljs-attr">routerSpy</span>: jasmine.<span class="hljs-property">SpyObj</span>&lt;<span class="hljs-title class_">Router</span>&gt;;
 
-    beforeEach(<span class="hljs-keyword">async</span> () =&gt; {
-        routerSpy = jasmine.createSpyObj(<span class="hljs-string">&#x27;router&#x27;</span>, [<span class="hljs-string">&#x27;navigateByUrl&#x27;</span>]);
-
-        <span class="hljs-keyword">await</span> TestBed.configureTestingModule({
-            imports: [ RouterTestingModule, NoopAnimationsModule ], <span class="hljs-comment">// angular modules</span>
-            providers: [
-              { provide: Router, useValue: routerSpy }, <span class="hljs-comment">// injected deps</span>
+    <span class="hljs-title function_">beforeEach</span>(<span class="hljs-title function_">async</span> () =&gt; {
+        routerSpy = jasmine.<span class="hljs-title function_">createSpyObj</span>(<span class="hljs-string">&#x27;router&#x27;</span>, [<span class="hljs-string">&#x27;navigateByUrl&#x27;</span>]);
+      
+        <span class="hljs-keyword">await</span> <span class="hljs-title class_">TestBed</span>.<span class="hljs-title function_">configureTestingModule</span>({
+            <span class="hljs-attr">imports</span>: [ <span class="hljs-title class_">RouterTestingModule</span>, <span class="hljs-title class_">NoopAnimationsModule</span> ], <span class="hljs-comment">// angular modules</span>
+            <span class="hljs-attr">providers</span>: [
+              { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">Router</span>, <span class="hljs-attr">useValue</span>: routerSpy }, <span class="hljs-comment">// injected deps</span>
               ],
-        }).overrideComponent(FooBarComponent, {
-            remove: {
-                imports: [CorgeComponent], <span class="hljs-comment">// real children</span>
+        }).<span class="hljs-title function_">overrideComponent</span>(<span class="hljs-title class_">FooBarComponent</span>, {
+            <span class="hljs-attr">remove</span>: {
+                <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">CorgeComponent</span>], <span class="hljs-comment">// real children</span>
             },
-            add: {
-                imports: [CorgeMockComponent], <span class="hljs-comment">// mock children</span>
+            <span class="hljs-attr">add</span>: {
+                <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">CorgeMockComponent</span>], <span class="hljs-comment">// mock children</span>
             },
-        }).compileComponents();
+        }).<span class="hljs-title function_">compileComponents</span>();
 
-        fixture = TestBed.createComponent(FooBarComponent);
-        component = fixture.componentInstance;
-        fixture.componentRef.setInput(<span class="hljs-string">&#x27;fooInput&#x27;</span>, { foo: <span class="hljs-number">42</span> });
+        fixture = <span class="hljs-title class_">TestBed</span>.<span class="hljs-title function_">createComponent</span>(<span class="hljs-title class_">FooBarComponent</span>);
+        component = fixture.<span class="hljs-property">componentInstance</span>;
+        fixture.<span class="hljs-property">componentRef</span>.<span class="hljs-title function_">setInput</span>(<span class="hljs-string">&#x27;fooInput&#x27;</span>, { <span class="hljs-attr">foo</span>: <span class="hljs-number">42</span> });
     });
 
-    it(<span class="hljs-string">&#x27;should create&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;should create&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
         <span class="hljs-comment">// Assert</span>
-        expect(component).toBeInstanceOf(FooBarComponent);
+        <span class="hljs-title function_">expect</span>(component).<span class="hljs-title function_">toBeInstanceOf</span>(<span class="hljs-title class_">FooBarComponent</span>);
     });
 
-    describe(<span class="hljs-string">&#x27;something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
-        it(<span class="hljs-string">&#x27;should do something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">describe</span>(<span class="hljs-string">&#x27;something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;should do something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
             <span class="hljs-comment">// Arrange</span>
             <span class="hljs-comment">// Act</span>
             <span class="hljs-comment">// Assert</span>
-            expect(<span class="hljs-number">1</span>).toBe(<span class="hljs-number">1</span>);
+            <span class="hljs-title function_">expect</span>(<span class="hljs-number">1</span>).<span class="hljs-title function_">toBe</span>(<span class="hljs-number">1</span>);
         });
     });
-});</code></pre>
-</div>
+});
+</code></pre></div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>
 </html>

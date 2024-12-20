@@ -238,7 +238,7 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="templates">Templates</h1>
+<div class="markdown-body"><h1>Templates</h1>
 <ul>
 <li><code>script</code> tags are not allowed, top level html/body are pointless of course</li>
 <li>expressions only: <code>{{userName}}</code>, <code>{{1 + 1}}</code><ul>
@@ -247,9 +247,9 @@
 </ul>
 </li>
 <li>bound properties must be <em>public</em> in the class (see <a href="https://github.com/angular/angular-cli/issues/5621#issuecomment-290896552">here</a>)</li>
-<li>referencing: <code>&lt;input #username&gt; {{username.value}}</code><br>referencing in the class:  <pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">&#x27;username&#x27;</span>)
-<span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> usernameInputRef: ElementRef&lt;HTMLInputElement&gt;;</code></pre>
-</li>
+<li>referencing: <code>&lt;input #username&gt; {{username.value}}</code><br>referencing in the class:  <pre class="hljs"><code class="hljs language-typescript"><span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">&#x27;username&#x27;</span>)
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-attr">usernameInputRef</span>: <span class="hljs-title class_">ElementRef</span>&lt;<span class="hljs-title class_">HTMLInputElement</span>&gt;;
+</code></pre></li>
 <li>data flow and binding:<ul>
 <li>box, banana, banana in a box  </li>
 <li><code>[attr/prop]</code>, <code>(event)</code>, <code>[(two-way)]</code></li>
@@ -263,7 +263,7 @@
 <li><code>[style]</code>, <code>[style.width.%]</code>, <code>[style.width.px]</code>,<br>
 <code>[style]=&quot;getStyle()&quot;</code> where the function returns a <code>style: Partial&lt;CSSStyleDeclaration&gt; = {}</code> object</li>
 <li><code>[attr.colspan]=&quot;colCount&quot;</code>, <code>[attr.disabled]=&quot;!canSubmit&quot;</code></li>
-<li><code>[ngClass]</code>, <code>[ngStyle]</code> = classic directive, 👴 <a href="https://github.com/angular/angular/pull/58860">probably will be</a>
+<li><code>[ngClass]</code>, <code>[ngStyle]</code> = classic directive, :older_man: <a href="https://github.com/angular/angular/pull/58860">probably will be</a>
  <a href="https://angular.schule/blog/2024-11-ngclass-ngstyle">deprecated</a></li>
 </ul>
 </li>

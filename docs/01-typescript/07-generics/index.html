@@ -245,49 +245,49 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="generics">Generics</h1>
+<div class="markdown-body"><h1>Generics</h1>
 <ul>
 <li>typically describes types of items inside a collection</li>
 <li>something can <em>work on</em> various types</li>
 <li>use angle brackets: <code>&lt;T&gt;</code></li>
 </ul>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">identity</span>&lt;<span class="hljs-title">T</span>&gt; (<span class="hljs-params">foo: T</span>): <span class="hljs-title">T</span> </span>{
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">function</span> identity&lt;T&gt; (<span class="hljs-attr">foo</span>: T): T {
   <span class="hljs-keyword">return</span> foo;
 }
 
-<span class="hljs-keyword">let</span> s = identity&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">&#x27;foo&#x27;</span>);</code></pre>
-<p>Working on a collection:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">uniq</span>&lt;<span class="hljs-title">T</span>&gt; (<span class="hljs-params">items: T[]</span>): <span class="hljs-title">T</span>[] </span>{
-  <span class="hljs-keyword">return</span> [...new <span class="hljs-built_in">Set</span>(items)];
-}</code></pre>
-<h2><a name="1">Advanced uses</a></h2>
-<p>🚀 Object and property constraints (<code>key of</code>):</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-comment">//                    &quot;key&quot; must extend a key of &quot;obj&quot; </span>
+<span class="hljs-keyword">let</span> s = identity&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">&#x27;foo&#x27;</span>);
+</code></pre><p>Working on a collection:</p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">function</span> uniq&lt;T&gt; (<span class="hljs-attr">items</span>: T[]): T[] {
+  <span class="hljs-keyword">return</span> [...<span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>(items)];
+}
+</code></pre><h2><a name="1">Advanced uses</a></h2>
+<p>:rocket: Object and property constraints (<code>key of</code>):</p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-comment">//                    &quot;key&quot; must extend a key of &quot;obj&quot; </span>
 <span class="hljs-comment">//                      ↓</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getProperty</span>&lt;<span class="hljs-title">T</span>, <span class="hljs-title">K</span> <span class="hljs-title">extends</span> <span class="hljs-title">keyof</span> <span class="hljs-title">T</span>&gt; (<span class="hljs-params">obj: T, key: K</span>) </span>{
+<span class="hljs-keyword">function</span> getProperty&lt;T, K <span class="hljs-keyword">extends</span> keyof T&gt; (<span class="hljs-attr">obj</span>: T, <span class="hljs-attr">key</span>: K) {
   <span class="hljs-keyword">return</span> obj[key];
 }
 
-<span class="hljs-keyword">let</span> x = { a: <span class="hljs-number">1</span>, b: <span class="hljs-number">2</span>, c: <span class="hljs-number">3</span>, d: <span class="hljs-number">4</span> };
-getProperty(x, <span class="hljs-string">&#x27;a&#x27;</span>); <span class="hljs-comment">// for statically created objects only of course</span>
-getProperty(x, <span class="hljs-string">&#x27;e&#x27;</span>); <span class="hljs-comment">// will trigger a warning</span></code></pre>
-<p>🚀 Class types for factories:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-comment">//              Type of Klass</span>
+<span class="hljs-keyword">let</span> x = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">c</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">d</span>: <span class="hljs-number">4</span> };
+<span class="hljs-title function_">getProperty</span>(x, <span class="hljs-string">&#x27;a&#x27;</span>); <span class="hljs-comment">// for statically created objects only of course</span>
+<span class="hljs-title function_">getProperty</span>(x, <span class="hljs-string">&#x27;e&#x27;</span>); <span class="hljs-comment">// will trigger a warning</span>
+</code></pre><p>:rocket: Class types for factories:</p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-comment">//              Type of Klass</span>
 <span class="hljs-comment">//              ↓</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">create</span>&lt;<span class="hljs-title">T</span>&gt; (<span class="hljs-params">Klass: {<span class="hljs-keyword">new</span>(): T;}, name: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">T</span> </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Klass();
+<span class="hljs-keyword">function</span> create&lt;T&gt; (<span class="hljs-title class_">Klass</span>: {<span class="hljs-title function_">new</span>(): T;}, <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>): T {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Klass</span>();
 }
 
-create(Dog, <span class="hljs-string">&#x27;Fido&#x27;</span>);
-create(Cat, <span class="hljs-string">&#x27;Tabby&#x27;</span>);</code></pre>
-<p>For a factory method one can define the allowed class types:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createVehicle</span>&lt;<span class="hljs-title">T</span> <span class="hljs-title">extends</span> <span class="hljs-title">Vehicle</span>&gt; (<span class="hljs-params">Klass: {<span class="hljs-keyword">new</span>(): T;}, passengerCount: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">T</span> </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Klass();
+<span class="hljs-title function_">create</span>(<span class="hljs-title class_">Dog</span>, <span class="hljs-string">&#x27;Fido&#x27;</span>);
+<span class="hljs-title function_">create</span>(<span class="hljs-title class_">Cat</span>, <span class="hljs-string">&#x27;Tabby&#x27;</span>);
+</code></pre><p>For a factory method one can define the allowed class types:</p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">function</span> createVehicle&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Vehicle</span>&gt; (<span class="hljs-title class_">Klass</span>: {<span class="hljs-title function_">new</span>(): T;}, <span class="hljs-attr">passengerCount</span>: <span class="hljs-built_in">number</span>): T {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Klass</span>();
 }
 
-<span class="hljs-keyword">const</span> car = createVehicle(Car, <span class="hljs-number">5</span>);
-<span class="hljs-keyword">const</span> airplane = createVehicle(Airplane, <span class="hljs-number">396</span>);</code></pre>
-</div>
+<span class="hljs-keyword">const</span> car = <span class="hljs-title function_">createVehicle</span>(<span class="hljs-title class_">Car</span>, <span class="hljs-number">5</span>);
+<span class="hljs-keyword">const</span> airplane = <span class="hljs-title function_">createVehicle</span>(<span class="hljs-title class_">Airplane</span>, <span class="hljs-number">396</span>);
+</code></pre></div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>
 </html>

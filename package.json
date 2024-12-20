@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node src/build.js",
-    "serve": "serve ./docs",
-    "dev": "nodemon -w book -w overlay -w src --ext js,md,ejs,css src/build.js -- --serve",
+    "dev": "nodemon -w book -w overlay -w src --ext js,md,ejs,css src/build.js -- --silent --serve",
     "format": "prettier -w src"
   },
   "repository": {
@@ -22,12 +21,13 @@
   "homepage": "https://github.com/szkrd/little-angular-book#readme",
   "devDependencies": {
     "ejs": "3.1.10",
-    "emojilib": "2.4.0",
-    "highlight.js": "10.1.1",
-    "marked": "1.1.0",
+    "emojilib": "4.0.1",
+    "highlight.js": "11.11.0",
+    "marked": "15.0.4",
+    "marked-emoji": "1.4.3",
+    "marked-highlight": "2.2.1",
     "nodemon": "3.1.9",
     "prettier": "3.4.2",
-    "serve": "14.2.4",
-    "shelljs": "0.8.5"
+    "serve": "14.2.4"
   }
 }

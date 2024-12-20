@@ -238,31 +238,31 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="lifecycle-events">Lifecycle events</h1>
-<p>💡 The most important ones
-are<br><strong>ngOnChanges</strong> 🚪, <strong>ngOnInit</strong> ⏰ and <strong>ngOnDestroy</strong> 💣!</p>
+<div class="markdown-body"><h1>Lifecycle events</h1>
+<p>:bulb: The most important ones
+are<br><strong>ngOnChanges</strong> :door:, <strong>ngOnInit</strong> :alarm_clock: and <strong>ngOnDestroy</strong> :bomb:!</p>
 <p>All events:</p>
 <ul>
 <li>(constructor): instanciation; set initial variables, but possibly <strong>nothing else</strong> here! You have no incoming data / input prop values!</li>
-<li><code>ngOnChanges()</code>: incoming input    </li>
+<li><code>ngOnChanges()</code>: incoming input	</li>
 <li><code>ngOnInit()</code>: component init, fetch data here if you must</li>
-<li><code>ngDoCheck()</code>: it runs on every detection, so <strong>avoid it</strong> like the plague, unless you really know what you&#39;re doing 🚫</li>
-<li>for projected (transcluded) content and children related:    <ul>
+<li><code>ngDoCheck()</code>: it runs on every detection, so <strong>avoid it</strong> like the plague, unless you really know what you&#39;re doing :no_entry_sign:</li>
+<li>for projected (transcluded) content and children related:	<ul>
 <li><code>ngAfterContentInit()</code>: transcluded content initialized</li>
 <li><code>ngAfterContentChecked()</code>    </li>
 <li><code>ngAfterViewInit()</code>: the view (along with children) has fully been initialized    </li>
-<li><code>ngAfterViewChecked()</code>    </li>
+<li><code>ngAfterViewChecked()</code></li>
 </ul>
 </li>
-<li><code>ngOnDestroy()</code>: clean up your subscribers and event listeners here    </li>
+<li><code>ngOnDestroy()</code>: clean up your subscribers and event listeners here</li>
 </ul>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@Component</span>({ selector: <span class="hljs-string">&#x27;app-sample&#x27;</span>, template: <span class="hljs-string">`...`</span> })
-<span class="hljs-keyword">class</span> Sample <span class="hljs-keyword">implements</span> OnInit, OnChanges, OnDestroy {
-  ngOnInit(): <span class="hljs-built_in">void</span> {}
-  ngOnChanges(changes: SimpleChanges): <span class="hljs-built_in">void</span> {}
-  ngOnDestroy(): <span class="hljs-built_in">void</span> {}
-}</code></pre>
-</div>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-meta">@Component</span>({ <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;app-sample&#x27;</span>, <span class="hljs-attr">template</span>: <span class="hljs-string">`...`</span> })
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Sample</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnInit</span>, <span class="hljs-title class_">OnChanges</span>, <span class="hljs-title class_">OnDestroy</span> {
+  <span class="hljs-title function_">ngOnInit</span>(): <span class="hljs-built_in">void</span> {}
+  <span class="hljs-title function_">ngOnChanges</span>(<span class="hljs-attr">changes</span>: <span class="hljs-title class_">SimpleChanges</span>): <span class="hljs-built_in">void</span> {}
+  <span class="hljs-title function_">ngOnDestroy</span>(): <span class="hljs-built_in">void</span> {}
+}
+</code></pre></div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>
 </html>

@@ -245,32 +245,32 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="input--output">Input / Output</h1>
+<div class="markdown-body"><h1>Input / Output</h1>
 <p>in parent html:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">app-search-form</span>
+<pre class="hljs"><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">app-search-form</span>
   [<span class="hljs-attr">query</span>]=<span class="hljs-string">&quot;queryString&quot;</span>
   (<span class="hljs-attr">query-change</span>)=<span class="hljs-string">&quot;onSearchFormChange($event)&quot;</span>
 &gt;</span>
   Search for posts:
-<span class="hljs-tag">&lt;/<span class="hljs-name">app-search-form</span>&gt;</span></code></pre>
-<p>in child (a generic search-form) ts:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-comment">// coming in via the [query] attribute</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">app-search-form</span>&gt;</span>
+</code></pre><p>in child (a generic search-form) ts:</p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-comment">// coming in via the [query] attribute</span>
 <span class="hljs-meta">@Input</span>(<span class="hljs-string">&#x27;query&#x27;</span>) defaultQuery = <span class="hljs-string">&#x27;&#x27;</span>;
 
 <span class="hljs-comment">// fired up to parent as (query-change)  event</span>
-<span class="hljs-meta">@Output</span>(<span class="hljs-string">&#x27;query-change&#x27;</span>) queryEmitter = <span class="hljs-keyword">new</span> EventEmitter&lt;<span class="hljs-built_in">string</span>&gt;();
+<span class="hljs-meta">@Output</span>(<span class="hljs-string">&#x27;query-change&#x27;</span>) queryEmitter = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">string</span>&gt;();
 
 <span class="hljs-comment">// internals</span>
-query: FormControl;
+<span class="hljs-attr">query</span>: <span class="hljs-title class_">FormControl</span>;
 
 <span class="hljs-comment">// listen for changes and react to them</span>
-ngOnChanges (changes) {
-  <span class="hljs-keyword">if</span> (changes.defaultQuery) {
-    <span class="hljs-built_in">this</span>.query.setValue(<span class="hljs-built_in">this</span>.defaultQuery);
+<span class="hljs-title function_">ngOnChanges</span> (changes) {
+  <span class="hljs-keyword">if</span> (changes.<span class="hljs-property">defaultQuery</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">query</span>.<span class="hljs-title function_">setValue</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">defaultQuery</span>);
   }
-}</code></pre>
-<p>❗ One can use getters and setters to emulate computed observable behaviour (eg. modify internal variable B when input A changes), but performance-wise it&#39;s NOT recommended.</p>
-<p>💣 Circumventing an I/O interface:</p>
+}
+</code></pre><p>:exclamation: One can use getters and setters to emulate computed observable behaviour (eg. modify internal variable B when input A changes), but performance-wise it&#39;s NOT recommended.</p>
+<p>:bomb: Circumventing an I/O interface:</p>
 <ol>
 <li>Accessing a child&#39;s internals via referencing (<code> &lt;app-timer #timer&gt;&lt;/app-timer&gt;</code>) <strong>from the parent template</strong> is possible.</li>
 <li>Or <strong>from the parent class</strong> itself with <code>@ViewChild</code>.</li>
@@ -282,7 +282,7 @@ ngOnChanges (changes) {
 <li>via services (subject, behaviour subjects)</li>
 <li>common store (<a href="https://github.com/ngrx/store">ngrx</a>)</li>
 <li>eventbus (<a href="https://nodejs.org/api/events.html">eventemitters</a>)</li>
-<li>custom DOM events (see: bubbles and composed) </li>
+<li>custom DOM events (see: bubbles and composed)</li>
 </ul>
 </div>
 <script src="../../main.js?v=2.0.0"></script>

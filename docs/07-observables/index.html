@@ -252,7 +252,7 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="observables">Observables</h1>
+<div class="markdown-body"><h1>Observables</h1>
 <p>One can <strong>subscribe</strong> to observables (don&#39;t forget to unsubscribe in ngOnDestroy) and get their values one by one, all at once, combined, reduced, transformed etc.</p>
 <p>In angular templates use the async pipe to create ad hoc subscriptions: <code>{{name$ | async}}</code>.</p>
 <p>See <a href="../07-observables/01-examples/index.html">examples</a>.</p>
@@ -269,7 +269,7 @@
 <li>same data is shared among subscribers</li>
 <li>new values can be &quot;added&quot; in time (bi-directional, multicast)</li>
 <li>use <code>BehaviorSubject</code> if you need access to the last emitted value</li>
-<li>use <code>ReplaySubject</code> if you need access to all the values (replayed) </li>
+<li>use <code>ReplaySubject</code> if you need access to all the values (replayed)</li>
 </ul>
 <h2><a name="2">Creating observables using shorthands</a></h2>
 <ul>

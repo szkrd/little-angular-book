@@ -245,7 +245,7 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="di-tricks">DI tricks</h1>
+<div class="markdown-body"><h1>DI tricks</h1>
 <h2><a name="1">Reach a parent from a child</a></h2>
 <ul>
 <li>a child can detect the presence of a parent (or any ancestor) with <code>@Optional</code></li>
@@ -253,10 +253,10 @@
 <li>probably cleaner to detect the <em>presence</em> of an ancestor than touching the dom</li>
 <li>do NOT manipulate the ancestor from the child!</li>
 </ul>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DogComponent {
-  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Optional</span>() <span class="hljs-keyword">public</span> alex: CanineComponent</span>) {}
-}</code></pre>
-</div>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DogComponent</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Optional</span>() <span class="hljs-keyword">public</span> <span class="hljs-attr">alex</span>: <span class="hljs-title class_">CanineComponent</span></span>) {}
+}
+</code></pre></div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>
 </html>

@@ -1,99 +1,53 @@
-const serveHandler = require('serve-handler')
-const http = require('http')
-const shelljs = require('shelljs')
-const fs = require('fs')
-const { promisify } = require('util')
-const path = require('path')
-const hljs = require('highlight.js')
-const marked = promisify(require('marked'))
-const emoji = require('emojilib')
-const ejs = require('ejs')
-const packageJson = require('../package.json')
-const args = process.argv.splice(2)
+const fs = require('fs');
+const { promisify } = require('util');
+const path = require('path');
 
-const fsCopyFile = promisify(fs.copyFile)
-const fsReadDir = promisify(fs.readdir)
-const fsStat = promisify(fs.stat)
-const fsMkDir = promisify(fs.mkdir)
-const fsReadFile = promisify(fs.readFile)
-const fsWriteFile = promisify(fs.writeFile)
+const ejs = require('ejs');
+const packageJson = require('../package.json');
+const { escapeRex, convertMarkdownToHtml, md, cd, rm, walkDir, launchHttpServer } = require('./utils');
+const args = process.argv.splice(2);
 
-// replace :emoji: markers with proper emoji (gitbook had a plugin for this)
-const customRenderer = (() => {
-  const emojiKeywords = Object.keys(emoji.lib).reduce((acc, key) => {
-    const chr = (acc[key] = emoji.lib[key].char)
-    ;(emoji.lib[key].keywords || []).forEach((kw) => (acc[kw] = chr))
-    return acc
-  }, {})
-  const origRenderer = marked.Renderer
-  const customRenderer = {}
-  const addHook = (method) => {
-    customRenderer[method] = function (text) {
-      if (text.includes(':') && text.match(/:/g).length > 1) {
-        text = text.replace(/:([a-z-_]*):/g, (s, m) => (emoji.lib[m] || {}).char || emojiKeywords[m] || s)
-      }
-      return origRenderer.prototype[method].apply(this, arguments)
-    }
-  }
-  ;['codespan', 'del', 'em', 'heading', 'listitem', 'paragraph', 'strong', 'text'].forEach(addHook)
-  return customRenderer
-})()
-marked.setOptions({
-  highlight: function (code, lang) {
-    lang = lang || 'text'
-    return lang === 'text' ? code : hljs.highlight(lang, code).value
-  },
-})
-marked.use({ renderer: customRenderer })
+const fsCopyFile = promisify(fs.copyFile);
+const fsMkDir = promisify(fs.mkdir);
+const fsReadFile = promisify(fs.readFile);
+const fsWriteFile = promisify(fs.writeFile);
 
-function escapeRex(s = '') {
-  return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
-}
-
-function moveItemToArrayBeginning(s, arr) {
-  if (arr && arr.length > 1 && arr.includes(s)) {
-    arr = [s].concat(arr.filter((x) => x !== s))
-  }
-  return arr
-}
-
-async function walkDir(dir, fileList = []) {
-  let files = await fsReadDir(dir)
-  files = moveItemToArrayBeginning('README.md', files.sort())
-  for (const file of files) {
-    const stat = await fsStat(path.join(dir, file))
-    if (stat.isDirectory()) fileList = await walkDir(path.join(dir, file), fileList)
-    else fileList.push(path.join(dir, file))
-  }
-  return fileList
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 async function main() {
-  // change to script's parent dir (which should be the project's root)
-  shelljs.cd(path.join(path.dirname(process.argv[1]), '/..'))
+  if (args.includes('--help') || args.includes('-h')) {
+    console.log(
+      'Converts markdown files in "book", saves output to "docs".\nOptions:\n--no-flush = do not delete the docs directory\n' +
+        '--silent = less verbose\n--serve = serves result on localhost:5000',
+    );
+    process.exit(0);
+  }
 
-  const { version } = packageJson
-  const list = await walkDir('./book')
+  // change to script's parent dir (which should be the project's root)
+  cd('<script>', '..');
+
+  const { version } = packageJson;
+  const list = await walkDir('./book');
 
   // delete the docs dir first
-  if (!args.includes('no-flush')) {
-    shelljs.rm('-rf', 'docs')
-    shelljs.mkdir('docs')
+  if (!args.includes('--no-flush')) {
+    await rm('docs');
+    await md('docs');
   }
 
   // build common menu
   let menuItems = list
     .filter((s) => s.endsWith('.md'))
     .map((s) => {
-      const original = s
-      const lines = fs.readFileSync(s, 'utf-8').split('\n')
-      let title = lines.find((line) => line.startsWith('# ')).replace(/^# /, '') || s[s.length - 2] || 'TOC'
-      const sections = (lines.filter((line) => line.startsWith('## ')) || []).map((l) => l.replace(/^## /, ''))
-      title = title.replace(/^# /, '')
-      s = s.split(path.sep).slice(1)
-      console.info(`Processing ${s} (d:${s.length})`)
+      const original = s;
+      const lines = fs.readFileSync(s, 'utf-8').split('\n');
+      let title = lines.find((line) => line.startsWith('# ')).replace(/^# /, '') || s[s.length - 2] || 'TOC';
+      const sections = (lines.filter((line) => line.startsWith('## ')) || []).map((l) => l.replace(/^## /, ''));
+      title = title.replace(/^# /, '');
+      s = s.split(path.sep).slice(1);
+      if (!args.includes('--silent')) {
+        console.info(`Processing ${s} (d:${s.length})`);
+      }
       return {
         original,
         selected: false,
@@ -106,61 +60,63 @@ async function main() {
             .join('/')
             .replace(/README\.md$/, 'index.html')
             .replace(/\.md$/, '.html'),
-      }
-    })
+      };
+    });
 
   // iterate through files
+  let processedCount = 0;
   for (let i = 0; i < list.length; i++) {
-    const source = list[i]
-    const baseName = path.basename(source)
-    const extName = path.extname(baseName).replace(/^\./, '')
+    const source = list[i];
+    const baseName = path.basename(source);
+    const extName = path.extname(baseName).replace(/^\./, '');
 
     // create target directories (book -> docs)
-    let target = source.replace(/^book/, 'docs')
-    const depth = target.split(path.sep).length - 1
-    const relativeRoot = new Array(depth).join('../')
-    const targetPathOnly = target.replace(new RegExp(escapeRex(baseName) + '$'), '')
-    await fsMkDir(targetPathOnly, { recursive: true })
+    let target = source.replace(/^book/, 'docs');
+    const depth = target.split(path.sep).length - 1;
+    const relativeRoot = new Array(depth).join('../');
+    const targetPathOnly = target.replace(new RegExp(escapeRex(baseName) + '$'), '');
+    await fsMkDir(targetPathOnly, { recursive: true });
 
     // mark selected item in menu, fix relative paths
     const localMenuItems = menuItems.map((item) => ({
       ...item,
       selected: item.original === source,
       url: (relativeRoot + item.url).replace('/./', '/'),
-    }))
+    }));
 
     // prep the ejs renderer, fix paths
-    let ejsSource = await fsReadFile('./overlay/index.ejs', 'utf-8')
+    let ejsSource = await fsReadFile('./overlay/index.ejs', 'utf-8');
     const ejsTemplate = ejs.compile(ejsSource, {
       fileName: 'index.ejs',
-    })
+    });
 
     // convert md files to html
     if (baseName.endsWith('.md')) {
-      target = target.replace(/\.md$/, '.html')
+      target = target.replace(/\.md$/, '.html');
       if (baseName === 'README.md') {
-        target = target.replace(/README\.html$/, 'index.html')
+        target = target.replace(/README\.html$/, 'index.html');
       }
-      const contents = await fsReadFile(source, 'utf-8')
+      const contents = await fsReadFile(source, 'utf-8');
 
-      let md = await marked(contents)
-      md = md.replace(/<pre>/g, '<pre class="hljs">') // such custom renderer, very lazy
-      let headings = 1
-      md = md.replace(/<h2[^>]*>/g, (sub) => `<h2><a name="${headings++}">`) // h2 start
-      md = md.replace(/<\/h2>/g, '</a></h2>') // h2 start
-      md = md.replace(/README\.md">/g, 'index.html">') // README to index.html
-      md = md.replace(/\.md">/g, '.html">') // all md to html
+      let md = await convertMarkdownToHtml(contents);
+      md = md.replace(/<pre>/g, '<pre class="hljs">'); // such custom renderer, very lazy
+      let headings = 1;
+      md = md.replace(/<h2[^>]*>/g, (sub) => `<h2><a name="${headings++}">`); // h2 start
+      md = md.replace(/<\/h2>/g, '</a></h2>'); // h2 start
+      md = md.replace(/README\.md">/g, 'index.html">'); // README to index.html
+      md = md.replace(/\.md">/g, '.html">'); // all md to html
       // fix relative roots in links
       const relPath = targetPathOnly
         .split(/[/\\]/) // slash vs backslash in path
         .slice(1)
-        .slice(0, depth - 1)
+        .slice(0, depth - 1);
       md = md.replace(/\shref="([^"]*)"/g, (all, matcher) => {
-        if (/^(http|https|ftp|\/|:\/\/)/.test(matcher)) return all // skip external or absolute
-        const pathMod = (relativeRoot + relPath.join('/') + '/' + matcher).replace(/^\//, '')
-        return ` href="${pathMod}"`
-      })
+        if (/^(http|https|ftp|\/|:\/\/)/.test(matcher)) return all; // skip external or absolute
+        const pathMod = (relativeRoot + relPath.join('/') + '/' + matcher).replace(/^\//, '');
+        return ` href="${pathMod}"`;
+      });
 
+      processedCount++;
       await fsWriteFile(
         target,
         ejsTemplate({
@@ -169,39 +125,35 @@ async function main() {
           root: relativeRoot,
           menuItems: localMenuItems,
         }),
-      )
+      );
     }
 
     // copy binaries
-    const copyOperation = []
+    const copyOperation = [];
     if (['png', 'jpg'].includes(extName)) {
-      copyOperation.push(fsCopyFile(source, target))
+      copyOperation.push(fsCopyFile(source, target));
     }
-    await Promise.all(copyOperation)
+    await Promise.all(copyOperation);
   }
+  console.log(`Processed ${processedCount} files.`);
 
   // copy overlay files
-  const hljsTheme = 'darcula' // 'github-gist'
+  const hljsTheme = 'atom-one-dark'; // 'github-gist', darcula is gone
   await Promise.all([
     fsCopyFile('./overlay/main.js', './docs/main.js'),
     fsCopyFile('./overlay/normalize.css', './docs/normalize.css'),
     fsCopyFile('./overlay/main.css', './docs/main.css'),
     fsCopyFile('./overlay/markdown.css', './docs/markdown.css'),
-    fsCopyFile(`./node_modules/highlight.js/styles/${hljsTheme}.css`, './docs/hljs-theme.css'),
-  ])
+    fsCopyFile(`./node_modules/highlight.js/styles/${hljsTheme}.min.css`, './docs/hljs-theme.css'),
+  ]);
+
+  if (args.includes('--serve')) {
+    launchHttpServer(5000);
+  }
 }
+
+// ----------------------------------------------------------------------------
 
 main().catch((error) => {
-  console.error(error)
-})
-
-// on Windows we have file locking errors if serve is running in another process
-// so it's just easier to relaunch it after the build process; it still takes
-// only a second or so...
-if (args.includes('--serve')) {
-  const port = 5000;
-  const server = http.createServer((request, response) => serveHandler(request, response, { public: 'docs' }))
-  server.listen(port, () => {
-    console.log(`Running at http://localhost:${port}`)
-  })
-}
+  console.error(error);
+});

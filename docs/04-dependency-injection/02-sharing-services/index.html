@@ -238,34 +238,34 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="sharing-services">Sharing services</h1>
+<div class="markdown-body"><h1>Sharing services</h1>
 <p>The simplest use case for DI is to instanciate a service once and then give that instance (provide) to every component that needs it:</p>
 <p><em>app.module.ts</em></p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@NgModule</span>({
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-meta">@NgModule</span>({
   <span class="hljs-comment">// ...</span>
-  declarations: [
-    PostsPageComponent
+  <span class="hljs-attr">declarations</span>: [
+    <span class="hljs-title class_">PostsPageComponent</span>
   ],
-  providers: [
-    PostsService
+  <span class="hljs-attr">providers</span>: [
+    <span class="hljs-title class_">PostsService</span>
   ],
   <span class="hljs-comment">// ...</span>
-})</code></pre>
-<p>PostsService (which is an injectable class) will be instanciated by the App module.</p>
-<p>💡 Writing <code>@Injectable</code> is not needed for classes without dependencies or already decorated classes, but it really helps readability.</p>
+})
+</code></pre><p>PostsService (which is an injectable class) will be instanciated by the App module.</p>
+<p>:bulb: Writing <code>@Injectable</code> is not needed for classes without dependencies or already decorated classes, but it really helps readability.</p>
 <p><em>services/posts.service.ts</em></p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@Injectable</span>()
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> PostsService {
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-meta">@Injectable</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PostsService</span> {
   <span class="hljs-comment">// ...</span>
-}</code></pre>
-<p>The PostsPage component can access this dependency:</p>
+}
+</code></pre><p>The PostsPage component can access this dependency:</p>
 <p><em>components/posts-page.component.ts</em></p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> PostsPageComponent <span class="hljs-keyword">implements</span> OnInit {
-  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> postsService: PostsService</span>) {}
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PostsPageComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnInit</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> <span class="hljs-attr">postsService</span>: <span class="hljs-title class_">PostsService</span></span>) {}
   <span class="hljs-comment">// ...</span>
-}</code></pre>
-<p>Under the hood <code>this.postsService = new PostsService()</code> &quot;happens&quot; in the constructor.</p>
-<p>💡 With a shared service and rxjs subjects it&#39;s trivial to setup an eventemitter or pubsub messaging.</p>
+}
+</code></pre><p>Under the hood <code>this.postsService = new PostsService()</code> &quot;happens&quot; in the constructor.</p>
+<p>:bulb: With a shared service and rxjs subjects it&#39;s trivial to setup an eventemitter or pubsub messaging.</p>
 </div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>

@@ -273,55 +273,55 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="classes-and-interfaces">Classes and interfaces</h1>
-<p>💡 TypeScript, unlike Java, understands types as <strong>shapes</strong>.</p>
+<div class="markdown-body"><h1>Classes and interfaces</h1>
+<p>:bulb: TypeScript, unlike Java, understands types as <strong>shapes</strong>.</p>
 <p>If a class quacks and walks like a duck and an interface quacks and walks like a duck then they are interchangeable from TypeScript&#39;s point of view (at least as a definition).</p>
 <h2><a name="1">Class</a></h2>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">class</span> Animal {
-  name: <span class="hljs-built_in">string</span>; <span class="hljs-comment">// plain public uninitialized</span>
-  <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> id: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>; <span class="hljs-comment">// readonly, default value</span>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span> {
+  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>; <span class="hljs-comment">// plain public uninitialized</span>
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>; <span class="hljs-comment">// readonly, default value</span>
 
-  <span class="hljs-keyword">constructor</span> (<span class="hljs-params">name: <span class="hljs-built_in">string</span></span>) {
-    <span class="hljs-built_in">this</span>.name = name;
+  <span class="hljs-title function_">constructor</span> (<span class="hljs-params"><span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;
   }
 
   <span class="hljs-comment">// we got public (default), private, protected</span>
-  <span class="hljs-keyword">protected</span> rename (newName: <span class="hljs-built_in">string</span>) {
-    <span class="hljs-built_in">this</span>.name = newName;
+  <span class="hljs-keyword">protected</span> <span class="hljs-title function_">rename</span> (<span class="hljs-attr">newName</span>: <span class="hljs-built_in">string</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = newName;
   }
-}</code></pre>
-<h2><a name="2">Inheritance</a></h2>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">class</span> Dog <span class="hljs-keyword">extends</span> Animal {
-  <span class="hljs-keyword">private</span> _bites: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>; <span class="hljs-comment">// unfortunately underscore IS needed</span>
-  <span class="hljs-keyword">private</span> isAngry: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>;
+}
+</code></pre><h2><a name="2">Inheritance</a></h2>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Animal</span> {
+  <span class="hljs-keyword">private</span> <span class="hljs-attr">_bites</span>: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>; <span class="hljs-comment">// unfortunately underscore IS needed</span>
+  <span class="hljs-keyword">private</span> <span class="hljs-attr">isAngry</span>: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>;
 
-  <span class="hljs-keyword">static</span> saySomething (): <span class="hljs-built_in">void</span> { <span class="hljs-comment">// static method</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;something&#x27;</span>);
-  }
-
-  bark (words: <span class="hljs-built_in">string</span> = <span class="hljs-string">&#x27;woof woof&#x27;</span>) {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.name}</span> barks &quot;<span class="hljs-subst">${words}</span>&quot;`</span>);
+  <span class="hljs-keyword">static</span> <span class="hljs-title function_">saySomething</span> (): <span class="hljs-built_in">void</span> { <span class="hljs-comment">// static method</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;something&#x27;</span>);
   }
 
-  get bites (): <span class="hljs-built_in">boolean</span> {
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>._bites;
+  <span class="hljs-title function_">bark</span> (<span class="hljs-attr">words</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">&#x27;woof woof&#x27;</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.name}</span> barks &quot;<span class="hljs-subst">${words}</span>&quot;`</span>);
+  }
+
+  get <span class="hljs-title function_">bites</span> (): <span class="hljs-built_in">boolean</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">_bites</span>;
   }
 
   <span class="hljs-comment">// without this setter _bites would be a readonly</span>
-  set bites (b: <span class="hljs-built_in">boolean</span>) {
-    <span class="hljs-built_in">this</span>._bites = b;
+  set <span class="hljs-title function_">bites</span> (<span class="hljs-attr">b</span>: <span class="hljs-built_in">boolean</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_bites</span> = b;
     <span class="hljs-keyword">if</span> (b) {
-      <span class="hljs-built_in">this</span>.isAngry = <span class="hljs-literal">true</span>;
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">isAngry</span> = <span class="hljs-literal">true</span>;
     }
   }
-}</code></pre>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">let</span> fido = <span class="hljs-keyword">new</span> Dog(<span class="hljs-string">&#x27;Fido&#x27;</span>);</code></pre>
-<h2><a name="3">Abstract class</a></h2>
+}
+</code></pre><pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">let</span> fido = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Dog</span>(<span class="hljs-string">&#x27;Fido&#x27;</span>);
+</code></pre><h2><a name="3">Abstract class</a></h2>
 <p>Abstracts can not be instanciated! They serve as a base template for other classes.</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> AlphaMale {
-  <span class="hljs-keyword">abstract</span> bite (): <span class="hljs-built_in">void</span>;
-}</code></pre>
-<h2><a name="4">Mixins</a></h2>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AlphaMale</span> {
+  <span class="hljs-keyword">abstract</span> <span class="hljs-title function_">bite</span> (): <span class="hljs-built_in">void</span>;
+}
+</code></pre><h2><a name="4">Mixins</a></h2>
 <p>Mixins can be emulated through <code>C implements A, B</code> (where A and B are classes), but the effective mixin logic must be implemented manually!</p>
 <p>This means that one must copy (mix) the prototype methods from A and B to C using an <code>applyMixins</code> implementation.</p>
 <h2><a name="5">Interfaces</a></h2>
@@ -333,79 +333,79 @@
 <li>iterables</li>
 <li>classes</li>
 </ul>
-<h3 id="object-interface">Object interface</h3>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> Book {
-  <span class="hljs-keyword">readonly</span> title: <span class="hljs-built_in">string</span>;
-  <span class="hljs-keyword">readonly</span> subtitle?: <span class="hljs-built_in">string</span>; <span class="hljs-comment">// &lt;-- notice the question mark, this is an optional prop</span>
-  <span class="hljs-keyword">readonly</span> author: <span class="hljs-built_in">string</span>;
-  read?: <span class="hljs-built_in">boolean</span>;
-  score?: <span class="hljs-built_in">number</span>;
+<h3>Object interface</h3>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Book</span> {
+  <span class="hljs-keyword">readonly</span> <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">readonly</span> <span class="hljs-attr">subtitle</span>?: <span class="hljs-built_in">string</span>; <span class="hljs-comment">// &lt;-- notice the question mark, this is an optional prop</span>
+  <span class="hljs-keyword">readonly</span> <span class="hljs-attr">author</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">read</span>?: <span class="hljs-built_in">boolean</span>;
+  <span class="hljs-attr">score</span>?: <span class="hljs-built_in">number</span>;
 }
 
-<span class="hljs-keyword">let</span> oldBook: Book = { title: <span class="hljs-string">&#x27;Candide&#x27;</span>, subtitle: <span class="hljs-string">&#x27;All for the best&#x27;</span>, author: <span class="hljs-string">&#x27;Voltaire&#x27;</span> };
-<span class="hljs-keyword">let</span> newBook: Book = { title: <span class="hljs-string">&#x27;Men Without Women&#x27;</span>, author: <span class="hljs-string">&#x27;Murakami Haruki&#x27;</span> };
-oldBook.read = <span class="hljs-literal">true</span>;
-newBook.read = <span class="hljs-literal">false</span>;</code></pre>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> FuzzyDog {
-  name: <span class="hljs-built_in">string</span>;
-  owner?: <span class="hljs-built_in">string</span>;
-  [propName: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>; <span class="hljs-comment">// &lt;-- this can be anything (both the key and the value!)</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">oldBook</span>: <span class="hljs-title class_">Book</span> = { <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Candide&#x27;</span>, <span class="hljs-attr">subtitle</span>: <span class="hljs-string">&#x27;All for the best&#x27;</span>, <span class="hljs-attr">author</span>: <span class="hljs-string">&#x27;Voltaire&#x27;</span> };
+<span class="hljs-keyword">let</span> <span class="hljs-attr">newBook</span>: <span class="hljs-title class_">Book</span> = { <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Men Without Women&#x27;</span>, <span class="hljs-attr">author</span>: <span class="hljs-string">&#x27;Murakami Haruki&#x27;</span> };
+oldBook.<span class="hljs-property">read</span> = <span class="hljs-literal">true</span>;
+newBook.<span class="hljs-property">read</span> = <span class="hljs-literal">false</span>;
+</code></pre><pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">FuzzyDog</span> {
+  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">owner</span>?: <span class="hljs-built_in">string</span>;
+  [<span class="hljs-attr">propName</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>; <span class="hljs-comment">// &lt;-- this can be anything (both the key and the value!)</span>
 }
 
-<span class="hljs-keyword">let</span> janesDog: FuzzyDog = { name: <span class="hljs-string">&#x27;Fido&#x27;</span>, owner: <span class="hljs-string">&#x27;Jane&#x27;</span>, favoriteFood: <span class="hljs-string">&#x27;tripe ration&#x27;</span> };
-<span class="hljs-keyword">let</span> strayDog: FuzzyDog = { name: <span class="hljs-string">&#x27;Socks&#x27;</span>, age: <span class="hljs-literal">null</span>, marked: <span class="hljs-literal">true</span> };</code></pre>
-<h3 id="function-interface">Function interface</h3>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> FindFn {
-  (needle: <span class="hljs-built_in">string</span>, haystack: <span class="hljs-built_in">string</span>[]): <span class="hljs-built_in">boolean</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">janesDog</span>: <span class="hljs-title class_">FuzzyDog</span> = { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Fido&#x27;</span>, <span class="hljs-attr">owner</span>: <span class="hljs-string">&#x27;Jane&#x27;</span>, <span class="hljs-attr">favoriteFood</span>: <span class="hljs-string">&#x27;tripe ration&#x27;</span> };
+<span class="hljs-keyword">let</span> <span class="hljs-attr">strayDog</span>: <span class="hljs-title class_">FuzzyDog</span> = { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Socks&#x27;</span>, <span class="hljs-attr">age</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">marked</span>: <span class="hljs-literal">true</span> };
+</code></pre><h3>Function interface</h3>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">FindFn</span> {
+  (<span class="hljs-attr">needle</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">haystack</span>: <span class="hljs-built_in">string</span>[]): <span class="hljs-built_in">boolean</span>;
 }
 
-<span class="hljs-keyword">let</span> searchForOwner: FindFn = <span class="hljs-function">(<span class="hljs-params">s, names</span>) =&gt;</span> names.includes(s.toLowerCase());</code></pre>
-<h3 id="index-interface">Index interface</h3>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> VeryComplicatedReadonlyArray {
-  <span class="hljs-keyword">readonly</span> [index: <span class="hljs-built_in">number</span>]: <span class="hljs-built_in">string</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">searchForOwner</span>: <span class="hljs-title class_">FindFn</span> = <span class="hljs-function">(<span class="hljs-params">s, names</span>) =&gt;</span> names.<span class="hljs-title function_">includes</span>(s.<span class="hljs-title function_">toLowerCase</span>());
+</code></pre><h3>Index interface</h3>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">VeryComplicatedReadonlyArray</span> {
+  <span class="hljs-keyword">readonly</span> [<span class="hljs-attr">index</span>: <span class="hljs-built_in">number</span>]: <span class="hljs-built_in">string</span>;
 }
-<span class="hljs-keyword">let</span> boyNames: VeryComplicatedReadonlyArray = [ <span class="hljs-string">&#x27;Joe&#x27;</span>, <span class="hljs-string">&#x27;Jack&#x27;</span>, <span class="hljs-string">&#x27;John&#x27;</span> ];
-<span class="hljs-keyword">let</span> girlNames: ReadonlyArray&lt;<span class="hljs-built_in">string</span>&gt; = [ <span class="hljs-string">&#x27;Jane&#x27;</span>, <span class="hljs-string">&#x27;Jill&#x27;</span>, <span class="hljs-string">&#x27;Judy&#x27;</span> ];</code></pre>
-<h3 id="class-interface">Class interface</h3>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> Dog {
-  <span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>;
-  bark (count: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">boyNames</span>: <span class="hljs-title class_">VeryComplicatedReadonlyArray</span> = [ <span class="hljs-string">&#x27;Joe&#x27;</span>, <span class="hljs-string">&#x27;Jack&#x27;</span>, <span class="hljs-string">&#x27;John&#x27;</span> ];
+<span class="hljs-keyword">let</span> <span class="hljs-attr">girlNames</span>: <span class="hljs-title class_">ReadonlyArray</span>&lt;<span class="hljs-built_in">string</span>&gt; = [ <span class="hljs-string">&#x27;Jane&#x27;</span>, <span class="hljs-string">&#x27;Jill&#x27;</span>, <span class="hljs-string">&#x27;Judy&#x27;</span> ];
+</code></pre><h3>Class interface</h3>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Dog</span> {
+  <span class="hljs-attr">type</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-title function_">bark</span> (<span class="hljs-attr">count</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span>;
 }
 
-<span class="hljs-keyword">class</span> GuardDog <span class="hljs-keyword">implements</span> Dog {
-  <span class="hljs-keyword">type</span>: <span class="hljs-string">&#x27;german shepherd&#x27;</span>;
-  bark (count: <span class="hljs-built_in">number</span>) {
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">GuardDog</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Dog</span> {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;german shepherd&#x27;</span>;
+  <span class="hljs-title function_">bark</span> (<span class="hljs-attr">count</span>: <span class="hljs-built_in">number</span>) {
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; count; i++) {
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Woof!&#x27;</span>);
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Woof!&#x27;</span>);
     }
   }
-}</code></pre>
-<h3 id="extending-interface">Extending interface</h3>
+}
+</code></pre><h3>Extending interface</h3>
 <p>Multiple interfaces may be extended at once.</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> Shape {
-  color: <span class="hljs-built_in">string</span>;
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Shape</span> {
+  <span class="hljs-attr">color</span>: <span class="hljs-built_in">string</span>;
 }
 
-<span class="hljs-keyword">interface</span> Circle {
-  radius: <span class="hljs-built_in">number</span>;
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Circle</span> {
+  <span class="hljs-attr">radius</span>: <span class="hljs-built_in">number</span>;
 }
 
-<span class="hljs-keyword">interface</span> Disc <span class="hljs-keyword">extends</span> Shape, Circle {
-  fillColor: <span class="hljs-built_in">string</span>;
-}</code></pre>
-<h3 id="auto-merging-interfaces">Auto-merging interfaces</h3>
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Disc</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Shape</span>, <span class="hljs-title class_">Circle</span> {
+  <span class="hljs-attr">fillColor</span>: <span class="hljs-built_in">string</span>;
+}
+</code></pre><h3>Auto-merging interfaces</h3>
 <p>TS can merge interfaces with the same name (unlike Classes):</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">interface</span> Box {
-    height: <span class="hljs-built_in">number</span>;
-    width: <span class="hljs-built_in">number</span>;
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Box</span> {
+    <span class="hljs-attr">height</span>: <span class="hljs-built_in">number</span>;
+    <span class="hljs-attr">width</span>: <span class="hljs-built_in">number</span>;
 }
 
-<span class="hljs-keyword">interface</span> Box {
-    scale: <span class="hljs-built_in">number</span>;
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Box</span> {
+    <span class="hljs-attr">scale</span>: <span class="hljs-built_in">number</span>;
 }
 
-<span class="hljs-keyword">const</span> box: Box = {height: <span class="hljs-number">1</span>, width: <span class="hljs-number">1</span>, scale: <span class="hljs-number">3</span>}</code></pre>
-</div>
+<span class="hljs-keyword">const</span> <span class="hljs-attr">box</span>: <span class="hljs-title class_">Box</span> = {<span class="hljs-attr">height</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">width</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">scale</span>: <span class="hljs-number">3</span>}
+</code></pre></div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>
 </html>

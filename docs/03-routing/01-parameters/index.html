@@ -252,40 +252,40 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="route-parameters">Route parameters</h1>
+<div class="markdown-body"><h1>Route parameters</h1>
 <ul>
 <li><code>:id</code> → <code>{path: &#39;post/:id&#39;, component: PostPageComponent}</code></li>
 <li>don&#39;t forget to unsubscribe on component destroy!</li>
 </ul>
 <p>Subscribing to parameter changes<br>with <code>ActivatedRoute</code> service from <code>@angular/router</code>:</p>
-<pre class="hljs"><code class="language-typescript">ngOnInit() {
-  <span class="hljs-built_in">this</span>.routeChangeSubscription = <span class="hljs-built_in">this</span>.activatedRoute
-    .paramMap
-    .subscribe(<span class="hljs-function"><span class="hljs-params">params</span> =&gt;</span> {
-      <span class="hljs-built_in">this</span>.id = <span class="hljs-built_in">Number</span>(params.get(<span class="hljs-string">&#x27;id&#x27;</span>));
-      <span class="hljs-built_in">this</span>.getPost();
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">routeChangeSubscription</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">activatedRoute</span>
+    .<span class="hljs-property">paramMap</span>
+    .<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">params</span> =&gt;</span> {
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span> = <span class="hljs-title class_">Number</span>(params.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;id&#x27;</span>));
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getPost</span>();
     });
-}</code></pre>
-<p>Opening links from the template<br>using the <code>routerLink</code> directive:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">&quot;[&#x27;/view/post&#x27;, item.id]&quot;</span>&gt;</span>
+}
+</code></pre><p>Opening links from the template<br>using the <code>routerLink</code> directive:</p>
+<pre class="hljs"><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">&quot;[&#x27;/view/post&#x27;, item.id]&quot;</span>&gt;</span>
   {{ item.title }}
-<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
-<p>Opening links from the component class,<br>using <code>{Router}</code> from <code>@angular/router</code>:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;/view/post&#x27;</span>, { id: item.id }]);</code></pre>
-<h2><a name="1">The current route</a></h2>
+<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre><p>Opening links from the component class,<br>using <code>{Router}</code> from <code>@angular/router</code>:</p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-variable language_">this</span>.<span class="hljs-property">router</span>.<span class="hljs-title function_">navigate</span>([<span class="hljs-string">&#x27;/view/post&#x27;</span>, { <span class="hljs-attr">id</span>: item.<span class="hljs-property">id</span> }]);
+</code></pre><h2><a name="1">The current route</a></h2>
 <p>The current route is available via <code>ActivatedRoute</code>, which has observables to allow us to listen for changes.</p>
 <p>paramMap, queryParamMap, parent, data, url, etc.
 official list is <a href="https://angular.io/guide/router#activated-route">here</a>.</p>
 <h2><a name="2">Router lifecycle</a></h2>
 <p>Router emits all its events (list can be found <a href="https://angular.io/guide/router#router-events">here</a>):</p>
-<pre class="hljs"><code class="language-typescript">ngOnInit() {
-  <span class="hljs-built_in">this</span>.router.events
-    .subscribe(<span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">router</span>.<span class="hljs-property">events</span>
+    .<span class="hljs-title function_">subscribe</span>(<span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
       <span class="hljs-comment">// example: NavigationStart, RoutesRecognized, NavigationEnd</span>
-      <span class="hljs-built_in">console</span>.log(event);
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(event);
     });
-}</code></pre>
-</div>
+}
+</code></pre></div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>
 </html>

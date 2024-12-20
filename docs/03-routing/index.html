@@ -245,7 +245,7 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="routing">Routing</h1>
+<div class="markdown-body"><h1>Routing</h1>
 <ol>
 <li><a href="../03-routing/01-parameters/index.html">Parameters</a></li>
 <li><a href="../03-routing/02-query-parameters/index.html">Query parameters</a></li>
@@ -256,32 +256,32 @@
 <li>info on the current route is available through subscriptions</li>
 </ul>
 <p><em>app.module.ts</em></p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-meta">@NgModule</span>({
-  imports: [
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-meta">@NgModule</span>({
+  <span class="hljs-attr">imports</span>: [
     routing <span class="hljs-comment">// from &quot;app.routes.ts&quot; below</span>
   ],
-  <span class="hljs-comment">// ...</span></code></pre>
-<p><em>app.routes.ts</em></p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">const</span> routes: Routes = [
+  <span class="hljs-comment">// ...</span>
+</code></pre><p><em>app.routes.ts</em></p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [
   <span class="hljs-comment">// redirection</span>
-  {path: <span class="hljs-string">&#x27;&#x27;</span>, redirectTo: <span class="hljs-string">&#x27;view/posts&#x27;</span>, pathMatch: <span class="hljs-string">&#x27;full&#x27;</span>},
+  {<span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-attr">redirectTo</span>: <span class="hljs-string">&#x27;view/posts&#x27;</span>, <span class="hljs-attr">pathMatch</span>: <span class="hljs-string">&#x27;full&#x27;</span>},
   <span class="hljs-comment">// standalone page</span>
-  {path: <span class="hljs-string">&#x27;profile&#x27;</span>, component: ProfilePageComponent},
+  {<span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;profile&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">ProfilePageComponent</span>},
   <span class="hljs-comment">// child view (the sidebar with the widgets is shared)</span>
   {
-    path: <span class="hljs-string">&#x27;view&#x27;</span>,
-    component: ViewComponent,
-    children: [
-      {path: <span class="hljs-string">&#x27;posts&#x27;</span>, component: PostsPageComponent},
-      {path: <span class="hljs-string">&#x27;post/:id&#x27;</span>, component: PostPageComponent}
+    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;view&#x27;</span>,
+    <span class="hljs-attr">component</span>: <span class="hljs-title class_">ViewComponent</span>,
+    <span class="hljs-attr">children</span>: [
+      {<span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;posts&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">PostsPageComponent</span>},
+      {<span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;post/:id&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">PostPageComponent</span>}
     ]
   },
   <span class="hljs-comment">// fallback</span>
-  {path: <span class="hljs-string">&#x27;**&#x27;</span>, component: PageNotFoundComponent}
+  {<span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;**&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">PageNotFoundComponent</span>}
 ];
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> routing = RouterModule.forRoot(routes);</code></pre>
-<h2><a name="1">Target outlets</a></h2>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> routing = <span class="hljs-title class_">RouterModule</span>.<span class="hljs-title function_">forRoot</span>(routes);
+</code></pre><h2><a name="1">Target outlets</a></h2>
 <ul>
 <li>Target slot is <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> in the html template.</li>
 <li>Multiple outlets may be used (must for a child component)</li>

@@ -238,32 +238,32 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="factory-provider">Factory provider</h1>
+<div class="markdown-body"><h1>Factory provider</h1>
 <p>Sometimes the class we want to inject needs to have its own parameters.</p>
 <p>For example I have a cache interceptor that can work with multiple backends (like a web storage service):</p>
-<pre class="hljs"><code class="language-typescript">providers: [
-  RepoService,
-  IssueService,
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-attr">providers</span>: [
+  <span class="hljs-title class_">RepoService</span>,
+  <span class="hljs-title class_">IssueService</span>,
   {
-    provide: HTTP_INTERCEPTORS,
-    useFactory: <span class="hljs-function">() =&gt;</span> {
-      <span class="hljs-keyword">const</span> sessionStorage = <span class="hljs-keyword">new</span> SessionStorageService(); <span class="hljs-comment">// depth -2</span>
-      <span class="hljs-keyword">const</span> httpCacheBackend = <span class="hljs-keyword">new</span> StorageCacheService(sessionStorage); <span class="hljs-comment">// depth -1</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> HttpGetCacheInterceptor(httpCacheBackend); <span class="hljs-comment">// depth 0</span>
+    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">HTTP_INTERCEPTORS</span>,
+    <span class="hljs-attr">useFactory</span>: <span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-keyword">const</span> <span class="hljs-variable language_">sessionStorage</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">SessionStorageService</span>(); <span class="hljs-comment">// depth -2</span>
+      <span class="hljs-keyword">const</span> httpCacheBackend = <span class="hljs-keyword">new</span> <span class="hljs-title class_">StorageCacheService</span>(<span class="hljs-variable language_">sessionStorage</span>); <span class="hljs-comment">// depth -1</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpGetCacheInterceptor</span>(httpCacheBackend); <span class="hljs-comment">// depth 0</span>
     },
-    multi: <span class="hljs-literal">true</span>
+    <span class="hljs-attr">multi</span>: <span class="hljs-literal">true</span>
   }
-]</code></pre>
-<p>(The <code>multi</code> property is only useful for interceptors.)</p>
+]
+</code></pre><p>(The <code>multi</code> property is only useful for interceptors.)</p>
 <p>A factory may have its (injectable) dependencies too - while the above is a bit convoluted, here&#39;s a simpler example:</p>
-<pre class="hljs"><code class="language-typescript">[
+<pre class="hljs"><code class="hljs language-typescript">[
   {
-    provide: PollService,
-    useFactory: <span class="hljs-function">(<span class="hljs-params">logger: Logger</span>) =&gt;</span> <span class="hljs-keyword">new</span> PollService(logger),
-    deps: [Logger]
+    <span class="hljs-attr">provide</span>: <span class="hljs-title class_">PollService</span>,
+    <span class="hljs-attr">useFactory</span>: <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">logger</span>: <span class="hljs-title class_">Logger</span></span>) =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PollService</span>(logger),
+    <span class="hljs-attr">deps</span>: [<span class="hljs-title class_">Logger</span>]
   }
-]</code></pre>
-</div>
+]
+</code></pre></div>
 <script src="../../../main.js?v=2.0.0"></script>
 </body>
 </html>

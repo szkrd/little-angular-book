@@ -245,37 +245,37 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="query-parameters">Query parameters</h1>
+<div class="markdown-body"><h1>Query parameters</h1>
 <ul>
 <li>for example: <code>view/posts?page=2&amp;q=porro</code></li>
 <li>not shown in the route definition</li>
 <li>don&#39;t forget to unsubscribe on component destroy!</li>
 </ul>
 <p>Subscribing to parameter changes<br>with <code>ActivatedRoute</code> service from <code>@angular/router</code>:</p>
-<pre class="hljs"><code class="language-typescript">ngOnInit() {
-  <span class="hljs-built_in">this</span>.routeChangeSubscription = <span class="hljs-built_in">this</span>.activatedRoute
-    .queryParamMap
-    .subscribe(<span class="hljs-function">(<span class="hljs-params">params</span>) =&gt;</span> {
-      <span class="hljs-built_in">this</span>.text = (params.get(<span class="hljs-string">&#x27;q&#x27;</span>) || <span class="hljs-string">&#x27;&#x27;</span>).trim();
-      <span class="hljs-built_in">this</span>.page = <span class="hljs-built_in">Number</span>(params.get(<span class="hljs-string">&#x27;page&#x27;</span>)) || <span class="hljs-number">1</span>;
-      <span class="hljs-built_in">this</span>.searchForPosts();
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">routeChangeSubscription</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">activatedRoute</span>
+    .<span class="hljs-property">queryParamMap</span>
+    .<span class="hljs-title function_">subscribe</span>(<span class="hljs-function">(<span class="hljs-params">params</span>) =&gt;</span> {
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">text</span> = (params.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;q&#x27;</span>) || <span class="hljs-string">&#x27;&#x27;</span>).<span class="hljs-title function_">trim</span>();
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">page</span> = <span class="hljs-title class_">Number</span>(params.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;page&#x27;</span>)) || <span class="hljs-number">1</span>;
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">searchForPosts</span>();
     });
-}</code></pre>
-<p>Opening links from the template<br>using the <code>routerLink</code> directive:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">&quot;[&#x27;/posts&#x27;]&quot;</span> [<span class="hljs-attr">queryParams</span>]=<span class="hljs-string">&quot;{q: searchText}&quot;</span>&gt;</span>
+}
+</code></pre><p>Opening links from the template<br>using the <code>routerLink</code> directive:</p>
+<pre class="hljs"><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">&quot;[&#x27;/posts&#x27;]&quot;</span> [<span class="hljs-attr">queryParams</span>]=<span class="hljs-string">&quot;{q: searchText}&quot;</span>&gt;</span>
   {{searchText}}
-<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
-<p>Opening links from the component class,<br>using <code>{Router}</code> from <code>@angular/router</code>:</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;view/posts&#x27;</span>], {
-  queryParams: {q: <span class="hljs-built_in">this</span>.searchText}
-});</code></pre>
-<h2><a name="1">Combining parameters and query parameters</a></h2>
-<p>💡 Sometimes you want to listen for query param and param change (probably with more complex pages) together.<br>Use <code>combineLatest</code> (from <em>rxjs/observable/combineLatest</em>) to get them both:</p>
-<pre class="hljs"><code class="language-typescript">combineLatest(
-  <span class="hljs-built_in">this</span>.activatedRoute.queryParamMap,
-  <span class="hljs-built_in">this</span>.activatedRoute.paramMap
-).subscribe(<span class="hljs-built_in">this</span>.onRouteAnyParamChange);</code></pre>
-<p>The bound <code>onRouteAnyParamChange</code> will accept an array param, the first item is the queryParam map, the second is the param map.</p>
+<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre><p>Opening links from the component class,<br>using <code>{Router}</code> from <code>@angular/router</code>:</p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-variable language_">this</span>.<span class="hljs-property">router</span>.<span class="hljs-title function_">navigate</span>([<span class="hljs-string">&#x27;view/posts&#x27;</span>], {
+  <span class="hljs-attr">queryParams</span>: {<span class="hljs-attr">q</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">searchText</span>}
+});
+</code></pre><h2><a name="1">Combining parameters and query parameters</a></h2>
+<p>:bulb: Sometimes you want to listen for query param and param change (probably with more complex pages) together.<br>Use <code>combineLatest</code> (from <em>rxjs/observable/combineLatest</em>) to get them both:</p>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-title function_">combineLatest</span>(
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">activatedRoute</span>.<span class="hljs-property">queryParamMap</span>,
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">activatedRoute</span>.<span class="hljs-property">paramMap</span>
+).<span class="hljs-title function_">subscribe</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">onRouteAnyParamChange</span>);
+</code></pre><p>The bound <code>onRouteAnyParamChange</code> will accept an array param, the first item is the queryParam map, the second is the param map.</p>
 </div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>

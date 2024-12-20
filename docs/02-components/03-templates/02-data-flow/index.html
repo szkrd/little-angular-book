@@ -259,26 +259,26 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="data-flow">Data flow</h1>
+<div class="markdown-body"><h1>Data flow</h1>
 <h2><a name="1">via dynamic attributes (props)</a></h2>
-<p>📦 <code>&lt;img [src]=&quot;avatar&quot;&gt;</code></p>
+<p>:package: <code>&lt;img [src]=&quot;avatar&quot;&gt;</code></p>
 <ul>
 <li>usually parent to child</li>
 <li>without the bracket it would be a static string</li>
 <li>force attribute binding (instead of a prop):<br><code>&lt;button [attr.aria-label]=&quot;ariaLabel&quot;&gt;...&lt;/button&gt;</code></li>
 </ul>
 <h2><a name="2">via events</a></h2>
-<p>🍌 <code>&lt;button (click)=&quot;onSave()&quot;&gt;Save&lt;/button&gt;</code></p>
+<p>:banana: <code>&lt;button (click)=&quot;onSave()&quot;&gt;Save&lt;/button&gt;</code></p>
 <ul>
 <li>native events and custom events follow the same format</li>
 <li>usually child to parent</li>
-<li><del><code>&lt;h2 (click)=&quot;onClick&quot;&gt;</code></del> - must be a proper fn <strong>call</strong> 🚫 (not just the name of the function)</li>
+<li><del><code>&lt;h2 (click)=&quot;onClick&quot;&gt;</code></del> - must be a proper fn <strong>call</strong> :no_entry_sign: (not just the name of the function)</li>
 <li><code>&lt;h2 (click)=&quot;onClick($event)&quot;&gt;</code> - MouseEvent argument</li>
 </ul>
-<p>💡 For stop propagation use the <code>$event</code>, but for a prevent default returning false is enough:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;onYearToggleClick(item.year); false&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
-<h2><a name="3">two-way</a></h2>
-<p>📦🍌 (banana in a box) <code>&lt;input [(ngModel)]=&quot;name&quot;&gt;</code></p>
+<p>:bulb: For stop propagation use the <code>$event</code>, but for a prevent default returning false is enough:</p>
+<pre class="hljs"><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;onYearToggleClick(item.year); false&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre><h2><a name="3">two-way</a></h2>
+<p>:package::banana: (banana in a box) <code>&lt;input [(ngModel)]=&quot;name&quot;&gt;</code></p>
 <ul>
 <li><code>[(size)]</code> === <code>[size]</code> + <code>(sizeChange)</code></li>
 <li>one can manually implement this in a component with <em>@Input size</em> and <em>@Output sizeChange</em> (EventEmitter<number>)</li>

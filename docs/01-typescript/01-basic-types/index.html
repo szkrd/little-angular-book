@@ -280,34 +280,34 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="basic-types">Basic types</h1>
+<div class="markdown-body"><h1>Basic types</h1>
 <h2><a name="1">simple types</a></h2>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">let</span> isFoo: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">true</span>;
-<span class="hljs-keyword">let</span> name: <span class="hljs-built_in">string</span> = <span class="hljs-string">&#x27;Peter Parker&#x27;</span>;
-<span class="hljs-keyword">let</span> answer: <span class="hljs-built_in">number</span> = <span class="hljs-number">42</span>;</code></pre>
-<h2><a name="2">arrays and readonly arrays</a></h2>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">let</span> lotteryNumbers: <span class="hljs-built_in">number</span>[] = [<span class="hljs-number">22</span>, <span class="hljs-number">48</span>, <span class="hljs-number">16</span>, <span class="hljs-number">45</span>, <span class="hljs-number">7</span>];
-<span class="hljs-keyword">let</span> dogs: <span class="hljs-built_in">Array</span>&lt;<span class="hljs-built_in">string</span>&gt; = [ <span class="hljs-string">&#x27;Fido&#x27;</span>, <span class="hljs-string">&#x27;Butch&#x27;</span>, <span class="hljs-string">&#x27;Killer&#x27;</span>, <span class="hljs-string">&#x27;Snoopy&#x27;</span> ];
-<span class="hljs-keyword">let</span> cats: ReadonlyArray&lt;<span class="hljs-built_in">string</span>&gt; = [ <span class="hljs-string">&#x27;Princess&#x27;</span>, <span class="hljs-string">&#x27;Shadow&#x27;</span>, <span class="hljs-string">&#x27;Tabby&#x27;</span>, <span class="hljs-string">&#x27;Puffy&#x27;</span>]; <span class="hljs-comment">// with mutators removed</span>
-<span class="hljs-keyword">let</span> whatevs: <span class="hljs-built_in">any</span>[] = [ <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-number">42</span>, <span class="hljs-literal">true</span> ];</code></pre>
-<h2><a name="3">tuples</a></h2>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">isFoo</span>: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">&#x27;Peter Parker&#x27;</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">answer</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">42</span>;
+</code></pre><h2><a name="2">arrays and readonly arrays</a></h2>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">lotteryNumbers</span>: <span class="hljs-built_in">number</span>[] = [<span class="hljs-number">22</span>, <span class="hljs-number">48</span>, <span class="hljs-number">16</span>, <span class="hljs-number">45</span>, <span class="hljs-number">7</span>];
+<span class="hljs-keyword">let</span> <span class="hljs-attr">dogs</span>: <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">string</span>&gt; = [ <span class="hljs-string">&#x27;Fido&#x27;</span>, <span class="hljs-string">&#x27;Butch&#x27;</span>, <span class="hljs-string">&#x27;Killer&#x27;</span>, <span class="hljs-string">&#x27;Snoopy&#x27;</span> ];
+<span class="hljs-keyword">let</span> <span class="hljs-attr">cats</span>: <span class="hljs-title class_">ReadonlyArray</span>&lt;<span class="hljs-built_in">string</span>&gt; = [ <span class="hljs-string">&#x27;Princess&#x27;</span>, <span class="hljs-string">&#x27;Shadow&#x27;</span>, <span class="hljs-string">&#x27;Tabby&#x27;</span>, <span class="hljs-string">&#x27;Puffy&#x27;</span>]; <span class="hljs-comment">// with mutators removed</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">whatevs</span>: <span class="hljs-built_in">any</span>[] = [ <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-number">42</span>, <span class="hljs-literal">true</span> ];
+</code></pre><h2><a name="3">tuples</a></h2>
 <p>Arrays with fixed number of items.</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">let</span> buyThis: [ <span class="hljs-built_in">string</span>, <span class="hljs-built_in">number</span> ] = [ <span class="hljs-string">&#x27;eggs&#x27;</span>, <span class="hljs-number">6</span> ];</code></pre>
-<h2><a name="4">enums</a></h2>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">buyThis</span>: [ <span class="hljs-built_in">string</span>, <span class="hljs-built_in">number</span> ] = [ <span class="hljs-string">&#x27;eggs&#x27;</span>, <span class="hljs-number">6</span> ];
+</code></pre><h2><a name="4">enums</a></h2>
 <p>Array of named numbers. It&#39;s possible to use strings, instead of numbers though.</p>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-built_in">enum</span> states { SelectAirport, PickDate, SetPassengerCount } <span class="hljs-comment">// 0, 1, 2</span>
-<span class="hljs-keyword">let</span> currentState: states = states.SelectAirport;</code></pre>
-<h2><a name="5">void, null, undefined, never</a></h2>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">let</span> run = (s: <span class="hljs-built_in">string</span>): <span class="hljs-function"><span class="hljs-params">void</span> =&gt;</span> { <span class="hljs-built_in">console</span>.log(s); };
-<span class="hljs-keyword">let</span> thinAir: <span class="hljs-literal">null</span> = <span class="hljs-literal">null</span>;
-<span class="hljs-keyword">let</span> horror: <span class="hljs-literal">undefined</span>;
-<span class="hljs-keyword">let</span> die = <span class="hljs-function">(<span class="hljs-params">lastWords: <span class="hljs-built_in">string</span>[]</span>) =&gt;</span> { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(lastWords.join(<span class="hljs-string">&#x27;, &#x27;</span>)); };</code></pre>
-<h2><a name="6">type assertion (type casting)</a></h2>
-<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">let</span> cat = <span class="hljs-string">&#x27;Garfield&#x27;</span>; <span class="hljs-comment">// implicit string, let&#x27;s say this variable is coming outside of TS</span>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">enum</span> states { <span class="hljs-title class_">SelectAirport</span>, <span class="hljs-title class_">PickDate</span>, <span class="hljs-title class_">SetPassengerCount</span> } <span class="hljs-comment">// 0, 1, 2</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">currentState</span>: states = states.<span class="hljs-property">SelectAirport</span>;
+</code></pre><h2><a name="5">void, null, undefined, never</a></h2>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">let</span> run = (<span class="hljs-attr">s</span>: <span class="hljs-built_in">string</span>): <span class="hljs-function"><span class="hljs-params">void</span> =&gt;</span> { <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(s); };
+<span class="hljs-keyword">let</span> <span class="hljs-attr">thinAir</span>: <span class="hljs-literal">null</span> = <span class="hljs-literal">null</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">horror</span>: <span class="hljs-literal">undefined</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">die</span> = (<span class="hljs-params"><span class="hljs-attr">lastWords</span>: <span class="hljs-built_in">string</span>[]</span>) =&gt; { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(lastWords.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;, &#x27;</span>)); };
+</code></pre><h2><a name="6">type assertion (type casting)</a></h2>
+<pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">let</span> cat = <span class="hljs-string">&#x27;Garfield&#x27;</span>; <span class="hljs-comment">// implicit string, let&#x27;s say this variable is coming outside of TS</span>
 
-<span class="hljs-keyword">let</span> catNameLen = (cat <span class="hljs-keyword">as</span> <span class="hljs-built_in">string</span>).length; <span class="hljs-comment">// tsx safe syntax</span>
-<span class="hljs-keyword">let</span> catNameLen = &lt;<span class="hljs-built_in">string</span>&gt;cat.length;</code></pre>
-</div>
+<span class="hljs-keyword">let</span> catNameLen = (cat <span class="hljs-keyword">as</span> <span class="hljs-built_in">string</span>).<span class="hljs-property">length</span>; <span class="hljs-comment">// tsx safe syntax</span>
+<span class="hljs-keyword">let</span> catNameLen = &lt;<span class="hljs-built_in">string</span>&gt;cat.<span class="hljs-property">length</span>;
+</code></pre></div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>
 </html>
