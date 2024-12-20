@@ -88,4 +88,5 @@ Spy naming (`aName`) is optional, like most other parameters (lots of :duck: typ
   - **toHaveBeenCalledBefore**: `expect(mySpy).toHaveBeenCalledBefore(otherSpy);`
   - **toHaveBeenCalledTimes**: `expect(mySpy).toHaveBeenCalledTimes(3);`
   - **toHaveBeenCalledWith**: `expect(mySpy).toHaveBeenCalledWith('foo', 'bar', 2);`
+  - **toHaveBeenNthCalledWith**: `expect(mySpy).toHaveBeenNthCalledWith(1, data);`
   - reset the call counter: `mySpy.calls.reset()`

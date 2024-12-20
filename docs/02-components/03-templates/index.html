@@ -207,6 +207,18 @@
             
         </div>
     
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../06-testing/02-snippets/index.html">Snippets</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../06-testing/03-templates/index.html">Templates</a>
+            
+        </div>
+    
         <div class="menu-item depth-2 ">
             ▸
             <a href="../../07-observables/index.html">Observables</a>
@@ -248,7 +260,8 @@
  <code>[class]=&quot;isOpen ? &#39;far fa-minus-square&#39; : &#39;far fa-plus-square&#39;&quot;</code>,<br>
  <code>[class]=&quot;[&#39;pill&#39;, &#39;pill-&#39; + name]&quot;</code>,<br>
  <code>[class]=&quot;{&#39;hidden&#39;: !isVisible, &#39;expanded&#39;: isExpanded}&quot;</code></li>
-<li><code>[style]</code>, <code>[style.width.%]</code>, <code>[style.width.px]</code></li>
+<li><code>[style]</code>, <code>[style.width.%]</code>, <code>[style.width.px]</code>,<br>
+<code>[style]=&quot;getStyle()&quot;</code> where the function returns a <code>style: Partial&lt;CSSStyleDeclaration&gt; = {}</code> object</li>
 <li><code>[attr.colspan]=&quot;colCount&quot;</code>, <code>[attr.disabled]=&quot;!canSubmit&quot;</code></li>
 <li><code>[ngClass]</code>, <code>[ngStyle]</code> = classic directive, 👴 <a href="https://github.com/angular/angular/pull/58860">probably will be</a>
  <a href="https://angular.schule/blog/2024-11-ngclass-ngstyle">deprecated</a></li>

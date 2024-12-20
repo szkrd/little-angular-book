@@ -117,16 +117,9 @@
             
         </div>
     
-        <div class="menu-item depth-3 selected">
+        <div class="menu-item depth-3 ">
             ▹
             <a href="../../02-components/04-styles/index.html">Styles</a>
-            
-                <div class="menu-section depth-4">
-                    ◦
-                    <a href="#1">
-                        Global styles
-                    </a>
-                </div>
             
         </div>
     
@@ -214,9 +207,51 @@
             
         </div>
     
-        <div class="menu-item depth-3 ">
+        <div class="menu-item depth-3 selected">
             ▹
             <a href="../../06-testing/02-snippets/index.html">Snippets</a>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#1">
+                        let
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#2">
+                        rx
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#3">
+                        mock store
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#4">
+                        fixture
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#5">
+                        spies
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#6">
+                        jest fake time
+                    </a>
+                </div>
             
         </div>
     
@@ -245,47 +280,50 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="styles">Styles</h1>
+<div class="markdown-body"><h1 id="snippets">Snippets</h1>
+<h2><a name="1">let</a></h2>
 <ul>
-<li>Styles are scoped (by default in an emulated fashion, but one can enable real shadow DOM styles with <code>encapsulation: ViewEncapsulation.Native</code>)</li>
-<li>If you are using an <strong>element</strong> selector in <code>@Component</code> then your element will be in the DOM! Use the <code>:host</code> selector to style it.<ul>
-<li><code>:host</code>: the current root element</li>
-<li><code>:host(.active)</code>: the current root element with a class</li>
-<li><code>:host-context(.theme-monokai)</code>: has a parent up the chain with the given class</li>
-<li>you can circumvent this behaviour (think of svg) with class or attribute selectors!</li>
+<li>Event: <code>let eventMock: jasmine.SpyObj&lt;Event&gt;</code></li>
+<li>Router: <code>let routerMock: jasmine.SpyObj&lt;Router&gt;</code></li>
+<li>FooService: <code>let fooServiceMock: jasmine.SpyObj&lt;FooService&gt;</code></li>
+<li>LoggerService: <code>let loggerServiceMock: jasmine.SpyObj&lt;LoggerService&gt;</code></li>
 </ul>
-</li>
-<li>Applying styles (in <code>@Component</code>)<ul>
-<li><code>styleUrls: []</code></li>
-<li><code>styles: []</code></li>
-<li>inside the <code>template</code> prop with <code>&lt;style&gt;&lt;/style&gt;</code></li>
-</ul>
-</li>
-</ul>
-<pre class="hljs"><code class="language-scss">:host {
-  display: block;
-  <span class="hljs-attribute">flex</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">200px</span>;
-}
-
-:host-context(.theme-monokai) {
-  background-color: <span class="hljs-number">#333</span>;
-}
-
-<span class="hljs-selector-tag">h2</span> {
-  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
-}
-</code></pre>
-<p>💣 <code>ViewEncapsulation.None</code> will destroy a component&#39;s boundaries (and will force Angular to duplicate their style in every shadowed element).</p>
-<h2><a name="1">Global styles</a></h2>
-<p>Shadow roots can&#39;t get global styles due to their encapsulated nature (<code>/deep/</code>, <code>::ng-deep</code>, <code>&gt;&gt;&gt;</code> has been deprecated).</p>
-<p>Some tips:</p>
+<h2><a name="2">rx</a></h2>
 <ul>
-<li>you can use a common scss if you keep it to the bare minimum</li>
-<li><code>@import &quot;~common.scss&quot;;</code> may be used with absolute paths</li>
-<li>use <code>stylePreprocessorOptions.includePaths</code> in <code>.angular-cli.json</code> and then you can omit the tilde and the extension, more <a href="https://github.com/angular/angular-cli/wiki/stories-global-styles">here</a></li>
+<li>Obsevable: <code>foobarMock.corgeMethod.and.returnValue(of())</code></li>
+<li>Error: <code>foobarMock.corgeMethod.and.returnValue(throwError(() =&gt; error))</code></li>
 </ul>
-<p>💣 Such an import will duplicate the css everywhere it has been included (checked the prod build).</p>
-<p>💣 Css will have mixin support with the <a href="https://tabatkins.github.io/specs/css-apply-rule/">@apply</a> rule, but right now it&#39;s not yet supported anywhere.</p>
+<h2><a name="3">mock store</a></h2>
+<ul>
+<li>Store: <code>let mockStore$: MockStore&lt;PartialDeep&lt;IAppState&gt;&gt;</code></li>
+<li>Store provide: <code>provideMockStore&lt;PartialDeep&lt;IAppState&gt;&gt;({ initialState: { ... } }),</code></li>
+<li>Store assignment: <code>mockStore$ = TestBed.inject(Store) as MockStore&lt;PartialDeep&lt;IAppState&gt;&gt;</code></li>
+<li>Refresh state: <code>mockStore$.refreshState()</code></li>
+<li>Override selector: <code>mockStore$.overrideSelector(selectFoobar, value)</code></li>
+<li>Spy on dispatch: <code>spyOn(mockStore$, &#39;dispatch&#39;)</code> and then check with <code>expect(mockStore$.dispatch).toHaveBeenCalledWith(dispatchedAction)</code></li>
+</ul>
+<h2><a name="4">fixture</a></h2>
+<ul>
+<li>Get child: <code>fixture.debugElement.query(By.directive(FoobarMockComponent)).componentInstance</code></li>
+<li>Get children: <code>fixture.debugElement.queryAll(By.directive(FoobarMockComponent)).map(debugEl =&gt; debugEl.componentInstance)</code></li>
+<li>Force detect changes: <code>fixture.detectChanges()</code> (sometimes you may need to &quot;wait&quot; a bit: <code>await fixture.whenStable()</code>)</li>
+<li>Initial component creation: <code>fixture = TestBed.createComponent(FoobarComponent)</code> and then <code>component = fixture.componentInstance</code></li>
+<li>Set input prop (standalone component): <code>fixture.componentRef.setInput(&#39;inputName&#39;, value)</code></li>
+</ul>
+<h2><a name="5">spies</a></h2>
+<ul>
+<li>Create spy object: <code>jasmine.createSpyObj(&#39;fooService&#39;, [&#39;method&#39;])</code></li>
+<li>Router: <code>routerMock = jasmine.createSpyObj&lt;Router&gt;(&#39;Router&#39;, [&#39;navigate&#39;])</code></li>
+<li>Event: <code>eventMock = jasmine.createSpyObj&lt;MouseEvent&gt;(&#39;clickEvent&#39;, [&#39;stopPropagation&#39;])</code></li>
+<li>Logger: <code>loggerServiceMock = jasmine.createSpyObj&lt;LoggerService&gt;(&#39;LoggerService&#39;, [&#39;warn&#39;, &#39;info&#39;])</code></li>
+<li>Spy on an emit: <code>spyOn(component.fooEvent, &#39;emit&#39;)</code></li>
+</ul>
+<h2><a name="6">jest fake time</a></h2>
+<ul>
+<li>Use fake timer: <code>jest.useFakeTimers()</code> and then <code>.setSystemTime(new Date(&#39;2020-01-01&#39;))</code></li>
+<li>Stop using fake timers: <code>jest.useRealTimers()</code></li>
+<li>Run all timers: <code>jest.runAllTimers()</code></li>
+</ul>
 </div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>
