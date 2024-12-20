@@ -117,16 +117,9 @@
             
         </div>
     
-        <div class="menu-item depth-3 selected">
+        <div class="menu-item depth-3 ">
             ▹
             <a href="../../02-components/04-styles/index.html">Styles</a>
-            
-                <div class="menu-section depth-4">
-                    ◦
-                    <a href="#1">
-                        Global styles
-                    </a>
-                </div>
             
         </div>
     
@@ -220,9 +213,23 @@
             
         </div>
     
-        <div class="menu-item depth-3 ">
+        <div class="menu-item depth-3 selected">
             ▹
             <a href="../../06-testing/03-templates/index.html">Templates</a>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#1">
+                        Standalone service
+                    </a>
+                </div>
+            
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#2">
+                        Standalone component
+                    </a>
+                </div>
             
         </div>
     
@@ -245,47 +252,97 @@
         </div>
     
 </div>
-<div class="markdown-body"><h1 id="styles">Styles</h1>
-<ul>
-<li>Styles are scoped (by default in an emulated fashion, but one can enable real shadow DOM styles with <code>encapsulation: ViewEncapsulation.Native</code>)</li>
-<li>If you are using an <strong>element</strong> selector in <code>@Component</code> then your element will be in the DOM! Use the <code>:host</code> selector to style it.<ul>
-<li><code>:host</code>: the current root element</li>
-<li><code>:host(.active)</code>: the current root element with a class</li>
-<li><code>:host-context(.theme-monokai)</code>: has a parent up the chain with the given class</li>
-<li>you can circumvent this behaviour (think of svg) with class or attribute selectors!</li>
-</ul>
-</li>
-<li>Applying styles (in <code>@Component</code>)<ul>
-<li><code>styleUrls: []</code></li>
-<li><code>styles: []</code></li>
-<li>inside the <code>template</code> prop with <code>&lt;style&gt;&lt;/style&gt;</code></li>
-</ul>
-</li>
-</ul>
-<pre class="hljs"><code class="language-scss">:host {
-  display: block;
-  <span class="hljs-attribute">flex</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">200px</span>;
-}
+<div class="markdown-body"><h1 id="templates">Templates</h1>
+<h2><a name="1">Standalone service</a></h2>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> { TestBed } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core/testing&#x27;</span>;
+<span class="hljs-keyword">import</span> { FooBarService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./foo-bar.service&#x27;</span>;
 
-:host-context(.theme-monokai) {
-  background-color: <span class="hljs-number">#333</span>;
-}
+describe(<span class="hljs-string">&#x27;FooBarService&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">let</span> loggerServiceMock: jasmine.SpyObj&lt;LoggerService&gt;;
 
-<span class="hljs-selector-tag">h2</span> {
-  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
-}
-</code></pre>
-<p>💣 <code>ViewEncapsulation.None</code> will destroy a component&#39;s boundaries (and will force Angular to duplicate their style in every shadowed element).</p>
-<h2><a name="1">Global styles</a></h2>
-<p>Shadow roots can&#39;t get global styles due to their encapsulated nature (<code>/deep/</code>, <code>::ng-deep</code>, <code>&gt;&gt;&gt;</code> has been deprecated).</p>
-<p>Some tips:</p>
+    beforeEach(<span class="hljs-function">() =&gt;</span> {
+        loggerServiceMock = jasmine.createSpyObj&lt;LoggerService&gt;(<span class="hljs-string">&#x27;LoggerService&#x27;</span>, [<span class="hljs-string">&#x27;error&#x27;</span>]);
+
+        TestBed.configureTestingModule({
+            providers: [
+                FooBarService,
+                { provide: LoggerService, useValue: loggerServiceMock },
+            ],
+        });
+    });
+
+    it(<span class="hljs-string">&#x27;should create&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-comment">// Assert</span>
+        expect(service).toBeInstanceOf(FooBarService);
+    });
+
+    describe(<span class="hljs-string">&#x27;something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        it(<span class="hljs-string">&#x27;should do something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+            <span class="hljs-comment">// Arrange</span>
+            <span class="hljs-comment">// Act</span>
+            <span class="hljs-comment">// Assert</span>
+            expect(<span class="hljs-number">1</span>).toBe(<span class="hljs-number">1</span>);
+        });
+    });
+});</code></pre>
+<h2><a name="2">Standalone component</a></h2>
 <ul>
-<li>you can use a common scss if you keep it to the bare minimum</li>
-<li><code>@import &quot;~common.scss&quot;;</code> may be used with absolute paths</li>
-<li>use <code>stylePreprocessorOptions.includePaths</code> in <code>.angular-cli.json</code> and then you can omit the tilde and the extension, more <a href="https://github.com/angular/angular-cli/wiki/stories-global-styles">here</a></li>
+<li>Since Angular 19 all components will be (are) standalone by default, the <code>standalone: true</code> can be omitted then.</li>
+<li>With <code>componentRef.setInput</code> there is no more need for a wrapper component.</li>
 </ul>
-<p>💣 Such an import will duplicate the css everywhere it has been included (checked the prod build).</p>
-<p>💣 Css will have mixin support with the <a href="https://tabatkins.github.io/specs/css-apply-rule/">@apply</a> rule, but right now it&#39;s not yet supported anywhere.</p>
+<pre class="hljs"><code class="language-typescript"><span class="hljs-keyword">import</span> { ChangeDetectionStrategy, Component } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
+<span class="hljs-keyword">import</span> { ComponentFixture, TestBed } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core/testing&#x27;</span>;
+<span class="hljs-keyword">import</span> { Router } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/router&#x27;</span>;
+<span class="hljs-keyword">import</span> { FooBarComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./foo-bar.component&#x27;</span>;
+
+<span class="hljs-meta">@Component</span>({
+    selector: <span class="hljs-string">&#x27;tt-corge-mock-component&#x27;</span>,
+    standalone: <span class="hljs-literal">true</span>,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+})
+<span class="hljs-keyword">class</span> CorgeMockComponent {}
+
+describe(<span class="hljs-string">&#x27;FooBarComponent&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">let</span> component: FooBarComponent;
+    <span class="hljs-keyword">let</span> fixture: ComponentFixture&lt;FooBarComponent&gt;;
+    <span class="hljs-keyword">let</span> routerSpy: jasmine.SpyObj&lt;Router&gt;;
+
+    beforeEach(<span class="hljs-keyword">async</span> () =&gt; {
+        routerSpy = jasmine.createSpyObj(<span class="hljs-string">&#x27;router&#x27;</span>, [<span class="hljs-string">&#x27;navigateByUrl&#x27;</span>]);
+
+        <span class="hljs-keyword">await</span> TestBed.configureTestingModule({
+            imports: [ RouterTestingModule, NoopAnimationsModule ], <span class="hljs-comment">// angular modules</span>
+            providers: [
+              { provide: Router, useValue: routerSpy }, <span class="hljs-comment">// injected deps</span>
+              ],
+        }).overrideComponent(FooBarComponent, {
+            remove: {
+                imports: [CorgeComponent], <span class="hljs-comment">// real children</span>
+            },
+            add: {
+                imports: [CorgeMockComponent], <span class="hljs-comment">// mock children</span>
+            },
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(FooBarComponent);
+        component = fixture.componentInstance;
+        fixture.componentRef.setInput(<span class="hljs-string">&#x27;fooInput&#x27;</span>, { foo: <span class="hljs-number">42</span> });
+    });
+
+    it(<span class="hljs-string">&#x27;should create&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-comment">// Assert</span>
+        expect(component).toBeInstanceOf(FooBarComponent);
+    });
+
+    describe(<span class="hljs-string">&#x27;something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        it(<span class="hljs-string">&#x27;should do something&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+            <span class="hljs-comment">// Arrange</span>
+            <span class="hljs-comment">// Act</span>
+            <span class="hljs-comment">// Assert</span>
+            expect(<span class="hljs-number">1</span>).toBe(<span class="hljs-number">1</span>);
+        });
+    });
+});</code></pre>
 </div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>

@@ -1,3 +1,5 @@
+const serveHandler = require('serve-handler')
+const http = require('http')
 const shelljs = require('shelljs')
 const fs = require('fs')
 const { promisify } = require('util')
@@ -166,7 +168,7 @@ async function main() {
           v: version,
           root: relativeRoot,
           menuItems: localMenuItems,
-        })
+        }),
       )
     }
 
@@ -192,3 +194,14 @@ async function main() {
 main().catch((error) => {
   console.error(error)
 })
+
+// on Windows we have file locking errors if serve is running in another process
+// so it's just easier to relaunch it after the build process; it still takes
+// only a second or so...
+if (args.includes('--serve')) {
+  const port = 5000;
+  const server = http.createServer((request, response) => serveHandler(request, response, { public: 'docs' }))
+  server.listen(port, () => {
+    console.log(`Running at http://localhost:${port}`)
+  })
+}
