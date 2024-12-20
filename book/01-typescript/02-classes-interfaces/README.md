@@ -1,6 +1,6 @@
 # Classes and interfaces
 
-:bulb: TypeScript, unlike Java, understands types as **shapes**.
+:light_bulb: TypeScript, unlike Java, understands types as **shapes**.
 
 If a class quacks and walks like a duck and an interface quacks and walks like a duck then they are interchangeable from TypeScript's point of view (at least as a definition).
 

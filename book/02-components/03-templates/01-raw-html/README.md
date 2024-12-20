@@ -4,7 +4,7 @@
 <div [innerHTML]="message"></div>
 ```
 
-:exclamation: This will still go through a sanitizer, so inline styles, scripts and urls are going to be stripped out (the sanitizer pipe solution below is by [Günter Zöchbauer](https://stackoverflow.com/a/37076868)).
+:exclamation_mark: This will still go through a sanitizer, so inline styles, scripts and urls are going to be stripped out (the sanitizer pipe solution below is by [Günter Zöchbauer](https://stackoverflow.com/a/37076868)).
 
 Possible sanitizers: style, html, script, url, resource url.
 

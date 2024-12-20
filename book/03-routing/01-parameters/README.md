@@ -3,8 +3,7 @@
 - `:id` → `{path: 'post/:id', component: PostPageComponent}`
 - don't forget to unsubscribe on component destroy!
 
-Subscribing to parameter changes  
-with `ActivatedRoute` service from `@angular/router`:
+**Subscribing** to parameter **changes** with `ActivatedRoute` service from `@angular/router`:
 
 ```typescript
 ngOnInit() {
@@ -17,8 +16,10 @@ ngOnInit() {
 }
 ```
 
-Opening links from the template  
-using the `routerLink` directive:
+Or if we need only a single immutable snapshot, then: `this.activatedRoute.snapshot.params.id;`  
+(if you only want to support page reload, but everything else happens inside the app, then just get the params in `ngOnInit`).
+
+Opening links from the template using the `routerLink` directive:
 
 ```html
 <a [routerLink]="['/view/post', item.id]">

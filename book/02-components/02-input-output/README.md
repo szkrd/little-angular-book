@@ -31,7 +31,7 @@ ngOnChanges (changes) {
 }
 ```
 
-:exclamation: One can use getters and setters to emulate computed observable behaviour (eg. modify internal variable B when input A changes), but performance-wise it's NOT recommended.
+:exclamation_mark: One can use getters and setters to emulate computed observable behaviour (eg. modify internal variable B when input A changes), but performance-wise it's NOT recommended.
 
 :bomb: Circumventing an I/O interface:
 

@@ -261,7 +261,7 @@
   <span class="hljs-keyword">return</span> [...<span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>(items)];
 }
 </code></pre><h2><a name="1">Advanced uses</a></h2>
-<p>:rocket: Object and property constraints (<code>key of</code>):</p>
+<p>🚀 Object and property constraints (<code>key of</code>):</p>
 <pre class="hljs"><code class="hljs language-typescript"><span class="hljs-comment">//                    &quot;key&quot; must extend a key of &quot;obj&quot; </span>
 <span class="hljs-comment">//                      ↓</span>
 <span class="hljs-keyword">function</span> getProperty&lt;T, K <span class="hljs-keyword">extends</span> keyof T&gt; (<span class="hljs-attr">obj</span>: T, <span class="hljs-attr">key</span>: K) {
@@ -271,7 +271,7 @@
 <span class="hljs-keyword">let</span> x = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">c</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">d</span>: <span class="hljs-number">4</span> };
 <span class="hljs-title function_">getProperty</span>(x, <span class="hljs-string">&#x27;a&#x27;</span>); <span class="hljs-comment">// for statically created objects only of course</span>
 <span class="hljs-title function_">getProperty</span>(x, <span class="hljs-string">&#x27;e&#x27;</span>); <span class="hljs-comment">// will trigger a warning</span>
-</code></pre><p>:rocket: Class types for factories:</p>
+</code></pre><p>🚀 Class types for factories:</p>
 <pre class="hljs"><code class="hljs language-typescript"><span class="hljs-comment">//              Type of Klass</span>
 <span class="hljs-comment">//              ↓</span>
 <span class="hljs-keyword">function</span> create&lt;T&gt; (<span class="hljs-title class_">Klass</span>: {<span class="hljs-title function_">new</span>(): T;}, <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>): T {

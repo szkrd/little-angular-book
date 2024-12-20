@@ -31,11 +31,11 @@ I (as the omnipotent narrator) will try to keep my snarky comments out of this b
 
 ## Icons
 
-- :no_entry_sign: - not working
-- :bulb: - interesting fact
+- :no_entry: - not working
+- :light_bulb: - interesting fact
 - :rocket: - non trivial or complicated (rocket science)
-- :question: - questionable statement
-- :exclamation: - notice or warning
+- :question_mark: - questionable statement
+- :exclamation_mark: - notice or warning
 - :bomb: - bad idea
-- :older_man: - deprecation
+- :old_man: - deprecation
 

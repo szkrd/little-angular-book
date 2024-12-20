@@ -239,14 +239,18 @@
     
 </div>
 <div class="markdown-body"><h1>Lifecycle events</h1>
-<p>:bulb: The most important ones
-are<br><strong>ngOnChanges</strong> :door:, <strong>ngOnInit</strong> :alarm_clock: and <strong>ngOnDestroy</strong> :bomb:!</p>
+<p>💡 The most important ones are:</p>
+<ol>
+<li>⏰ <strong>ngOnInit</strong></li>
+<li>🚪 <strong>ngOnChanges</strong></li>
+<li>⚰️ <strong>ngOnDestroy</strong></li>
+</ol>
 <p>All events:</p>
 <ul>
 <li>(constructor): instanciation; set initial variables, but possibly <strong>nothing else</strong> here! You have no incoming data / input prop values!</li>
-<li><code>ngOnChanges()</code>: incoming input	</li>
+<li><code>ngOnChanges()</code>: incoming input; <code>SimpleChanges</code> does NOT support generic <code>&lt;T&gt;</code> (<a href="https://github.com/angular/angular/issues/17560">feature request since 2017</a>)</li>
 <li><code>ngOnInit()</code>: component init, fetch data here if you must</li>
-<li><code>ngDoCheck()</code>: it runs on every detection, so <strong>avoid it</strong> like the plague, unless you really know what you&#39;re doing :no_entry_sign:</li>
+<li><code>ngDoCheck()</code>: it runs on every detection, so <strong>avoid it</strong> like the plague, unless you really know what you&#39;re doing ⛔</li>
 <li>for projected (transcluded) content and children related:	<ul>
 <li><code>ngAfterContentInit()</code>: transcluded content initialized</li>
 <li><code>ngAfterContentChecked()</code>    </li>

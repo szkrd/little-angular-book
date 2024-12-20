@@ -240,7 +240,7 @@
 </div>
 <div class="markdown-body"><h1>Raw HTML</h1>
 <pre class="hljs"><code class="hljs">&lt;div [innerHTML]=&quot;message&quot;&gt;&lt;/div&gt;
-</code></pre><p>:exclamation: This will still go through a sanitizer, so inline styles, scripts and urls are going to be stripped out (the sanitizer pipe solution below is by <a href="https://stackoverflow.com/a/37076868">Günter Zöchbauer</a>).</p>
+</code></pre><p>❗ This will still go through a sanitizer, so inline styles, scripts and urls are going to be stripped out (the sanitizer pipe solution below is by <a href="https://stackoverflow.com/a/37076868">Günter Zöchbauer</a>).</p>
 <p>Possible sanitizers: style, html, script, url, resource url.</p>
 <pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pipe</span>, <span class="hljs-title class_">PipeTransform</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
 <span class="hljs-keyword">import</span> { <span class="hljs-title class_">DomSanitizer</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/platform-browser&#x27;</span>;

@@ -270,7 +270,7 @@
   <span class="hljs-attr">queryParams</span>: {<span class="hljs-attr">q</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">searchText</span>}
 });
 </code></pre><h2><a name="1">Combining parameters and query parameters</a></h2>
-<p>:bulb: Sometimes you want to listen for query param and param change (probably with more complex pages) together.<br>Use <code>combineLatest</code> (from <em>rxjs/observable/combineLatest</em>) to get them both:</p>
+<p>💡 Sometimes you want to listen for query param and param change (probably with more complex pages) together.<br>Use <code>combineLatest</code> (from <em>rxjs/observable/combineLatest</em>) to get them both:</p>
 <pre class="hljs"><code class="hljs language-typescript"><span class="hljs-title function_">combineLatest</span>(
   <span class="hljs-variable language_">this</span>.<span class="hljs-property">activatedRoute</span>.<span class="hljs-property">queryParamMap</span>,
   <span class="hljs-variable language_">this</span>.<span class="hljs-property">activatedRoute</span>.<span class="hljs-property">paramMap</span>

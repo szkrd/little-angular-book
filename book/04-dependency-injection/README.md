@@ -15,6 +15,6 @@ Since those dependencies may need their own parameters, may have already been in
   - _@Host_ will not walk further than the current host
   - _@Optional_ set the non-existent dependency to null
 
-:exclamation: Place global dependencies in `@NgModule` - they are going to be instanciated only once.
+:exclamation_mark: Place global dependencies in `@NgModule` - they are going to be instanciated only once.
 
-:bulb: During testing one can easily inject mock dependencies instead of real ones.
+:light_bulb: During testing one can easily inject mock dependencies instead of real ones.

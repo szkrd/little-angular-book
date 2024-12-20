@@ -257,8 +257,8 @@
 </code></pre><p>As indicated in the comment, this is a shortcut for
 <code>[{ provide: PostsService, useClass: PostsService }]</code>.</p>
 <p>Use <code>useClass</code> to replace the dependency with any other class (for example during testing).</p>
-<p>:bulb: You can use the same (already instanciated) class multiple times as an alias with <code>useExisting:</code> - this way you will not instanciate the same class multiple times.</p>
-<p>:no_entry_sign: <code>[Foo, {provide: Bar, useClass: Foo}]</code> would instanciate Foo twice!</p>
+<p>💡 You can use the same (already instanciated) class multiple times as an alias with <code>useExisting:</code> - this way you will not instanciate the same class multiple times.</p>
+<p>⛔ <code>[Foo, {provide: Bar, useClass: Foo}]</code> would instanciate Foo twice!</p>
 <h2><a name="1">Blog example</a></h2>
 <p>I&#39;m using <a href="https://github.com/chjj/marked">marked</a> to parse text into markdown, so I can either create a wrapper class around the external library, or provide it as a value.</p>
 <p>Wrapping it in a class (interfaces are just typescript sugar, so defining a class is more straightforward):</p>

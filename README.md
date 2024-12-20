@@ -20,4 +20,5 @@ Scripts:
 1. `npm install`
 2. `npm run build` = converts all the markdowns in the _book_ directory, output is _docs_
 3. `npm run dev` = listens and rebuilds everything on change, serves it at http://localhost:5000
+   (on firefox serving static files on http takes ages to load)
 4. `npm run format` = uses [prettier](https://prettier.io/) to reformat the code in _src_

@@ -10,7 +10,7 @@
 
 Angular uses TypeScript. While you can omit all type definitions, trying to ignore TS (not including it in an angular project) and going all js would not be a good idea.
 
-:bulb: Angular devs wanted to create another language on top of javascript, because they needed to rely heavily on code annotations (decorators, hence the @ naming) which are not yet part of the js spec. Fortunately TS decided to add decorator support and Angular went with TypeScript.
+:light_bulb: Angular devs wanted to create another language on top of javascript, because they needed to rely heavily on code annotations (decorators, hence the @ naming) which are not yet part of the js spec. Fortunately TS decided to add decorator support and Angular went with TypeScript.
 
 ## What is TypeScript
 
@@ -20,12 +20,12 @@ Syntactical superset means that the TS compiler will **not** transpile your code
 
 TS feels like a bridge between java and javascript and it is rather close to the failed and forgotten **ES4** (or ActionScript / **AS3**) - the type system is optional and noone stops you from using functional concepts if you prefer those (though some people would argue that the class system and the philosophy around types is a deviation from the functional nature of the language).
 
-:bulb: Anders Hejlsberg, grand daddy of Turbo Pascal, Delphi and C#, is the lead architect of TypeScript.
+:light_bulb: Anders Hejlsberg, grand daddy of Turbo Pascal, Delphi and C#, is the lead architect of TypeScript.
 
 ## Keeping your code clean: linting
 
 - Coding style should be enforced by a linter. Use **tslint** for TS.
-- eslint _may_ work to a certain extent with babel parser or typescript eslint parser. :question:
+- eslint _may_ work to a certain extent with babel parser or typescript eslint parser. :question_mark:
 - `tslint:recommended` seems to be a sane default, but it feels different from the standard/semistandard world.
 - `"extends": "tslint-config-semistandard"` works, but feels out of place and triggers warnings during script execution (unrelated to the code itself).
 
@@ -36,7 +36,7 @@ Don't forget to use target `es6` in tsconfig (es5 target will break with es6 lan
 
 If you want `array.includes` for example, then add the es7 option to tsconfig (`lib: ['es7']`)
 
-:bulb: ES7 has `array.includes` and the exponentiation operator (`**`, Math.pow).
+:light_bulb: ES7 has `array.includes` and the exponentiation operator (`**`, Math.pow).
 
 ## External dependencies, type definitions
 

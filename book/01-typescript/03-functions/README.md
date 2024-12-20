@@ -34,9 +34,9 @@ to use the above function:
 
 - `getHeight('body');` → calls signature A
 - `getHeight(document.getElementsByTagName('body')[0]);` → calls signature B
-- `getHeight(42);` → this will not work on typescript's level :no_entry_sign: (but will work of course in the compiled js)
+- `getHeight(42);` → this will not work on typescript's level :no_entry: (but will work of course in the compiled js)
 
-:exclamation: Notice how the function "technically" accepts any type - both signatures are just type helpers and will be stripped away. 
+:exclamation_mark: Notice how the function "technically" accepts any type - both signatures are just type helpers and will be stripped away. 
 
 ## Defining context (explicit this)
 
@@ -64,5 +64,5 @@ function getUser (this: Users, name: string = 'jill') {
 ```
 
  - use call or apply: `getUser.call(users, 'jack');`
- - it would **not** work without the scoping: `getUser('jill');` :no_entry_sign:
+ - it would **not** work without the scoping: `getUser('jill');` :no_entry:
 

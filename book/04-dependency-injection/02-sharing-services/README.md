@@ -19,7 +19,7 @@ _app.module.ts_
 
 PostsService (which is an injectable class) will be instanciated by the App module.
 
-:bulb: Writing `@Injectable` is not needed for classes without dependencies or already decorated classes, but it really helps readability.
+:light_bulb: Writing `@Injectable` is not needed for classes without dependencies or already decorated classes, but it really helps readability.
 
 _services/posts.service.ts_
 ```typescript
@@ -41,5 +41,5 @@ export class PostsPageComponent implements OnInit {
 
 Under the hood `this.postsService = new PostsService()` "happens" in the constructor.
 
-:bulb: With a shared service and rxjs subjects it's trivial to setup an eventemitter or pubsub messaging.
+:light_bulb: With a shared service and rxjs subjects it's trivial to setup an eventemitter or pubsub messaging.
 

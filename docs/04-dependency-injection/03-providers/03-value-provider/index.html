@@ -268,7 +268,7 @@
 <p>To avoid name collisions one may use a unique value - the recommended wrapper is the <code>InjectionToken</code> (its previous version, the OpaqueToken, has been deprecated) class:</p>
 <pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">const</span> injectableId = <span class="hljs-keyword">new</span> <span class="hljs-title class_">InjectionToken</span>&lt;<span class="hljs-title class_">MarkedParser</span>&gt;(<span class="hljs-string">&#x27;toMarkDown&#x27;</span>);
 </code></pre><p>Then use the &quot;symbolish&quot; id in <code>@Inject(injectableId)</code>.</p>
-<p>:bomb: For some reason Symbol as an id doesn&#39;t work with Angular 5, though it clearly should. This may be a <a href="https://github.com/angular/angular/issues/12082">regression</a>.</p>
+<p>💣 For some reason Symbol as an id doesn&#39;t work with Angular 5, though it clearly should. This may be a <a href="https://github.com/angular/angular/issues/12082">regression</a>.</p>
 </div>
 <script src="../../../main.js?v=2.0.0"></script>
 </body>

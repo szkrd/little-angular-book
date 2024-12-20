@@ -22,12 +22,12 @@
   "devDependencies": {
     "ejs": "3.1.10",
     "emojilib": "4.0.1",
+    "express": "4.21.2",
     "highlight.js": "11.11.0",
     "marked": "15.0.4",
     "marked-emoji": "1.4.3",
     "marked-highlight": "2.2.1",
     "nodemon": "3.1.9",
-    "prettier": "3.4.2",
-    "serve": "14.2.4"
+    "prettier": "3.4.2"
   }
 }

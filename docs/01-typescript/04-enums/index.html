@@ -258,17 +258,17 @@
   <span class="hljs-title class_">Right</span> = <span class="hljs-string">&#x27;VK_ARROW_RIGHT&#x27;</span>
 }
 </code></pre><h2><a name="1">Advanced uses</a></h2>
-<p>:rocket: Typescript enums can have dynamically initialized values:</p>
+<p>🚀 Typescript enums can have dynamically initialized values:</p>
 <pre class="hljs"><code class="hljs language-typescript"><span class="hljs-keyword">enum</span> <span class="hljs-title class_">Week</span> {
   <span class="hljs-title class_">NumberOfDays</span> = <span class="hljs-number">7</span>,
   <span class="hljs-title class_">Today</span> = (<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()).<span class="hljs-title function_">getDay</span>() <span class="hljs-comment">// today is saturday, so it would be 6</span>
 }
-</code></pre><p>:rocket: Number based enums have reversed mapping too:</p>
+</code></pre><p>🚀 Number based enums have reversed mapping too:</p>
 <ul>
 <li><code>Week.NumberOfDays</code> is 7</li>
 <li><code>Week[7]</code> is &quot;NumberOfDays&quot;</li>
 </ul>
-<p>:rocket: Const enums are replaced inline by the compiler:</p>
+<p>🚀 Const enums are replaced inline by the compiler:</p>
 <pre class="hljs"><code class="hljs language-typescript"><span class="hljs-comment">//                    0       1       2</span>
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">enum</span> <span class="hljs-title class_">States</span> { <span class="hljs-title class_">Select</span>, <span class="hljs-title class_">Search</span>, <span class="hljs-title class_">Result</span> }
 

@@ -274,7 +274,7 @@
 <span class="hljs-selector-tag">h2</span> {
   <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
 }
-</code></pre><p>:bomb: <code>ViewEncapsulation.None</code> will destroy a component&#39;s boundaries (and will force Angular to duplicate their style in every shadowed element).</p>
+</code></pre><p>💣 <code>ViewEncapsulation.None</code> will destroy a component&#39;s boundaries (and will force Angular to duplicate their style in every shadowed element).</p>
 <h2><a name="1">Global styles</a></h2>
 <p>Shadow roots can&#39;t get global styles due to their encapsulated nature (<code>/deep/</code>, <code>::ng-deep</code>, <code>&gt;&gt;&gt;</code> has been deprecated).</p>
 <p>Some tips:</p>
@@ -283,8 +283,8 @@
 <li><code>@import &quot;~common.scss&quot;;</code> may be used with absolute paths</li>
 <li>use <code>stylePreprocessorOptions.includePaths</code> in <code>.angular-cli.json</code> and then you can omit the tilde and the extension, more <a href="https://github.com/angular/angular-cli/wiki/stories-global-styles">here</a></li>
 </ul>
-<p>:bomb: Such an import will duplicate the css everywhere it has been included (checked the prod build).</p>
-<p>:bomb: Css will have mixin support with the <a href="https://tabatkins.github.io/specs/css-apply-rule/">@apply</a> rule, but right now it&#39;s not yet supported anywhere.</p>
+<p>💣 Such an import will duplicate the css everywhere it has been included (checked the prod build).</p>
+<p>💣 Css will have mixin support with the <a href="https://tabatkins.github.io/specs/css-apply-rule/">@apply</a> rule, but right now it&#39;s not yet supported anywhere.</p>
 </div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>

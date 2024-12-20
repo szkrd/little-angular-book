@@ -18,9 +18,9 @@ As indicated in the comment, this is a shortcut for
 
 Use `useClass` to replace the dependency with any other class (for example during testing).
 
-:bulb: You can use the same (already instanciated) class multiple times as an alias with `useExisting:` - this way you will not instanciate the same class multiple times.
+:light_bulb: You can use the same (already instanciated) class multiple times as an alias with `useExisting:` - this way you will not instanciate the same class multiple times.
 
-:no_entry_sign: `[Foo, {provide: Bar, useClass: Foo}]` would instanciate Foo twice!
+:no_entry: `[Foo, {provide: Bar, useClass: Foo}]` would instanciate Foo twice!
 
 ## Blog example
 

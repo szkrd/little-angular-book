@@ -39,7 +39,7 @@ this.router.navigate(['view/posts'], {
 
 ## Combining parameters and query parameters
 
-:bulb: Sometimes you want to listen for query param and param change (probably with more complex pages) together.  
+:light_bulb: Sometimes you want to listen for query param and param change (probably with more complex pages) together.  
 Use `combineLatest` (from _rxjs/observable/combineLatest_) to get them both:
 
 ```typescript

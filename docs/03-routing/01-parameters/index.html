@@ -257,7 +257,7 @@
 <li><code>:id</code> → <code>{path: &#39;post/:id&#39;, component: PostPageComponent}</code></li>
 <li>don&#39;t forget to unsubscribe on component destroy!</li>
 </ul>
-<p>Subscribing to parameter changes<br>with <code>ActivatedRoute</code> service from <code>@angular/router</code>:</p>
+<p><strong>Subscribing</strong> to parameter <strong>changes</strong> with <code>ActivatedRoute</code> service from <code>@angular/router</code>:</p>
 <pre class="hljs"><code class="hljs language-typescript"><span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {
   <span class="hljs-variable language_">this</span>.<span class="hljs-property">routeChangeSubscription</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">activatedRoute</span>
     .<span class="hljs-property">paramMap</span>
@@ -266,7 +266,8 @@
       <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getPost</span>();
     });
 }
-</code></pre><p>Opening links from the template<br>using the <code>routerLink</code> directive:</p>
+</code></pre><p>Or if we need only a single immutable snapshot, then: <code>this.activatedRoute.snapshot.params.id;</code><br>(if you only want to support page reload, but everything else happens inside the app, then just get the params in <code>ngOnInit</code>).</p>
+<p>Opening links from the template using the <code>routerLink</code> directive:</p>
 <pre class="hljs"><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">&quot;[&#x27;/view/post&#x27;, item.id]&quot;</span>&gt;</span>
   {{ item.title }}
 <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>

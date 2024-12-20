@@ -23,6 +23,6 @@
   - `[style]`, `[style.width.%]`, `[style.width.px]`,<br>
     `[style]="getStyle()"` where the function returns a `style: Partial<CSSStyleDeclaration> = {}` object
   - `[attr.colspan]="colCount"`, `[attr.disabled]="!canSubmit"`
-  - `[ngClass]`, `[ngStyle]` = classic directive, :older_man: [probably will be](https://github.com/angular/angular/pull/58860)
+  - `[ngClass]`, `[ngStyle]` = classic directive, :old_man: [probably will be](https://github.com/angular/angular/pull/58860)
      [deprecated](https://angular.schule/blog/2024-11-ngclass-ngstyle)
 - structural directives: `*ngIf`, `*ngFor`, `*ngSwitch`

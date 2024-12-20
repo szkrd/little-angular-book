@@ -15,10 +15,10 @@
 
 - native events and custom events follow the same format
 - usually child to parent
-- ~~`<h2 (click)="onClick">`~~ - must be a proper fn **call** :no_entry_sign: (not just the name of the function)
+- ~~`<h2 (click)="onClick">`~~ - must be a proper fn **call** :no_entry: (not just the name of the function)
 - `<h2 (click)="onClick($event)">` - MouseEvent argument
 
-:bulb: For stop propagation use the `$event`, but for a prevent default returning false is enough:
+:light_bulb: For stop propagation use the `$event`, but for a prevent default returning false is enough:
 
 ```html
 <a href="#" (click)="onYearToggleClick(item.year); false">...</a>
