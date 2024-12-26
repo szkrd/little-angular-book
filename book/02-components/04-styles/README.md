@@ -30,9 +30,11 @@ h2 {
 :bomb: `ViewEncapsulation.None` will destroy a component's boundaries (and will force Angular to duplicate their style in every shadowed element).
 
 
-## Global styles
+## Global styles and overriding styles
 
-Shadow roots can't get global styles due to their encapsulated nature (`/deep/`, `::ng-deep`, `>>>` has been deprecated).
+- Shadow roots can't get global styles due to their encapsulated nature (`/deep/`, `::ng-deep`, `>>>` has been deprecated).
+- :question_mark: Fortunately `::ng-deep` has been ["undeprecated"](https://github.com/angular/angular/pull/54219) in 2024
+  (or [maybe not](https://blog.angular-university.io/angular-host-context/))
 
 Some tips:
 
@@ -42,4 +44,5 @@ Some tips:
 
 :bomb: Such an import will duplicate the css everywhere it has been included (checked the prod build).
 
-:bomb: Css will have mixin support with the [@apply](https://tabatkins.github.io/specs/css-apply-rule/) rule, but right now it's not yet supported anywhere.
+:bomb: Css will have mixin support with the [@apply](https://tabatkins.github.io/specs/css-apply-rule/) rule,
+but right now it's not yet supported anywhere.

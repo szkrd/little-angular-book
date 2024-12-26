@@ -1,0 +1,11 @@
+<form [formGroup]="searchForm" (ngSubmit)="onFormSubmit()" (reset)="onFormReset()">
+  <input
+    formControlName="userName"
+    [style.backgroundColor]="
+      searchForm.controls.userName.dirty && searchForm.controls.userName.errors ? 'red' : 'white'
+    "
+  />
+  <button type="submit" [disabled]="searchForm.invalid">Search</button>
+  <!-- type is required, without that it will be a submit -->
+  <button type="reset">Reset</button>
+</form>

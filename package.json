@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node src/build.js",
     "dev": "nodemon -w book -w overlay -w src --ext js,md,ejs,css src/build.js -- --silent --serve",
-    "format": "prettier -w src"
+    "format": "prettier -w src sandbox"
   },
   "repository": {
     "type": "git",

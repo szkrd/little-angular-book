@@ -41,7 +41,7 @@ async function main() {
     .map((s) => {
       const original = s;
       const lines = fs.readFileSync(s, 'utf-8').split('\n');
-      let title = lines.find((line) => line.startsWith('# ')).replace(/^# /, '') || s[s.length - 2] || 'TOC';
+      let title = (lines.find((line) => line.startsWith('# ')) ?? '').replace(/^# /, '') || s[s.length - 2] || 'TOC';
       const sections = (lines.filter((line) => line.startsWith('## ')) || []).map((l) => l.replace(/^## /, ''));
       title = title.replace(/^# /, '');
       s = s.split(path.sep).slice(1);

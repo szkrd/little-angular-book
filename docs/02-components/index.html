@@ -73,6 +73,13 @@
             ▸
             <a href="../02-components/index.html">Components</a>
             
+                <div class="menu-section depth-3">
+                    ◦
+                    <a href="#1">
+                        Standalone components
+                    </a>
+                </div>
+            
         </div>
     
         <div class="menu-item depth-3 ">
@@ -233,7 +240,13 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../08-problems/index.html">Problems</a>
+            <a href="../08-extras/index.html">Extras</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../08-extras/01-reactive-forms/index.html">Reactive forms</a>
             
         </div>
     
@@ -249,6 +262,13 @@
 <ul>
 <li>smart (container) component: component with data model wired in (through store, service, inline ajax etc.), possibly stateful, usable in certain contexts only</li>
 <li>dumb (presentational) component: communicates through input and output channels, stateless, properly encapsulated, highly reusable</li>
+</ul>
+<h2><a name="1">Standalone components</a></h2>
+<ul>
+<li>Since A19 all components will be (are) standalone by default</li>
+<li>In the class decorator you will have to use <code>imports: []</code> to list the dependencies you are using in the html template</li>
+<li>Common pipes (like <code>JsonPipe</code> or <code>DecimalPipe</code> etc.) and common directives (like <code>NgFor</code>, <code>NgStyle</code> or <code>NgIf</code> etc.)
+can be easily imported using the <strong>CommonModule</strong> (<code>imports: [CommonModule]</code>).</li>
 </ul>
 </div>
 <script src="../main.js?v=2.0.0"></script>

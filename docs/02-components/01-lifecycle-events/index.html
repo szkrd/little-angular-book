@@ -79,6 +79,13 @@
             ▹
             <a href="../../02-components/01-lifecycle-events/index.html">Lifecycle events</a>
             
+                <div class="menu-section depth-4">
+                    ◦
+                    <a href="#1">
+                        Unsubscribing on destroy
+                    </a>
+                </div>
+            
         </div>
     
         <div class="menu-item depth-3 ">
@@ -233,7 +240,13 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../../08-problems/index.html">Problems</a>
+            <a href="../../08-extras/index.html">Extras</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../08-extras/01-reactive-forms/index.html">Reactive forms</a>
             
         </div>
     
@@ -266,7 +279,32 @@
   <span class="hljs-title function_">ngOnChanges</span>(<span class="hljs-attr">changes</span>: <span class="hljs-title class_">SimpleChanges</span>): <span class="hljs-built_in">void</span> {}
   <span class="hljs-title function_">ngOnDestroy</span>(): <span class="hljs-built_in">void</span> {}
 }
-</code></pre></div>
+</code></pre><h2><a name="1">Unsubscribing on destroy</a></h2>
+<ul>
+<li>any observable subscribed to should be unsubscribed from when the component is destroyed</li>
+<li>the only exception (because Angular does this automatically) is the <code>| async</code> pipe</li>
+</ul>
+<h3>Popular ways of unsubscribing onDestroy</h3>
+<ol>
+<li>some people created a <code>destroyed = new Subject()</code> helper (then used <code>takeUntil</code> and <code>this.destroyed.next()</code>)</li>
+<li><code>@UntilDestroy</code> is a popular way of doing unsubscribes (using decorators)<ul>
+<li>see <a href="https://github.com/ngneat/until-destroy">https://github.com/ngneat/until-destroy</a></li>
+<li>before the component decorator use <code>@UntilDestroy()</code></li>
+<li>use a pipe before subscription: <code>.pipe(untilDestroyed(this)).subscribe(...)</code></li>
+</ul>
+</li>
+<li>since A16 we have a builtin <code>takeUntilDestroy</code><ul>
+<li>this can only be used in injection contexts (constructor or &quot;pre&quot; constructor)</li>
+<li>use <code>.pipe(takeUntilDestroyed()).subscribe(...)</code></li>
+<li>it uses <code>DestroyRef</code> under the hood, which is needed if you&#39;re not inside an injection context:<ul>
+<li>injection: <code>destroyRef = inject(DestroyRef)</code></li>
+<li>usage: <code>.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(...)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>
 </html>

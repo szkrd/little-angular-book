@@ -124,7 +124,7 @@
                 <div class="menu-section depth-4">
                     ◦
                     <a href="#1">
-                        Global styles
+                        Global styles and overriding styles
                     </a>
                 </div>
             
@@ -240,7 +240,13 @@
     
         <div class="menu-item depth-2 ">
             ▸
-            <a href="../../08-problems/index.html">Problems</a>
+            <a href="../../08-extras/index.html">Extras</a>
+            
+        </div>
+    
+        <div class="menu-item depth-3 ">
+            ▹
+            <a href="../../08-extras/01-reactive-forms/index.html">Reactive forms</a>
             
         </div>
     
@@ -275,8 +281,12 @@
   <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
 }
 </code></pre><p>💣 <code>ViewEncapsulation.None</code> will destroy a component&#39;s boundaries (and will force Angular to duplicate their style in every shadowed element).</p>
-<h2><a name="1">Global styles</a></h2>
-<p>Shadow roots can&#39;t get global styles due to their encapsulated nature (<code>/deep/</code>, <code>::ng-deep</code>, <code>&gt;&gt;&gt;</code> has been deprecated).</p>
+<h2><a name="1">Global styles and overriding styles</a></h2>
+<ul>
+<li>Shadow roots can&#39;t get global styles due to their encapsulated nature (<code>/deep/</code>, <code>::ng-deep</code>, <code>&gt;&gt;&gt;</code> has been deprecated).</li>
+<li>❓ Fortunately <code>::ng-deep</code> has been <a href="https://github.com/angular/angular/pull/54219">&quot;undeprecated&quot;</a> in 2024
+(or <a href="https://blog.angular-university.io/angular-host-context/">maybe not</a>)</li>
+</ul>
 <p>Some tips:</p>
 <ul>
 <li>you can use a common scss if you keep it to the bare minimum</li>
@@ -284,7 +294,8 @@
 <li>use <code>stylePreprocessorOptions.includePaths</code> in <code>.angular-cli.json</code> and then you can omit the tilde and the extension, more <a href="https://github.com/angular/angular-cli/wiki/stories-global-styles">here</a></li>
 </ul>
 <p>💣 Such an import will duplicate the css everywhere it has been included (checked the prod build).</p>
-<p>💣 Css will have mixin support with the <a href="https://tabatkins.github.io/specs/css-apply-rule/">@apply</a> rule, but right now it&#39;s not yet supported anywhere.</p>
+<p>💣 Css will have mixin support with the <a href="https://tabatkins.github.io/specs/css-apply-rule/">@apply</a> rule,
+but right now it&#39;s not yet supported anywhere.</p>
 </div>
 <script src="../../main.js?v=2.0.0"></script>
 </body>

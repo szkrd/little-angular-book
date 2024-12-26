@@ -9,7 +9,7 @@ A journey to the magical land of Angular.
 - [Services](05-services/README.md)
 - [Testing](06-testing/README.md)
 - [Observables](07-observables/README.md)
-- [Problems](08-problems/README.md)
+- [Extras](08-extras/README.md)
 
 ## Requirements 
 
